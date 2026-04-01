@@ -1,0 +1,310 @@
+/* ============================================
+   Newsletter Landing Page – section styles
+   Compatible with Shopify Online Store 2.0
+   ============================================ */
+
+/* ---------- Layout ---------- */
+.newsletter-landing-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+}
+
+.newsletter-landing__content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ---------- Background ---------- */
+.newsletter-landing__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.newsletter-landing__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.newsletter-landing__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+}
+
+/* ---------- Logo ---------- */
+.newsletter-landing__logo {
+  margin-bottom: 2rem;
+}
+
+.newsletter-landing__logo img {
+  max-width: 160px;
+  height: auto;
+  display: inline-block;
+}
+
+/* ---------- Typography ---------- */
+.newsletter-landing__eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  background-color: rgba(var(--color-foreground), 0.08);
+  color: rgb(var(--color-foreground));
+}
+
+.newsletter-landing__heading {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  word-break: break-word;
+}
+
+.newsletter-landing__heading.h0 {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1.1;
+}
+
+.newsletter-landing__heading.h1 {
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.newsletter-landing__heading.h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.2;
+}
+
+.newsletter-landing__subheading {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin-bottom: 2.5rem;
+}
+
+.newsletter-landing__subheading p {
+  margin: 0;
+}
+
+/* ---------- Form ---------- */
+.newsletter-landing__form-wrapper {
+  margin-bottom: 2.5rem;
+}
+
+.newsletter-landing__form {
+  width: 100%;
+}
+
+.newsletter-landing__field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter-landing__field-group {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .newsletter-landing__field {
+    flex: 1 1 0;
+  }
+}
+
+.newsletter-landing__field {
+  position: relative;
+}
+
+.newsletter-landing__field .field__input {
+  width: 100%;
+  height: 52px;
+  padding: 0 1.25rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: var(--inputs-radius, 4px);
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-size: 1rem;
+  font-family: var(--font-body-family);
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.newsletter-landing__field .field__input::placeholder {
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.newsletter-landing__field .field__input:focus {
+  outline: 0;
+  border-color: rgb(var(--color-foreground));
+  box-shadow: 0 0 0 3px rgba(var(--color-foreground), 0.1);
+}
+
+/* ---------- Submit button ---------- */
+.newsletter-landing__submit.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 52px;
+  padding: 0 1.75rem;
+  border: none;
+  border-radius: var(--buttons-radius, 4px);
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-body-family);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.newsletter-landing__submit.button:hover {
+  opacity: 0.88;
+}
+
+.newsletter-landing__submit.button:active {
+  transform: scale(0.98);
+}
+
+@media screen and (max-width: 749px) {
+  .newsletter-landing__submit.button {
+    width: 100%;
+  }
+}
+
+/* ---------- Privacy note ---------- */
+.newsletter-landing__privacy {
+  margin-top: 0.875rem;
+  font-size: 0.8125rem;
+  opacity: 0.6;
+  line-height: 1.5;
+}
+
+/* ---------- Success / Error messages ---------- */
+.newsletter-landing__success,
+.newsletter-landing__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--inputs-radius, 4px);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.newsletter-landing__success {
+  background-color: rgba(0, 150, 80, 0.1);
+  color: #006633;
+  border: 1px solid rgba(0, 150, 80, 0.3);
+}
+
+.newsletter-landing__error {
+  background-color: rgba(200, 30, 30, 0.08);
+  color: #991b1b;
+  border: 1px solid rgba(200, 30, 30, 0.25);
+}
+
+/* ---------- Benefits list ---------- */
+.newsletter-landing__benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  text-align: left;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsletter-landing__benefit {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.9375rem;
+}
+
+.newsletter-landing__benefit-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(var(--color-button));
+}
+
+/* ---------- Color scheme helpers ---------- */
+/* These classes mirror Shopify Dawn's color scheme pattern */
+.color-background-1 {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.color-background-2 {
+  background-color: rgba(var(--color-foreground), 0.04);
+  color: rgb(var(--color-foreground));
+}
+
+.color-inverse {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.color-accent-1 {
+  background-color: rgb(var(--color-accent-1));
+  color: rgb(var(--color-accent-1-contrast));
+}
+
+.color-accent-2 {
+  background-color: rgb(var(--color-accent-2));
+  color: rgb(var(--color-accent-2-contrast));
+}
+
+/* ---------- Utility ---------- */
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  word-wrap: normal !important;
+}
+
+.page-width {
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.gradient {
+  background: inherit;
+}
+
+/* ---------- Responsive adjustments ---------- */
+@media screen and (max-width: 480px) {
+  .newsletter-landing-page {
+    padding: 4rem 1rem;
+  }
+}

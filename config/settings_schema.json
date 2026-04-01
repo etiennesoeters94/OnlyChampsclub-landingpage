@@ -1,0 +1,85 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "OnlyChampsClub Newsletter Landing",
+    "theme_version": "1.0.0",
+    "theme_author": "OnlyChampsClub",
+    "theme_documentation_url": "https://github.com/etiennesoeters94/OnlyChampsclub-landingpage",
+    "theme_support_url": "https://github.com/etiennesoeters94/OnlyChampsclub-landingpage/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "colors_solid_button_labels",
+        "default": "#FFFFFF",
+        "label": "Solid button labels"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_1",
+        "default": "#121212",
+        "label": "Accent 1"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_2",
+        "default": "#6D6D6D",
+        "label": "Accent 2"
+      },
+      {
+        "type": "color",
+        "id": "colors_text",
+        "default": "#121212",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "colors_outline_button_labels",
+        "default": "#121212",
+        "label": "Outline button labels"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_1",
+        "default": "#FFFFFF",
+        "label": "Background 1"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_2",
+        "default": "#F3F3F3",
+        "label": "Background 2"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "default": "helvetica_n4",
+        "label": "Heading font"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "default": "helvetica_n4",
+        "label": "Body font"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "32 x 32px .png or .ico file recommended"
+      }
+    ]
+  }
+]
