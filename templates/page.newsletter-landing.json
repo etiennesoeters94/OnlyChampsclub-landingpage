@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "newsletter-landing": {
+      "type": "newsletter-landing",
+      "settings": {}
+    }
+  },
+  "order": ["newsletter-landing"]
+}

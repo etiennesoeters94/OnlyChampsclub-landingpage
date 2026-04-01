@@ -1,0 +1,14 @@
+{
+  "newsletter": {
+    "label": "Email address",
+    "label_first_name": "First name",
+    "button_label": "Subscribe",
+    "success": "Thanks for subscribing! Check your inbox for a confirmation email.",
+    "error": "Please enter a valid email address."
+  },
+  "general": {
+    "meta": {
+      "page": "Page {{page}}"
+    }
+  }
+}
