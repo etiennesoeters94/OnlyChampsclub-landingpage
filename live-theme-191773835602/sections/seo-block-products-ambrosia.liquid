@@ -1,0 +1,105 @@
+{% if product.metafields.custom.image_seo_block
+  or product.metafields.custom.title_seo_block
+  or product.metafields.custom.beschrijving_info
+  or product.metafields.custom.verzending
+  or product.metafields.custom.regio_champagnemaker
+%}
+  <section class="seo-block-tabs-section">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-12 col-md-6">
+          {% if product.metafields.custom.image_seo_block %}
+            <img
+              src="{{ product.metafields.custom.image_seo_block | image_url }}"
+              alt="{{ product.metafields.custom.image_seo_block.alt | escape }}"
+              class="img-fluid"
+              loading="lazy" width="{{ product.metafields.custom.image_seo_block.width }}" height="{{ product.metafields.custom.image_seo_block.height }}">
+          {% endif %}
+        </div>
+
+        <div class="col-12 col-md-6">
+          {% if product.metafields.custom.title_seo_block %}
+            <h2>{{ product.metafields.custom.title_seo_block }}</h2>
+          {% endif %}
+
+          <ul class="nav nav-tabs" id="seoTabNav" role="tablist">
+            {% if product.metafields.custom.beschrijving_info %}
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="beschrijving-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#beschrijving"
+                  type="button"
+                  role="tab"
+                >
+                  Beschrijving
+                </button>
+              </li>
+            {% endif %}
+            {% if product.metafields.custom.verzending %}
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="verzending-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#verzending"
+                  type="button"
+                  role="tab"
+                >
+                  Verzending
+                </button>
+              </li>
+            {% endif %}
+            {% if product.metafields.custom.regio_champagnemaker %}
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="regio-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#regio"
+                  type="button"
+                  role="tab"
+                >
+                  <span class="hidden-tablet">Regio/</span>
+                  Champagnemaker
+                </button>
+              </li>
+            {% endif %}
+          </ul>
+
+          <div class="tab-content" id="seoTabContent">
+            {% if product.metafields.custom.beschrijving_info %}
+              <div class="tab-pane fade show active" id="beschrijving" role="tabpanel">
+                {{ product.metafields.custom.beschrijving_info | metafield_tag }}
+              </div>
+            {% endif %}
+            {% if product.metafields.custom.verzending %}
+              <div class="tab-pane fade" id="verzending" role="tabpanel">
+                <p>{{ product.metafields.custom.verzending | newline_to_br }}</p>
+              </div>
+            {% endif %}
+            {% if product.metafields.custom.regio_champagnemaker %}
+              <div class="tab-pane fade" id="regio" role="tabpanel">
+                <p>{{ product.metafields.custom.regio_champagnemaker | newline_to_br }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% schema %}
+{
+  "name": "SEO Block products",
+  "tag": "section",
+  "class": "seo-block-tabs",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SEO Block products"
+    }
+  ]
+}
+{% endschema %}

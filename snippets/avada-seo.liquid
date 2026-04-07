@@ -1,0 +1,7 @@
+{%- capture avada_seo_snippets -%}
+{%- render 'avada-seo-other' -%}
+{%- render 'avada-seo-meta' -%}
+{%- endcapture -%}
+{%- unless avada_seo_snippets contains 'Liquid error' -%}
+{{ avada_seo_snippets }}
+{%- endunless -%}

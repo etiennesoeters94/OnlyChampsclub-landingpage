@@ -1,0 +1,106 @@
+<section class="content-b2b-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        {% if section.settings.section_title != blank %}
+          <h2>{{ section.settings.section_title }}</h2>
+          <p class="text-center hero">{{ section.settings.section_subtitle }}</p>
+          <figure class="img-hero">
+            <img
+              src="{{ section.settings.section_image | image_url }}"
+              alt="{{ section.settings.section_title | escape }}"
+              class="img-fluid"
+              loading="lazy" width="{{ section.settings.section_image.width }}" height="{{ section.settings.section_image.height }}">
+          </figure>
+        {% endif %}
+      </div>
+
+      <div class="col-12 col-lg-8 text-center">
+        {% for block in section.blocks %}
+          <div>
+            {% if block.settings.image != blank %}
+              <figure class="img-content">
+                <img
+                  src="{{ block.settings.image | image_url }}"
+                  alt="{{ block.settings.title | escape }}"
+                  class="img-fluid"
+                  loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+              </figure>
+            {% endif %}
+            <h3>{{ block.settings.title }}</h3>
+            <p class="text-body">
+              {{ block.settings.text | newline_to_br }}
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image & Text Blocks",
+  "tag": "section",
+  "class": "image-text-blocks-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Optional section title",
+      "default": "Section title"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Optional section subtitle",
+      "default": "Section subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_image",
+      "label": "Optional section image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content_block",
+      "name": "Content Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Your paragraph goes here."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Image & Text Blocks",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "content_block"
+        },
+        {
+          "type": "content_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

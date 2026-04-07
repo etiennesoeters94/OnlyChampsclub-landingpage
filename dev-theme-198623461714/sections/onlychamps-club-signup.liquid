@@ -1,0 +1,907 @@
+<section id="OnlyChampsClubSection-{{ section.id }}" class="onlychamps-club-section color-{{ section.settings.color_scheme }}">
+  <div class="onlychamps-club__layout">
+    <div class="onlychamps-club__media">
+      {% if section.settings.side_image != blank %}
+        {% assign side_image_alt = section.settings.side_image.alt | default: section.settings.heading | escape %}
+        <img
+          src="{{ section.settings.side_image | image_url: width: 2000 }}"
+          srcset="
+            {{ section.settings.side_image | image_url: width: 750 }} 750w,
+            {{ section.settings.side_image | image_url: width: 1100 }} 1100w,
+            {{ section.settings.side_image | image_url: width: 1500 }} 1500w,
+            {{ section.settings.side_image | image_url: width: 2000 }} 2000w
+          "
+          sizes="(min-width: 990px) 50vw, 100vw"
+          alt="{{ side_image_alt }}"
+          class="onlychamps-club__media-image"
+          loading="lazy"
+          width="{{ section.settings.side_image.width }}"
+          height="{{ section.settings.side_image.height }}"
+        >
+      {% else %}
+        <div class="onlychamps-club__media-placeholder" aria-hidden="true"></div>
+      {% endif %}
+    </div>
+
+    <div class="onlychamps-club__panel">
+      <div class="onlychamps-club__panel-inner">
+        <div class="onlychamps-club__card">
+          <div class="onlychamps-club__content">
+            {% if section.settings.kicker != blank %}
+              <p class="onlychamps-club__kicker">{{ section.settings.kicker }}</p>
+            {% endif %}
+
+            {% if section.settings.heading != blank %}
+              <h1 class="onlychamps-club__heading">{{ section.settings.heading }}</h1>
+            {% endif %}
+
+            {% if section.settings.subtext != blank %}
+              <div class="onlychamps-club__subtext rte">{{ section.settings.subtext }}</div>
+            {% endif %}
+          </div>
+
+          <form
+            method="post"
+            action="{{ routes.root_url }}contact#contact_form"
+            accept-charset="UTF-8"
+            id="OnlyChampsClubForm"
+            class="onlychamps-club__form"
+            target="OnlyChampsClubSubmitFrame-{{ section.id }}"
+          >
+          <input type="hidden" name="form_type" value="customer">
+          <input type="hidden" name="utf8" value="✓">
+          <input
+            id="OnlyChampsClubTags"
+            type="hidden"
+            name="contact[tags]"
+            value="newsletter, onlychamps-club"
+            data-base-tags="newsletter, onlychamps-club"
+          >
+          <input
+            type="hidden"
+            name="return_to"
+            value="{{ request.path }}?customer_posted=true#OnlyChampsClubSection-{{ section.id }}"
+          >
+
+          <div
+            class="onlychamps-club__alert onlychamps-club__alert--error"
+            role="alert"
+            data-onlychamps-form-error
+            hidden
+          >
+            <p>{{ section.settings.error_text }}</p>
+          </div>
+
+          <div class="field onlychamps-club__field">
+            <label class="field__label" for="OnlyChampsName">{{ section.settings.name_label }}</label>
+            <input
+              id="OnlyChampsName"
+              type="text"
+              name="contact[first_name]"
+              class="field__input"
+              placeholder="{{ section.settings.name_placeholder }}"
+              required
+            >
+          </div>
+
+          <div class="field onlychamps-club__field">
+            <label class="field__label" for="OnlyChampsEmail">{{ section.settings.email_label }}</label>
+            <input
+              id="OnlyChampsEmail"
+              type="email"
+              name="contact[email]"
+              class="field__input"
+              placeholder="{{ section.settings.email_placeholder }}"
+              required
+            >
+          </div>
+
+          <div class="field onlychamps-club__field">
+            <label class="field__label" for="OnlyChampsPhone">{{ section.settings.phone_label }}</label>
+            <input
+              id="OnlyChampsPhone"
+              type="tel"
+              name="contact[phone]"
+              class="field__input"
+              placeholder="{{ section.settings.phone_placeholder }}"
+              required
+            >
+          </div>
+
+          <label class="onlychamps-club__consent onlychamps-club__consent--optional" for="OnlyChampsVipWhatsapp">
+            <input
+              id="OnlyChampsVipWhatsapp"
+              type="checkbox"
+              value="true"
+              data-vip-whatsapp-opt-in
+              data-whatsapp-tag="vip-whatsapp, onlychamps-whatsapp-vip-request"
+            >
+            <span>{{ section.settings.vip_whatsapp_text }}</span>
+          </label>
+
+          <label class="onlychamps-club__consent" for="OnlyChampsConsent">
+            <input
+              id="OnlyChampsConsent"
+              type="checkbox"
+              name="contact[accepts_marketing]"
+              value="true"
+              required
+            >
+            <span>{{ section.settings.gdpr_text }}</span>
+          </label>
+
+          <button type="submit" class="button button--primary onlychamps-club__submit">
+            {{ section.settings.button_text }}
+          </button>
+          </form>
+          <iframe
+            name="OnlyChampsClubSubmitFrame-{{ section.id }}"
+            title="OnlyChamps Club submission target"
+            hidden
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="onlychamps-club-popup" id="OnlyChampsSuccessPopup" aria-hidden="true">
+    <div class="onlychamps-club-popup__backdrop" data-close-popup></div>
+    <div class="onlychamps-club-popup__dialog" role="dialog" aria-modal="true" aria-labelledby="OnlyChampsPopupTitle">
+      <button type="button" class="onlychamps-club-popup__close" data-close-popup aria-label="Close">
+        x
+      </button>
+      <h2 id="OnlyChampsPopupTitle">{{ section.settings.popup_heading }}</h2>
+      <p>{{ section.settings.popup_text }}</p>
+      {% if section.settings.popup_logo != blank %}
+        <div class="onlychamps-club-popup__logo">
+          {{
+            section.settings.popup_logo
+            | image_url: width: 400
+            | image_tag:
+              alt: section.settings.popup_logo.alt | default: shop.name,
+              loading: 'lazy',
+              widths: '120, 180, 240, 320, 400'
+          }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <style>
+    .onlychamps-club-section {
+      --onlychamps-top-offset: 16rem;
+      --onlychamps-panel-side-padding: clamp(2.4rem, 4vw, 6rem);
+      --onlychamps-panel-bottom-padding: 64px;
+      --onlychamps-background: {{ section.settings.section_background_color }};
+      --onlychamps-surface: {{ section.settings.input_background_color }};
+      --onlychamps-surface-soft: {{ section.settings.card_background_color }};
+      --onlychamps-text: {{ section.settings.heading_text_color }};
+      --onlychamps-text-muted: {{ section.settings.body_text_color }};
+      --onlychamps-text-subtle: {{ section.settings.body_text_color | color_modify: 'alpha', 0.8 }};
+      --onlychamps-border: {{ section.settings.border_color }};
+      --onlychamps-border-strong: {{ section.settings.heading_text_color | color_modify: 'alpha', 0.35 }};
+      --onlychamps-button-bg-rgb: {{ section.settings.button_background_color.red }}, {{ section.settings.button_background_color.green }}, {{ section.settings.button_background_color.blue }};
+      --onlychamps-button-text-rgb: {{ section.settings.button_text_color.red }}, {{ section.settings.button_text_color.green }}, {{ section.settings.button_text_color.blue }};
+      --onlychamps-overlay: {{ section.settings.overlay_color | color_modify: 'alpha', 0.45 }};
+      --onlychamps-popup-background: {{ section.settings.popup_background_color }};
+      --onlychamps-popup-heading: {{ section.settings.popup_heading_color }};
+      --onlychamps-popup-text: {{ section.settings.popup_text_color }};
+      --onlychamps-popup-border: {{ section.settings.popup_border_color }};
+      padding: 0;
+      background: var(--onlychamps-background);
+    }
+
+    .onlychamps-club__layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: stretch;
+      min-height: clamp(56rem, 72vh, 82rem);
+    }
+
+    .onlychamps-club__media {
+      min-width: 0;
+      min-height: 100%;
+      background: linear-gradient(135deg, rgba(var(--color-shadow), 0.08), rgba(var(--color-shadow), 0.02));
+      border-right: 1px solid var(--onlychamps-border);
+    }
+
+    .onlychamps-club__media-image,
+    .onlychamps-club__media-placeholder {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+    }
+
+    .onlychamps-club__media-image {
+      object-fit: cover;
+    }
+
+    .onlychamps-club__media-placeholder {
+      background: linear-gradient(145deg, rgba(var(--color-shadow), 0.12), rgba(var(--color-shadow), 0.04)),
+        var(--onlychamps-surface-soft);
+    }
+
+    .onlychamps-club__panel {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      padding: calc(var(--onlychamps-top-offset) + 2.4rem) var(--onlychamps-panel-side-padding)
+        var(--onlychamps-panel-bottom-padding);
+    }
+
+    .onlychamps-club__panel-inner {
+      width: min(100%, 56rem);
+      margin: 0 auto;
+    }
+
+    .onlychamps-club__content {
+      margin-bottom: 2.4rem;
+    }
+
+    .onlychamps-club__kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      margin: 0 0 12px;
+      color: var(--onlychamps-text-subtle);
+      font-weight: 700;
+    }
+
+    .onlychamps-club__heading {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.05;
+      color: var(--onlychamps-text);
+    }
+
+    .onlychamps-club__subtext {
+      max-width: none;
+      color: var(--onlychamps-text-muted);
+      font-size: 16px;
+    }
+
+    .onlychamps-club__card {
+      background: var(--onlychamps-surface-soft);
+      border: 1px solid var(--onlychamps-border);
+      border-radius: 20px;
+      box-shadow: 0 1.2rem 3.2rem rgba(var(--color-shadow), 0.08);
+      padding: clamp(2.4rem, 3vw, 3.6rem);
+      backdrop-filter: blur(4px);
+    }
+
+    .onlychamps-club__form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .onlychamps-club__field {
+      margin: 0;
+      display: grid;
+      gap: 6px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .onlychamps-club__field::before,
+    .onlychamps-club__field::after {
+      content: none;
+    }
+
+    .onlychamps-club__form .field__label {
+      position: static;
+      font-size: 13px;
+      color: var(--onlychamps-text-muted);
+      margin: 0;
+    }
+
+    .onlychamps-club__form .field__input {
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 1px solid var(--onlychamps-border);
+      min-height: 4.8rem;
+      padding: 0 1.2rem;
+      background: var(--onlychamps-surface);
+      color: var(--onlychamps-text);
+      margin: 0;
+      font-size: 1.6rem;
+      line-height: 1.2;
+      appearance: none;
+      -webkit-appearance: none;
+      box-shadow: none;
+      caret-color: var(--onlychamps-text);
+    }
+
+    .onlychamps-club__form .field__input::placeholder {
+      opacity: 1;
+      color: rgba(var(--color-foreground), 0.45);
+    }
+
+    .onlychamps-club__form .field__input:focus,
+    .onlychamps-club__form .field__input:focus-visible {
+      border-color: var(--onlychamps-border-strong);
+      box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.15);
+      outline: 0;
+    }
+
+    .onlychamps-club__consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--onlychamps-text-muted);
+      font-size: 13px;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+    .onlychamps-club__consent input {
+      margin-top: 3px;
+    }
+
+    .onlychamps-club__consent--optional {
+      margin-top: 2px;
+    }
+
+    .onlychamps-club__submit {
+      width: 100%;
+      min-height: 4.4rem;
+      --color-button: var(--onlychamps-button-bg-rgb);
+      --color-button-text: var(--onlychamps-button-text-rgb);
+    }
+
+    .onlychamps-club__alert {
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+
+    .onlychamps-club__alert--error {
+      background: #fff1f1;
+      color: #7f1111;
+      border: 1px solid #f1c6c6;
+    }
+
+    .onlychamps-club-popup {
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 9999;
+    }
+
+    .onlychamps-club-popup.is-open {
+      display: block;
+    }
+
+    .onlychamps-club-popup__backdrop {
+      position: absolute;
+      inset: 0;
+      background: var(--onlychamps-overlay);
+    }
+
+    .onlychamps-club-popup__dialog {
+      position: relative;
+      width: min(92vw, 440px);
+      margin: 16vh auto 0;
+      background: var(--onlychamps-popup-background);
+      border: 1px solid var(--onlychamps-popup-border);
+      border-radius: 18px;
+      padding: 26px 24px;
+      box-shadow: 0 1.6rem 4rem rgba(var(--color-shadow), 0.16);
+      text-align: center;
+    }
+
+    .onlychamps-club-popup__dialog h2 {
+      margin: 0 0 8px;
+      color: var(--onlychamps-popup-heading);
+    }
+
+    .onlychamps-club-popup__dialog p {
+      margin: 0;
+      color: var(--onlychamps-popup-text);
+    }
+
+    .onlychamps-club-popup__logo {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .onlychamps-club-popup__logo img {
+      display: block;
+      width: min(100%, {{ section.settings.popup_logo_width }}px);
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .onlychamps-club-popup__close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      color: var(--onlychamps-popup-heading);
+    }
+
+    @media screen and (max-width: 989px) {
+      .onlychamps-club__layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .onlychamps-club__media {
+        min-height: clamp(28rem, 45vh, 40rem);
+        border-right: 0;
+        border-bottom: 1px solid var(--onlychamps-border);
+      }
+
+      .onlychamps-club__panel {
+        padding: 2rem 1.5rem 44px;
+      }
+
+      .onlychamps-club-section {
+        --onlychamps-top-offset: 11rem;
+        --onlychamps-panel-bottom-padding: 44px;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      var sectionId = 'OnlyChampsClubSection-{{ section.id }}';
+      var popupId = 'OnlyChampsSuccessPopup';
+      var iframeName = 'OnlyChampsClubSubmitFrame-{{ section.id }}';
+      var headerSelectors = [
+        '.header-wrapper',
+        '#shopify-section-header',
+        '.section-header',
+        'sticky-header',
+        '.site-header',
+        'header'
+      ];
+
+      function getSection(source) {
+        if (source && source.closest) {
+          var closestSection = source.closest('.onlychamps-club-section');
+          if (closestSection) return closestSection;
+        }
+
+        return document.getElementById(sectionId);
+      }
+
+      function getFormElements(form) {
+        return {
+          tagsInput: form ? form.querySelector('#OnlyChampsClubTags') : null,
+          errorAlert: form ? form.querySelector('[data-onlychamps-form-error]') : null,
+          submitButton: form ? form.querySelector('.onlychamps-club__submit') : null,
+          whatsappOptIn: form ? form.querySelector('[data-vip-whatsapp-opt-in]') : null,
+          submitFrame: document.querySelector('iframe[name="' + iframeName + '"]')
+        };
+      }
+
+      function updateSectionOffset(section) {
+        if (!section) return;
+
+        var headerHeight = headerSelectors.reduce(function (largest, selector) {
+          var element = document.querySelector(selector);
+          if (!element) return largest;
+          return Math.max(largest, Math.ceil(element.getBoundingClientRect().height));
+        }, 0);
+
+        var extraOffset = window.innerWidth < 990 ? 32 : 40;
+        var fallbackOffset = window.innerWidth < 990 ? 176 : 256;
+        var nextOffset = headerHeight > 0 ? headerHeight + extraOffset : fallbackOffset;
+
+        section.style.setProperty('--onlychamps-top-offset', nextOffset + 'px');
+      }
+
+      function syncContactTags(form) {
+        if (!form) return;
+
+        var elements = getFormElements(form);
+        if (!elements.tagsInput) return;
+
+        var tags = (elements.tagsInput.getAttribute('data-base-tags') || '')
+          .split(',')
+          .map(function (tag) {
+            return tag.trim();
+          })
+          .filter(Boolean);
+
+        if (elements.whatsappOptIn && elements.whatsappOptIn.checked) {
+          var whatsappTags = (elements.whatsappOptIn.getAttribute('data-whatsapp-tag') || '')
+            .split(',')
+            .map(function (tag) {
+              return tag.trim();
+            })
+            .filter(Boolean);
+
+          whatsappTags.forEach(function (tag) {
+            if (tags.indexOf(tag) === -1) {
+              tags.push(tag);
+            }
+          });
+        }
+
+        elements.tagsInput.value = tags.join(', ');
+      }
+
+      function setErrorVisibility(form, isVisible) {
+        var elements = getFormElements(form);
+
+        if (!elements.errorAlert) return;
+
+        if (isVisible) {
+          elements.errorAlert.removeAttribute('hidden');
+        } else {
+          elements.errorAlert.setAttribute('hidden', 'hidden');
+        }
+      }
+
+      function setSubmitting(form, isSubmitting) {
+        var elements = getFormElements(form);
+
+        if (!elements.submitButton) return;
+
+        form.dataset.onlyChampsSubmitting = isSubmitting ? 'true' : 'false';
+        elements.submitButton.disabled = isSubmitting;
+        elements.submitButton.setAttribute('aria-busy', isSubmitting ? 'true' : 'false');
+      }
+
+      function getPopup(section) {
+        return section ? section.querySelector('#' + popupId) : null;
+      }
+
+      function openPopup(section) {
+        var popup = getPopup(section);
+        if (!popup) return;
+
+        popup.classList.add('is-open');
+        popup.setAttribute('aria-hidden', 'false');
+      }
+
+      function closePopup(section) {
+        var popup = getPopup(section);
+        if (!popup) return;
+
+        popup.classList.remove('is-open');
+        popup.setAttribute('aria-hidden', 'true');
+      }
+
+      function bindPopupHandlers(section) {
+        var popup = getPopup(section);
+        if (!popup || popup.dataset.onlyChampsBound === 'true') return;
+
+        popup.dataset.onlyChampsBound = 'true';
+
+        var closeButtons = popup.querySelectorAll('[data-close-popup]');
+        closeButtons.forEach(function (button) {
+          button.addEventListener('click', function () {
+            closePopup(section);
+          });
+        });
+      }
+
+      function handleSuccessfulSubmission(section, form) {
+        form.reset();
+        syncContactTags(form);
+        setErrorVisibility(form, false);
+        openPopup(section);
+      }
+
+      function handleIframeLoad(section, form) {
+        var elements = getFormElements(form);
+
+        if (!elements.submitFrame || form.dataset.onlyChampsPending !== 'true') {
+          return;
+        }
+
+        form.dataset.onlyChampsPending = 'false';
+        setSubmitting(form, false);
+
+        try {
+          var frameWindow = elements.submitFrame.contentWindow;
+          var frameDocument = elements.submitFrame.contentDocument || (frameWindow && frameWindow.document);
+
+          if (!frameWindow || !frameDocument || frameWindow.location.href === 'about:blank') {
+            setErrorVisibility(form, true);
+            return;
+          }
+
+          var frameUrl = new URL(frameWindow.location.href, window.location.origin);
+          var postedSuccessfully = frameUrl.searchParams.get('customer_posted') === 'true';
+
+          if (!postedSuccessfully) {
+            postedSuccessfully = Boolean(
+              frameDocument.querySelector('.newsletter-form__message--success') ||
+                frameDocument.querySelector('[data-newsletter-success]') ||
+                frameDocument.body.innerHTML.indexOf('customer_posted=true') !== -1
+            );
+          }
+
+          if (postedSuccessfully) {
+            handleSuccessfulSubmission(section, form);
+            return;
+          }
+
+          setErrorVisibility(form, true);
+        } catch (error) {
+          setErrorVisibility(form, true);
+        }
+      }
+
+      function initializeSection(source) {
+        var section = getSection(source);
+        if (!section) return;
+
+        updateSectionOffset(section);
+        bindPopupHandlers(section);
+
+        var form = section.querySelector('#OnlyChampsClubForm');
+        if (!form) return;
+
+        syncContactTags(form);
+
+        var elements = getFormElements(form);
+        if (form.dataset.onlyChampsBound !== 'true') {
+          form.dataset.onlyChampsBound = 'true';
+          form.addEventListener('submit', function () {
+            syncContactTags(form);
+            setErrorVisibility(form, false);
+            setSubmitting(form, true);
+            form.dataset.onlyChampsPending = 'true';
+          });
+        }
+
+        if (elements.submitFrame && elements.submitFrame.dataset.onlyChampsBound !== 'true') {
+          elements.submitFrame.dataset.onlyChampsBound = 'true';
+          elements.submitFrame.addEventListener('load', function () {
+            handleIframeLoad(section, form);
+          });
+        }
+
+        if (elements.whatsappOptIn && elements.whatsappOptIn.dataset.onlyChampsBound !== 'true') {
+          elements.whatsappOptIn.dataset.onlyChampsBound = 'true';
+          elements.whatsappOptIn.addEventListener('change', function () {
+            syncContactTags(form);
+          });
+        }
+      }
+
+      function initializeCurrentSection() {
+        initializeSection(document.getElementById(sectionId));
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeCurrentSection, { once: true });
+      } else {
+        initializeCurrentSection();
+      }
+
+      window.addEventListener('load', initializeCurrentSection);
+      window.addEventListener('resize', initializeCurrentSection);
+
+      document.addEventListener('shopify:section:load', function (event) {
+        initializeSection(event.target);
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "OnlyChamps Club Signup",
+  "tag": "section",
+  "class": "onlychamps-club-signup",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Left image"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_background_color",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_text_color",
+      "label": "Heading text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "body_text_color",
+      "label": "Secondary text",
+      "default": "#606060"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Borders",
+      "default": "#d9d9d9"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Popup overlay",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "popup_background_color",
+      "label": "Popup background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "popup_heading_color",
+      "label": "Popup heading text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "popup_text_color",
+      "label": "Popup body text",
+      "default": "#606060"
+    },
+    {
+      "type": "color",
+      "id": "popup_border_color",
+      "label": "Popup border",
+      "default": "#d9d9d9"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Members only"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join OnlyChamps Club"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Sign up to our newsletter and be first in line for rare drops, stories, and members-only moments.</p>"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name placeholder",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "you@example.com"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone label",
+      "default": "Phone number"
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "Phone placeholder",
+      "default": "+31 6 12345678"
+    },
+    {
+      "type": "text",
+      "id": "vip_whatsapp_text",
+      "label": "VIP WhatsApp consent text",
+      "default": "I agree to be added to the VIP WhatsApp group."
+    },
+    {
+      "type": "text",
+      "id": "gdpr_text",
+      "label": "GDPR text",
+      "default": "I agree to receive marketing emails and accept the privacy policy."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Join the club"
+    },
+    {
+      "type": "text",
+      "id": "error_text",
+      "label": "Error text",
+      "default": "Please check your details and try again."
+    },
+    {
+      "type": "text",
+      "id": "popup_heading",
+      "label": "Popup heading",
+      "default": "You are in."
+    },
+    {
+      "type": "textarea",
+      "id": "popup_text",
+      "label": "Popup text",
+      "default": "Thanks for signing up. Please check your inbox to confirm your subscription."
+    },
+    {
+      "type": "image_picker",
+      "id": "popup_logo",
+      "label": "Popup logo"
+    },
+    {
+      "type": "range",
+      "id": "popup_logo_width",
+      "label": "Popup logo width",
+      "min": 80,
+      "max": 280,
+      "step": 10,
+      "unit": "px",
+      "default": 160
+    }
+  ],
+  "presets": [
+    {
+      "name": "OnlyChamps Club Signup"
+    }
+  ]
+}
+{% endschema %}

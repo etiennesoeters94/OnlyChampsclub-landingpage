@@ -1,0 +1,90 @@
+<section class="contact-section-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="d-block d-lg-none">{{ section.settings.title }}</h2>
+        <p class="d-block d-lg-none">{{ section.settings.subtitle }}</p>
+      </div>
+      {% if section.settings.contact_image != blank %}
+        <div class="col-md-6">
+          <figure>
+            <img
+              src="{{ section.settings.contact_image | image_url }}"
+              alt="Contact image"
+              class="img-fluid"
+              loading="lazy" width="{{ section.settings.contact_image.width }}" height="{{ section.settings.contact_image.height }}">
+          </figure>
+        </div>
+      {% endif %}
+
+      <div class="col-md-6">
+        <h2 class="d-none d-lg-block">{{ section.settings.title }}</h2>
+        <p class="d-none d-lg-block">{{ section.settings.subtitle }}</p>
+
+        {%- form 'contact', id: 'ContactAmbrosiaB2BForm', class: 'contact-form' -%}
+          {% if form.posted_successfully? %}
+            <p class="text-success">Bedankt voor je bericht! We nemen contact met je op.</p>
+          {% endif %}
+          {% if form.errors %}
+            <div class="text-danger">
+              <ul class="mb-3">
+                {% for field in form.errors %}
+                  <li>
+                    <strong>{{ field | capitalize }}</strong>: {{ form.errors.messages[field] }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <input type="text" name="contact[name]" class="form-control" placeholder="Naam" required>
+          <input type="text" name="contact[company]" class="form-control" placeholder="Bedrijfsnaam" required>
+          <input type="email" name="contact[email]" class="form-control" placeholder="E-mail" required>
+          <input type="tel" name="contact[phone]" class="form-control" placeholder="Telefoonnummer">
+
+          <textarea
+            name="contact[body]"
+            class="form-control"
+            rows="4"
+            placeholder="Bericht"
+            required
+          ></textarea>
+          <button type="submit" class="btn btn-primary">Versturen</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact B2B Ambrosia",
+  "tag": "section",
+  "class": "contact-ambrosia-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "contact_image",
+      "label": "Decorative image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Stuur Ons een Bericht!"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Interesse in onze champagnes voor jouw horecazaak? Neem contact op en ontdek de mogelijkheden!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact B2B Ambrosia",
+      "category": "Contact"
+    }
+  ]
+}
+{% endschema %}

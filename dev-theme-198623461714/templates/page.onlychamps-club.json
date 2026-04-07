@@ -1,0 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "onlychamps-club-signup",
+      "settings": {
+        "kicker": "OnlyChamps Club",
+        "heading": "Word lid van de OnlyChamps Club",
+        "subtext": "<p>Schrijf je in op onze nieuwsbrief en ontvang als eerste exclusieve drops, stories en aanbiedingen.</p>",
+        "name_label": "Naam",
+        "name_placeholder": "Jouw naam",
+        "email_label": "E-mail",
+        "email_placeholder": "jij@example.com",
+        "phone_label": "Telefoonnummer",
+        "phone_placeholder": "+31 6 12345678",
+        "vip_whatsapp_text": "Ik geef toestemming om toegevoegd te worden aan de VIP WhatsApp-groep.",
+        "gdpr_text": "Ik geef toestemming voor e-mailmarketing en ga akkoord met het privacybeleid.",
+        "button_text": "Schrijf me in",
+        "error_text": "Controleer je gegevens en probeer opnieuw.",
+        "popup_heading": "Welkom bij de club",
+        "popup_text": "Bedankt voor je inschrijving. Check je inbox om je nieuwsbriefinschrijving te bevestigen."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

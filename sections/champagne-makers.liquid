@@ -1,0 +1,119 @@
+<section class="blog-posts-section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.subtitle != blank %}
+      <p class="text text-center">{{ section.settings.subtitle }}</p>
+    {% endif %}
+
+    <div class="swiper blog-swiper">
+      <div class="swiper-wrapper">
+        {% for product in section.settings.champagne_makers_collections %}
+          <div class="swiper-slide">
+            <div class="card-content">
+              <a href="{{ product.url }}">
+                {% if product.featured_image %}
+                  <img
+                    src="{{ product.featured_image | image_url }}"
+                    alt="{{ product.title }}"
+                    class="img-fluid" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+                {% endif %}
+              </a>
+              <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text">
+                  {{ product.description | strip_html }}
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="swiper-button-prev d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M13.586 17.414L7.879 11.707L13.586 6L15 7.414L10.707 11.707L15 16L13.586 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+      <div class="swiper-button-next d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+    </div>
+
+    {% if section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="btn btn-outline-primary">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.blog-swiper', {
+      loop: false,
+      spaceBetween: 64,
+      slidesPerView: 3,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1.5,
+          spaceBetween: 56,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 45,
+        },
+      },
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Champagne Makers Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Champagne makers"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Verken champagnes van traditionele huizen en sterke producenten uit de Champagne-regio"
+    },
+    {
+      "type": "product_list",
+      "id": "champagne_makers_collections",
+      "label": "Select Champagne Makers Collections",
+      "limit": 3
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Alle champagne makers"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Champagne Makers Section"
+    }
+  ]
+}
+{% endschema %}

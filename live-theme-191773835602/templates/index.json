@@ -1,0 +1,414 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_nieuw_NX7rrr": {
+      "type": "hero-nieuw",
+      "name": "Hero nieuw",
+      "settings": {
+        "bg_image_mobile": "shopify://shop_images/EDIT_X_STUDIO_BAYBEE-8771_1.jpg",
+        "bg_image": "shopify://shop_images/1.png",
+        "bg_color": "#f1ede1",
+        "overlay_opacity": 0,
+        "content_max_width": 620,
+        "padding_y": 160,
+        "kicker": "",
+        "heading": "Welkom!",
+        "text": "<p>Wij zijn Etienne en Rens. Gedreven door onze passie voor champagne werken we rechtstreeks met kleine champagnehuizen uit de Champagnestreek. Wij selecteren alleen champagnes waar we zelf volledig achter staan, zodat jij zonder twijfel de juiste keuze maakt.</p>",
+        "cta_label": "Bestel nu!",
+        "cta_link": "",
+        "show_trust": true,
+        "trust_1": "Kleine champagnehuizen",
+        "trust_2": "Snel en veilig verzonden",
+        "trust_3": "Alleen wat wij zelf drinken",
+        "kicker_color": "#ffffff",
+        "heading_color": "#ffffff",
+        "body_color": "#ffffff",
+        "trust_color": "#ffffff",
+        "kicker_size_desktop": 14,
+        "heading_size_desktop": 80,
+        "body_size_desktop": 28,
+        "trust_size_desktop": 17,
+        "kicker_size_mobile": 12,
+        "heading_size_mobile": 32,
+        "body_size_mobile": 19,
+        "trust_size_mobile": 12,
+        "btn_font_desktop": 22,
+        "btn_pad_y_desktop": 8,
+        "btn_pad_x_desktop": 28,
+        "btn_font_mobile": 13,
+        "btn_pad_y_mobile": 7,
+        "btn_pad_x_mobile": 11,
+        "text_outline_enabled": false,
+        "text_outline_color": "#2a3942",
+        "text_outline_width_desktop": 1,
+        "text_outline_width_mobile": 1
+      }
+    },
+    "hero_ambrosia_LqBDrk": {
+      "type": "hero-ambrosia",
+      "blocks": {
+        "slide_9nfRtz": {
+          "type": "slide",
+          "settings": {
+            "pre_title": "Only Champs",
+            "title": "Online Champagne Expert",
+            "text": "Bij OnlyChamps vind je exclusieve champagnes en zorgvuldig samengestelde pakketten voor elke gelegenheid. Pure kwaliteit, rechtstreeks van de beste huizen",
+            "button_label": "",
+            "button_link": "",
+            "use_svg_cta": false,
+            "image": "shopify://shop_images/STUDIO_BAYBEE_EDIT-8771_convert.io.webp"
+          }
+        },
+        "slide_ifmU3h": {
+          "type": "slide",
+          "settings": {
+            "pre_title": "Only Champs",
+            "title": "Ontdek ons B2B aanbod!",
+            "text": "Exclusieve champagnes met karakter – rechtstreeks van de producent, scherp geprijsd voor de professionele markt",
+            "button_label": "Lees meer",
+            "button_link": "shopify://pages/zakelijke-champagne-horeca",
+            "use_svg_cta": false,
+            "image": "shopify://shop_images/Ambrosia-b2b_4_11zon.webp"
+          }
+        },
+        "slide_wHhzJn": {
+          "type": "slide",
+          "settings": {
+            "pre_title": "Only Champs",
+            "title": "Meet the maker!",
+            "text": "Eerlijke verhalen, pure ambacht. Leer de gepassioneerde wijnmakers kennen achter onze exclusieve champagnes",
+            "button_label": "Lees meer",
+            "button_link": "shopify://collections/champagnemakers",
+            "use_svg_cta": false,
+            "image": "shopify://shop_images/wijnmakers-onlychamps_1_11zon.webp"
+          }
+        },
+        "slide_abhxak": {
+          "type": "slide",
+          "settings": {
+            "pre_title": "Only Champs",
+            "title": "Check onze instagram.",
+            "text": "Volg ons en deel jouw #OnlyChamps moment",
+            "button_label": "Lees meer",
+            "button_link": "https://www.instagram.com/ambrosia_onlychamps/",
+            "use_svg_cta": true,
+            "image": "shopify://shop_images/edit_x_studio_baybee-8888_convert.io_1.webp"
+          }
+        }
+      },
+      "block_order": [
+        "slide_9nfRtz",
+        "slide_ifmU3h",
+        "slide_wHhzJn",
+        "slide_abhxak"
+      ],
+      "disabled": true,
+      "settings": {
+        "background_color": "#ffe562"
+      }
+    },
+    "champagnes_ambrosia_HcHimJ": {
+      "type": "champagnes-ambrosia",
+      "settings": {
+        "title": "Meest Gewilde Champagnes",
+        "text": "Ontdek onze best verkochte champagnes – favorieten gekozen door echte liefhebbers.",
+        "collection": "bestellers-champagne"
+      }
+    },
+    "about_accordion_4XhmkY": {
+      "type": "about-accordion",
+      "blocks": {
+        "accordion_item_hfAVzc": {
+          "type": "accordion_item",
+          "disabled": true,
+          "settings": {
+            "accordion_title": "Blanc de Blancs",
+            "accordion_content": "The essence of refinement: made from 100% Chardonnay. Fresh, elegant, and lively, with refined citrus and mineral notes.",
+            "accordion_image": "shopify://shop_images/Odyssee_brut_1.png",
+            "cta_text": "Bekijk alles",
+            "cta_link": ""
+          }
+        },
+        "accordion_item_7KHJ4H": {
+          "type": "accordion_item",
+          "settings": {
+            "accordion_title": "Blends",
+            "accordion_content": "Champagne Blends worden gemaakt door het mengen van de drie druivensoorten Chardonnay, Pinot Noir, en oogstjaren.",
+            "accordion_image": "shopify://shop_images/Les_coudes_sur_le_zinc.png",
+            "cta_text": "Bekijk alles",
+            "cta_link": "shopify://collections/champagne-blends"
+          }
+        },
+        "accordion_item_7dycYc": {
+          "type": "accordion_item",
+          "settings": {
+            "accordion_title": "Blanc de Noirs",
+            "accordion_content": "Champagne Blanc de Noirs is een volle en expressieve champagnesoort die uitsluitend wordt gemaakt van blauwe druiven zoals Pinot Noir en Pinot Meunier.",
+            "accordion_image": "shopify://shop_images/Mallet_blanc_de_noirs_2016.png",
+            "cta_text": "Bekijk alles",
+            "cta_link": "shopify://collections/blanc-de-noirs-champagne"
+          }
+        },
+        "accordion_item_mJkhJY": {
+          "type": "accordion_item",
+          "settings": {
+            "accordion_title": "Blanc de Blancs",
+            "accordion_content": "Champagne Blanc de Blancs is een elegante, frisse champagne die exclusief gemaakt is van 100% chardonnay-druiven.",
+            "accordion_image": "shopify://shop_images/Odyssee_brut_1.png",
+            "cta_text": "Bekijk alles",
+            "cta_link": "shopify://collections/blanc-de-blancs-champagne"
+          }
+        },
+        "accordion_item_4C3aPJ": {
+          "type": "accordion_item",
+          "settings": {
+            "accordion_title": "Rosé",
+            "accordion_content": "Rosé champagne krijgt zijn verfijnde kleur en karakter door korte schilinweking of het mengen van rode stille wijn met witte champagne.",
+            "accordion_image": "shopify://shop_images/Gamet_rose.png",
+            "cta_text": "Bekijk alles",
+            "cta_link": "shopify://collections/rose-champagne-roze-bubbels"
+          }
+        },
+        "accordion_item_NDzAhj": {
+          "type": "accordion_item",
+          "settings": {
+            "accordion_title": "Vintage",
+            "accordion_content": "Deze exclusieve champagnes worden uitsluitend gemaakt van druiven uit één oogstjaar!",
+            "accordion_image": "shopify://shop_images/Konrat_vintage.png",
+            "cta_text": "Bekijk alles",
+            "cta_link": "shopify://collections/vintage"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_item_hfAVzc",
+        "accordion_item_7KHJ4H",
+        "accordion_item_7dycYc",
+        "accordion_item_mJkhJY",
+        "accordion_item_4C3aPJ",
+        "accordion_item_NDzAhj"
+      ],
+      "settings": {
+        "bottle_image": "shopify://shop_images/Lamiable_Alhena.png",
+        "main_title": "Ontdek Onze Champagnesoorten"
+      }
+    },
+    "recommendations_ambrosia_iPmTVe": {
+      "type": "recommendations-ambrosia",
+      "blocks": {
+        "recommendation_card_Qzw9Kt": {
+          "type": "recommendation_card",
+          "settings": {
+            "image": "shopify://shop_images/Etienne_s_favorieten_f6d0a271-be24-4cb0-a86f-2fbebe7f9f35.jpg",
+            "title": "Etienne's Favorieten",
+            "description": "Ik (Etienne) vertrouw op mijn smaak. Geen ingewikkelde theorieën, maar puur genieten. De champagnes die je hier vindt, hebben allemaal dat speciale karakter: elegant, eigenzinnig, soms een tikje wild, maar altijd perfect in balans. Ze zijn stuk voor stuk gekozen om momenten onvergetelijk te maken.",
+            "cta_text": "Ontdek Etienne’s Selectie",
+            "cta_link": "shopify://collections/etiennes-favorieten"
+          }
+        },
+        "recommendation_card_tWwn8T": {
+          "type": "recommendation_card",
+          "settings": {
+            "image": "shopify://shop_images/EDIT_X_STUDIO_BAYBEE-0121_51f02a3e-3331-4561-879d-f4a077e57ea7.jpg",
+            "title": "Rens' Favorieten",
+            "description": "Ik (Rens) heb een zwak voor champagnes die je bijblijven. Geen dertien-in-een-dozijn bubbels, maar flessen met karakter – onverwacht, eigenzinnig en altijd vol smaak. Ik kies op gevoel en laat me graag verrassen. Als het spannend is in het glas, mag je me er letterlijk voor wakker maken.",
+            "cta_text": "Ontdek Rens's Selectie",
+            "cta_link": "shopify://collections/rens-favorieten"
+          }
+        }
+      },
+      "block_order": [
+        "recommendation_card_Qzw9Kt",
+        "recommendation_card_tWwn8T"
+      ],
+      "settings": {
+        "section_title": "Onze Aanbevelingen"
+      }
+    },
+    "taste_finest_ambrosia_kA9gaP": {
+      "type": "taste-finest-ambrosia",
+      "settings": {
+        "image": "shopify://shop_images/Rectangle_17_d21d0777-3b89-4cc3-83e6-fba17e0f9163.png",
+        "title": "Proef de Fijnste Champagnes",
+        "text": "Ontdek unieke smaken met een zorgvuldig samengesteld proefpakket. Laat jouw champagne eenvoudig thuis bezorgen en vind moeiteloos je nieuwe favoriet.",
+        "cta_text": "Bestel Nu",
+        "cta_link": "shopify://collections/online-champagne-kopen"
+      }
+    },
+    "champagne_makers_automatic_WDAFp6": {
+      "type": "champagne-makers-automatic",
+      "name": "Champagne Makers Auto",
+      "settings": {
+        "title": "Champagne makers",
+        "subtitle": "Verken champagnes van traditionele huizen en sterke producenten uit de Champagne-regio",
+        "button_link": "https://www.onlychamps.nl/collections/champagnemakers",
+        "button_label": "Alle champagne makers"
+      }
+    },
+    "stories_ambrosia_EbbHat": {
+      "type": "stories-ambrosia",
+      "settings": {
+        "title": "Champagne Verhalen",
+        "text": "Lees over champagne, trends en tips van experts!",
+        "cta_text": "Bekijk alles"
+      }
+    },
+    "partners_ambrosia_VD9UHM": {
+      "type": "partners-ambrosia",
+      "blocks": {
+        "partner_Fntnfe": {
+          "type": "partner",
+          "settings": {
+            "logo": "shopify://shop_images/LOGO_Stacked_No_Tagline_Black_1_66c600ad-885c-4df6-a8c4-768559ec8fbe.png"
+          }
+        },
+        "partner_RkXU9G": {
+          "type": "partner",
+          "settings": {
+            "logo": "shopify://shop_images/WOW_logo_origineel_3a7a4200-11ca-42dd-aa9e-c960b0f3450a.png"
+          }
+        },
+        "partner_TNdcLQ": {
+          "type": "partner",
+          "settings": {
+            "logo": "shopify://shop_images/blend_wijnfestival_transparent.png"
+          }
+        },
+        "partner_mNtbbX": {
+          "type": "partner",
+          "settings": {
+            "logo": "shopify://shop_images/Group_803758.png"
+          }
+        },
+        "partner_97T9Td": {
+          "type": "partner",
+          "settings": {
+            "logo": "shopify://shop_images/Logo-Bar-Proast1_1_c0f0bad3-f3ca-45ce-aefb-1e7803ba668f.png"
+          }
+        },
+        "partner_zNXAX4": {
+          "type": "partner",
+          "settings": {
+            "logo": "shopify://shop_images/Logo-Mainstreet_trim_5b517667-46c9-476c-8525-b2cf73df3319.png"
+          }
+        },
+        "partner_kd8tUd": {
+          "type": "partner",
+          "settings": {
+            "logo": "shopify://shop_images/vvv-cadeaukaart_front_2024.png"
+          }
+        }
+      },
+      "block_order": [
+        "partner_Fntnfe",
+        "partner_RkXU9G",
+        "partner_TNdcLQ",
+        "partner_mNtbbX",
+        "partner_97T9Td",
+        "partner_zNXAX4",
+        "partner_kd8tUd"
+      ],
+      "settings": {
+        "title": "Onze Partners"
+      }
+    },
+    "17484628683da2216d": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_pctppR": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "insta-feed-custom",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_pctppR"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "feed_instagram_7hbdgr": {
+      "type": "feed-instagram",
+      "blocks": {
+        "image_Cxcirz": {
+          "type": "image",
+          "settings": {
+            "photo": "shopify://shop_images/Frame_803742.png"
+          }
+        },
+        "image_WpjpTB": {
+          "type": "image",
+          "settings": {
+            "photo": "shopify://shop_images/Frame_803743.png"
+          }
+        },
+        "image_hKgk8P": {
+          "type": "image",
+          "settings": {
+            "photo": "shopify://shop_images/Frame_803744.png"
+          }
+        },
+        "image_T86TtY": {
+          "type": "image",
+          "settings": {
+            "photo": "shopify://shop_images/Frame_803745.png"
+          }
+        },
+        "image_4JtVxf": {
+          "type": "image",
+          "settings": {
+            "photo": "shopify://shop_images/Frame_803746.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_Cxcirz",
+        "image_WpjpTB",
+        "image_hKgk8P",
+        "image_T86TtY",
+        "image_4JtVxf"
+      ],
+      "settings": {
+        "title": "Laat je inspireren door onze Instagram",
+        "subtitle": "Ontdek de mooiste champagne momenten en exclusieve updates. Volg ons en deel jouw ervaring",
+        "button_link": "https://www.instagram.com/ambrosia_onlychamps/",
+        "button_label": "Volg Ons op Instagram"
+      }
+    }
+  },
+  "order": [
+    "hero_nieuw_NX7rrr",
+    "hero_ambrosia_LqBDrk",
+    "champagnes_ambrosia_HcHimJ",
+    "about_accordion_4XhmkY",
+    "recommendations_ambrosia_iPmTVe",
+    "taste_finest_ambrosia_kA9gaP",
+    "champagne_makers_automatic_WDAFp6",
+    "stories_ambrosia_EbbHat",
+    "partners_ambrosia_VD9UHM",
+    "17484628683da2216d",
+    "feed_instagram_7hbdgr"
+  ]
+}

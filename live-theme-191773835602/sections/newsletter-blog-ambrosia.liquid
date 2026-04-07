@@ -1,0 +1,83 @@
+<section class="box-news-blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="box-blue">
+          <div class="content">
+            <h3>{{ section.settings.title }}</h3>
+            <p>{{ section.settings.subtitle }}</p>
+          </div>
+
+          <div class="content right">
+            {%- form 'customer', id: 'ContactNewsletterBlog', class: 'newsletter-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="d-block d-md-flex flex-column flex-md-row gap-2">
+                <input
+                  id="NewsletterFormNewsBlog"
+                  type="email"
+                  name="contact[email]"
+                  class="form-control"
+                  value="{{ form.email }}"
+                  placeholder="{{ section.settings.placeholder }}"
+                  required
+                >
+                <button type="submit" class="btn btn-primary" name="commit" id="SubscribeNewsBlog">
+                  {{ section.settings.button_text }}
+                </button>
+              </div>
+            {%- endform -%}
+
+            {% if section.settings.legal_notice != blank %}
+              <div class="text-form">{{ section.settings.legal_notice }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter Blog",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Altijd op de hoogte van de beste bubbels!"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Schrijf je in voor onze nieuwsbrief en ontvang de mooiste aanbiedingen en verhalen..."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Placeholder",
+      "default": "Vul je e-mailadres in"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Inschrijven"
+    },
+    {
+      "type": "richtext",
+      "id": "legal_notice",
+      "label": "Legal Notice",
+      "default": "<p>Door je in te schrijven ga je akkoord met ons <a href=\"/pages/privacybeleid\">privacybeleid</a>.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Blog",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,172 @@
+<section class="contact-section-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="d-block d-lg-none">{{ section.settings.title }}</h2>
+        <p class="d-block d-lg-none">{{ section.settings.subtitle }}</p>
+      </div>
+      {% if section.settings.contact_image != blank %}
+        <div class="col-md-6">
+          <figure>
+            <img
+              src="{{ section.settings.contact_image | image_url }}"
+              alt="Contact image"
+              class="img-fluid" width="{{ section.settings.contact_image.width }}" height="{{ section.settings.contact_image.height }}">
+          </figure>
+        </div>
+      {% endif %}
+
+      <div class="col-md-6">
+        <h2 class="d-none d-lg-block">{{ section.settings.title }}</h2>
+        <p class="d-none d-lg-block">{{ section.settings.subtitle }}</p>
+        <ul class="list-unstyled">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M20 4H4C2.897 4 2 4.897 2 6V18C2 19.103 2.897 20 4 20H20C21.103 20 22 19.103 22 18V6C22 4.897 21.103 4 20 4ZM20 6V6.511L12 12.734L4 6.512V6H20ZM4 18V9.044L11.386 14.789C11.5611 14.9265 11.7773 15.0013 12 15.0013C12.2227 15.0013 12.4389 14.9265 12.614 14.789L20 9.044L20.002 18H4Z" fill="#2A3942"/>
+            </svg>
+            <a href="mailto:{{ section.settings.email | escape }}" class="text-decoration-none ms-2">
+              {{ section.settings.email }}
+            </a>
+          </li>
+          <li class="mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M17.7064 12.2932C17.6136 12.2003 17.5034 12.1265 17.382 12.0762C17.2607 12.0259 17.1307 12 16.9994 12C16.868 12 16.738 12.0259 16.6167 12.0762C16.4953 12.1265 16.3851 12.2003 16.2924 12.2932L14.6984 13.8872C13.9594 13.6672 12.5804 13.1672 11.7064 12.2932C10.8324 11.4192 10.3324 10.0402 10.1124 9.3012L11.7064 7.7072C11.7993 7.61441 11.873 7.50421 11.9234 7.38289C11.9737 7.26158 11.9996 7.13153 11.9996 7.0002C11.9996 6.86887 11.9737 6.73882 11.9234 6.61751C11.873 6.49619 11.7993 6.38599 11.7064 6.2932L7.70636 2.2932C7.61357 2.20026 7.50337 2.12652 7.38205 2.07621C7.26074 2.0259 7.13069 2 6.99936 2C6.86802 2 6.73798 2.0259 6.61666 2.07621C6.49535 2.12652 6.38515 2.20026 6.29236 2.2932L3.58036 5.0052C3.20036 5.3852 2.98636 5.9072 2.99436 6.4402C3.01736 7.8642 3.39436 12.8102 7.29236 16.7082C11.1904 20.6062 16.1364 20.9822 17.5614 21.0062H17.5894C18.1174 21.0062 18.6164 20.7982 18.9944 20.4202L21.7064 17.7082C21.7993 17.6154 21.873 17.5052 21.9234 17.3839C21.9737 17.2626 21.9996 17.1325 21.9996 17.0012C21.9996 16.8699 21.9737 16.7398 21.9234 16.6185C21.873 16.4972 21.7993 16.387 21.7064 16.2942L17.7064 12.2932ZM17.5794 19.0052C16.3314 18.9842 12.0614 18.6492 8.70636 15.2932C5.34036 11.9272 5.01436 7.6422 4.99436 6.4192L6.99936 4.4142L9.58536 7.0002L8.29236 8.2932C8.17482 8.41065 8.0884 8.55554 8.04091 8.71477C7.99342 8.874 7.98636 9.04256 8.02036 9.2052C8.04436 9.3202 8.63136 12.0472 10.2914 13.7072C11.9514 15.3672 14.6784 15.9542 14.7934 15.9782C14.9559 16.0132 15.1246 16.0067 15.284 15.9593C15.4434 15.9119 15.5883 15.8252 15.7054 15.7072L16.9994 14.4142L19.5854 17.0002L17.5794 19.0052Z" fill="#2A3942"/>
+            </svg>
+            <a
+              href="tel:+31850831537"
+              class="text-decoration-none ms-2"
+            >
+              {{ section.settings.phone }}
+            </a>
+          </li>
+          <li class="mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12.0001 14C14.2061 14 16.0001 12.206 16.0001 10C16.0001 7.794 14.2061 6 12.0001 6C9.79406 6 8.00006 7.794 8.00006 10C8.00006 12.206 9.79406 14 12.0001 14ZM12.0001 8C13.1031 8 14.0001 8.897 14.0001 10C14.0001 11.103 13.1031 12 12.0001 12C10.8971 12 10.0001 11.103 10.0001 10C10.0001 8.897 10.8971 8 12.0001 8Z" fill="#2A3942"/>
+              <path d="M11.4201 21.814C11.5893 21.9349 11.7921 21.9998 12.0001 21.9998C12.2081 21.9998 12.4108 21.9349 12.5801 21.814C12.8841 21.599 20.0291 16.44 20.0001 10C20.0001 5.589 16.4111 2 12.0001 2C7.58909 2 4.00009 5.589 4.00009 9.995C3.97109 16.44 11.1161 21.599 11.4201 21.814ZM12.0001 4C15.3091 4 18.0001 6.691 18.0001 10.005C18.0211 14.443 13.6121 18.428 12.0001 19.735C10.3891 18.427 5.97909 14.441 6.00009 10C6.00009 6.691 8.69109 4 12.0001 4Z" fill="#2A3942"/>
+            </svg>
+            <a
+              href="https://maps.app.goo.gl/H8xuWHvZUPL8ZoAf7"
+              target="_blank"
+              rel="noopener"
+              class="text-decoration-none ms-2"
+            >
+              {{ section.settings.address }}
+            </a>
+          </li>
+          <li class="line"></li>
+          <li><span>VAT:</span> {{ section.settings.btw }}</li>
+          <li><span>KVK:</span> {{ section.settings.kvk }}</li>
+        </ul>
+
+        {%- form 'contact', id: 'ContactAmbrosiaForm', class: 'contact-form' -%}
+          {% if form.posted_successfully? %}
+            <p class="text-success">Bedankt voor je bericht! We nemen contact met je op.</p>
+          {% endif %}
+          {% if form.errors %}
+            <div class="text-danger">
+              <ul class="mb-3">
+                {% for field in form.errors %}
+                  <li>
+                    <strong>{{ field | capitalize }}</strong>: {{ form.errors.messages[field] }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <input type="text" name="contact[name]" class="form-control" placeholder="Naam" required>
+          <input type="email" name="contact[email]" class="form-control" placeholder="E-mail" required>
+          <input type="tel" name="contact[phone]" class="form-control" placeholder="Telefoonnummer">
+          <div class="select-wrapper position-relative">
+            <select name="contact[reason]" class="form-control pe-5" required>
+              <option value="">Reden voor contact</option>
+              <option value="Over een bestelling">Over een bestelling</option>
+              <option value="PR">PR</option>
+              <option value="Partnerships">Partnerships</option>
+              <option value="Events">Events</option>
+              <option value="Overige">Overige</option>
+            </select>
+
+            <span class="select-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M16.293 8.29297L12 12.586L7.70697 8.29297L6.29297 9.70697L12 15.414L17.707 9.70697L16.293 8.29297Z" fill="#2A3942"/>
+              </svg>
+            </span>
+          </div>
+
+          <textarea
+            name="contact[body]"
+            class="form-control"
+            rows="4"
+            placeholder="Je bericht..."
+            required
+          ></textarea>
+          <button type="submit" class="btn btn-primary">Versturen</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Ambrosia",
+  "tag": "section",
+  "class": "contact-ambrosia-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "contact_image",
+      "label": "Decorative image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Our friendly team is happy to help you further."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "onlychamps@vinambrosia.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "+1 (555) 000-0000"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "Generaal van Dedemlaan 98, 5623 GH Eindhoven, Nederland"
+    },
+    {
+      "type": "text",
+      "id": "btw",
+      "label": "VAT (BTW)",
+      "default": "NL866265089B01"
+    },
+    {
+      "type": "text",
+      "id": "kvk",
+      "label": "Chamber of Commerce (KVK)",
+      "default": "93068069"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Ambrosia",
+      "category": "Contact"
+    }
+  ]
+}
+{% endschema %}

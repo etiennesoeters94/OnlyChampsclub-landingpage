@@ -1,0 +1,147 @@
+<section class="related-articles-section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <!-- Desktop -->
+    <div class="row d-none d-md-flex">
+      {% for related_article in blog.articles limit: 3 %}
+        {% if related_article.handle != article.handle %}
+          <div class="col-md-4">
+            <div class="cardborder-0">
+              {% if related_article.image %}
+                <div class="card-content">
+                  <a href="{{ related_article.url }}">
+                    <img
+                      src="{{ related_article.image | image_url }}"
+                      alt="{{ related_article.image.alt | escape }}"
+                      class="img-fluid" width="{{ related_article.image.width }}" height="{{ related_article.image.height }}">
+                  </a>
+                  <div class="card-body p-0">
+                    <h5 class="card-title">
+                      <a href="{{ related_article.url }}" class="text-dark text-decoration-none">
+                        {{ related_article.title }}
+                      </a>
+                    </h5>
+                    <p class="card-text">
+                      {% if related_article.excerpt != blank %}
+                        {{ related_article.excerpt | strip_html | truncate: 70 }}
+                      {% else %}
+                        {{ related_article.content | strip_html | truncate: 70 }}
+                      {% endif %}
+                    </p>
+                    {% assign word_count = related_article.content | strip_html | split: ' ' | size %}
+                    {% assign reading_time = word_count | divided_by: 200 | ceil %}
+                    <p class="text-time">{{ reading_time }} min leestijd</p>
+                    <a href="{{ related_article.url }}" class="btn btn-link">
+                      Lees meer
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <path d="M10.414 18.2538L16.121 12.5468L10.414 6.83984L9 8.25384L13.293 12.5468L9 16.8398L10.414 18.2538Z" fill="#1468A7"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Mobile -->
+    <div class="swiper blog-news-swiper-single d-md-none">
+      <div class="swiper-wrapper">
+        {% for related_article in blog.articles limit: 3 %}
+          {% if related_article.handle != article.handle %}
+            <div class="swiper-slide" style="width: 85%; margin-right: 15%;">
+              <div class="cardborder-0">
+                {% if related_article.image %}
+                  <div class="card-content">
+                    <a href="{{ related_article.url }}">
+                      <img
+                        src="{{ related_article.image | image_url }}"
+                        alt="{{ related_article.image.alt | escape }}"
+                        class="img-fluid" width="{{ related_article.image.width }}" height="{{ related_article.image.height }}">
+                    </a>
+                    <div class="card-body p-0">
+                      <h5 class="card-title">
+                        <a href="{{ related_article.url }}" class="text-dark text-decoration-none">
+                          {{ related_article.title }}
+                        </a>
+                      </h5>
+                      <p class="card-text">
+                        {% if related_article.excerpt != blank %}
+                          {{ related_article.excerpt | strip_html | truncate: 70 }}
+                        {% else %}
+                          {{ related_article.content | strip_html | truncate: 70 }}
+                        {% endif %}
+                      </p>
+                      {% assign word_count = related_article.content | strip_html | split: ' ' | size %}
+                      {% assign reading_time = word_count | divided_by: 200 | ceil %}
+                      <p class="text-time">{{ reading_time }} min leestijd</p>
+                      <a href="{{ related_article.url }}" class="btn btn-link">
+                        Lees meer
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                          <path d="M10.414 18.2538L16.121 12.5468L10.414 6.83984L9 8.25384L13.293 12.5468L9 16.8398L10.414 18.2538Z" fill="#1468A7"/>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="swiper-button-prev d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M13.586 17.414L7.879 11.707L13.586 6L15 7.414L10.707 11.707L15 16L13.586 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+      <div class="swiper-button-next d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.innerWidth < 768) {
+      new Swiper('.blog-news-swiper-single', {
+        loop: true,
+        slidesPerView: 1.5,
+        spaceBetween: 16,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    }
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Related Blog Articles",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title section",
+      "default": "Gerelateerde berichten"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related Blog Articles",
+      "category": "Blog"
+    }
+  ]
+}
+{% endschema %}

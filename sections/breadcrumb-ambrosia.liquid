@@ -1,0 +1,93 @@
+<section class="breadcrumb-section">
+  <div class="container">
+    <nav class="breadcrumb-nav d-block align-items-center" style="font-size: 14px; gap: 8px;">
+      {% if request.page_type == 'list-collections' %}
+        <a href="{{ section.settings.shop_link }}" class="text-decoration-none">
+          {{ section.settings.shop_label }}
+        </a>
+
+      {% elsif template.name == 'collection' %}
+        <a href="{{ section.settings.shop_link }}" class="text-decoration-none">
+          {{ section.settings.shop_label }}
+        </a>
+
+        <span class="breadcrumb-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M6.471 11.8L10.276 7.995 6.471 4.19 5.529 5.133 8.391 7.995 5.529 10.857 6.471 11.8Z" fill="#2A3942"/>
+          </svg>
+        </span>
+
+        <span>{{ collection.title }}</span>
+
+      {% elsif template.name == 'product' %}
+        <a href="{{ routes.root_url }}" class="text-decoration-none">Home</a>
+
+        <span class="breadcrumb-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M6.471 11.8L10.276 7.995 6.471 4.19 5.529 5.133 8.391 7.995 5.529 10.857 6.471 11.8Z" fill="#2A3942"/>
+          </svg>
+        </span>
+
+        <a href="{{ section.settings.shop_link }}" class="text-decoration-none">
+          {{ section.settings.shop_label }}
+        </a>
+
+        {% if collection %}
+          <span class="breadcrumb-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+              <path d="M6.471 11.8L10.276 7.995 6.471 4.19 5.529 5.133 8.391 7.995 5.529 10.857 6.471 11.8Z" fill="#2A3942"/>
+            </svg>
+          </span>
+          <a href="{{ collection.url }}" class="text-decoration-none">
+            {{ collection.title }}
+          </a>
+        {% elsif product.collections[1] %}
+          <span class="breadcrumb-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+              <path d="M6.471 11.8L10.276 7.995 6.471 4.19 5.529 5.133 8.391 7.995 5.529 10.857 6.471 11.8Z" fill="#2A3942"/>
+            </svg>
+          </span>
+          <a href="{{ product.collections[1].url }}" class="text-decoration-none">
+            {{ product.collections[1].title }}
+          </a>
+        {% endif %}
+
+        <span class="breadcrumb-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M6.471 11.8L10.276 7.995 6.471 4.19 5.529 5.133 8.391 7.995 5.529 10.857 6.471 11.8Z" fill="#2A3942"/>
+          </svg>
+        </span>
+
+        <span>{{ product.title }}</span>
+
+      {% else %}
+        <a href="{{ routes.root_url }}" class="text-decoration-none">Home</a>
+      {% endif %}
+    </nav>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Breadcrumb",
+  "settings": [
+    {
+      "type": "text",
+      "id": "shop_label",
+      "label": "Shop Label",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "shop_link",
+      "label": "Shop Link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Breadcrumb"
+    }
+  ]
+}
+{% endschema %}

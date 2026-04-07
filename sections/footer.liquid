@@ -1,0 +1,957 @@
+{{ 'component-list-menu.aio.min.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-payment.aio.min.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-social.aio.min.css' | asset_url | stylesheet_tag }}
+
+<footer class="footer">
+  {%- liquid
+    assign has_social_icons = true
+    if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+      assign has_social_icons = false
+    endif
+
+    if settings.brand_image == blank and settings.brand_headline == blank and settings.brand_description == blank
+      assign brand_empty = true
+    endif
+
+    if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and brand_empty and has_social_icons == false and section.settings.newsletter_enable == false and section.settings.enable_follow_on_shop == false
+      assign only_empty_brand = true
+    endif
+  -%}
+
+  {%- if section.blocks.size > 0
+    or section.settings.newsletter_enable
+    or section.settings.show_social
+    and has_social_icons
+    or section.settings.enable_follow_on_shop
+  -%}
+    {%- unless only_empty_brand -%}
+      <div class="footer__content-top container">
+        {%- if section.settings.footer_logo != blank -%}
+          <div class="text-sm-center logo-footer hoverme">
+            <a href="{{ routes.root_url }}" aria-label="Home">
+              <img
+                src="{{ section.settings.footer_logo | image_url }}"
+                alt="{{ section.settings.footer_logo.alt | escape }}"
+                width="148"
+                height="207"
+               
+              >
+            </a>
+            {% for i in (1..50) %}
+              <i></i>
+            {% endfor %}
+          </div>
+        {%- endif -%}
+
+        <div class="row">
+          {%- assign column_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'link_list' and column_index < 3 -%}
+              <div class="col-12 col-sm-4 col-lg-3">
+                <div class="footer-block">
+                  {%- if block.settings.heading != blank -%}
+                    <h2 class="footer-block__heading inline-richtext">{{ block.settings.heading }}</h2>
+                  {%- endif -%}
+                  {%- if block.settings.menu != blank -%}
+                    <ul class="footer-block__details-content list-unstyled">
+                      {%- for link in block.settings.menu.links -%}
+                        <li>
+                          <a
+                            href="{{ link.url }}"
+                            class="link list-menu__item{% if link.active %} list-menu__item--active{% endif %}"
+                          >
+                            {{ link.title | escape }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+              </div>
+              {%- assign column_index = column_index | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          <div class="col-12 col-lg-3">
+            <div class="footer-block d-block d-sm-flex d-lg-block">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'text' -%}
+                  <div class="box">
+                    {%- if block.settings.heading != blank -%}
+                      <h2 class="footer-block__heading">{{ block.settings.heading }}</h2>
+                    {%- endif -%}
+                    <div class="rte">{{ block.settings.subtext }}</div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if section.settings.newsletter_enable -%}
+                <div class="footer-block__newsletter">
+                  {%- form 'customer', id: 'ContactFooter', class: 'newsletter-form' -%}
+                    <input type="hidden" name="contact[tags]" value="newsletter">
+                    <div class="d-flex">
+                      <input
+                        id="NewsletterFormNews"
+                        type="email"
+                        name="contact[email]"
+                        class="form-control"
+                        value="{{ form.email }}"
+                        placeholder="Vul je e-mailadres in"
+                        required
+                      >
+                      <button type="submit" class="btn btn-primary ms-2" name="commit" id="SubscribeFormNews">
+                        Inschrijven
+                      </button>
+                    </div>
+                  {%- endform -%}
+                  {%- if section.settings.newsletter_heading != blank -%}
+                    <p class="footer-block__heading-news">{{ section.settings.newsletter_heading }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endunless -%}
+  {%- endif -%}
+
+  <div
+    class="footer-content"
+    {% if settings.animations_reveal_on_scroll %}
+      data-cascade
+    {% endif %}
+  >
+    <div class="footer__content-bottom-wrapper page-width">
+      <div class="footer__column footer__localization isolate">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'FooterCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="caption-large text-body" id="FooterLanguageLabel">
+                  {{ 'localization.language_label' | t }}
+                </h2>
+                {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+      </div>
+      <div class="footer__column footer__column--info">
+        {%- if section.settings.payment_enable -%}
+          <div class="footer__payment">
+            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+            <ul class="list list-payment" role="list">
+              {%- for type in shop.enabled_payment_types -%}
+                <li class="list-payment__item">
+                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="footer-bottom container">
+      <div class="icon-float-nix">
+        <img src="{{ 'nix-18.svg' | asset_url }}" class="icon" alt="NIX18 logo" width="48" height="48">
+      </div>
+      <div class="row justify-content-between align-items-center text-md-start caption">
+        <div class="col-12 col-md-4 text-md-start">
+          <small class="copyright__content"> &copy; {{ 'now' | date: '%Y' }} Alle rechten voorbehouden </small>
+        </div>
+
+        <div class="col-12 col-md-5 text-md-start">
+          {%- if section.settings.show_social and has_social_icons -%}
+            {%- render 'social-icons', class: 'footer__list-social d-flex justify-content-md-center gap-2' -%}
+          {%- endif -%}
+        </div>
+
+        <div class="col-12 col-md-3 text-md-end">
+          <small class="copyright__content">
+            Gerealiseerd door
+            <a href="https://kleinmedia.nl/" title="Klein Media" target="_blank">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="85"
+                height="16"
+                viewBox="0 0 85 16"
+                fill="none"
+                style="vertical-align: middle;"
+              >
+                <path d="M9.08116 4.2834L7.19717 4.00879L3.7247 8.00711H3.71855V4.22848L1.89612 4.00879V12.983H3.71855V10.4841L4.68517 9.3527L7.40034 12.983H9.65375L5.95964 7.97965L9.08116 4.2834Z" fill="#2A3942"/>
+                <path d="M23.7705 12.983H25.5929V4.22848L23.7705 4.00879V12.983Z" fill="#2A3942"/>
+                <path d="M66.6477 12.983H68.4701V4.22848L66.6477 4.00879V12.983Z" fill="#2A3942"/>
+                <path d="M12.5786 4.22848L10.7562 4.00879V12.983H15.5278L15.774 11.4178H12.5786V4.22848Z" fill="#2A3942"/>
+                <path d="M18.7651 9.19356H21.6588L21.9051 7.71066H18.7651V5.6401H21.7574L22.0283 4.06934H16.9489V4.11327V12.9832H21.9667L22.213 11.4124H18.7651V9.19356Z" fill="#2A3942"/>
+                <path d="M52.6839 9.19356H55.5776L55.8239 7.71066H52.6839V5.6401H55.6761L55.947 4.06934H50.8676V4.11327V12.9832H55.8854L56.1317 11.4124H52.6839V9.19356Z" fill="#2A3942"/>
+                <path d="M33.1166 4.00879V10.1051L29.3855 4.22848L27.5631 4.00879V12.983H29.3239V7.21623L32.9565 12.983H34.8774V4.22848L33.1166 4.00879Z" fill="#2A3942"/>
+                <path d="M47.2038 4.00879L44.2793 9.05063L41.3056 4.22848L39.5632 4.00879V12.983H41.3056V7.34804L43.7621 11.1871H44.8827L47.2038 7.24919V12.983H48.9585V4.22848L47.2038 4.00879Z" fill="#2A3942"/>
+                <path d="M61.9676 4.05859L57.6147 4.06958V12.9779H61.9676C63.6792 12.9779 65.0707 11.7367 65.0707 10.2099V6.82117C65.0707 5.29983 63.6792 4.05859 61.9676 4.05859ZM63.2298 9.94623C63.2298 10.7426 62.5033 11.3907 61.6105 11.3907H59.4372V5.64035H61.6105C62.5033 5.64035 63.2298 6.28842 63.2298 7.08479V9.94623Z" fill="#2A3942"/>
+                <path d="M77.1199 12.983H78.9607L75.4637 4.24495L73.0071 4.00879L69.51 12.983H71.3509L72.1513 10.907H76.3256L77.1199 12.983ZM72.7177 9.42409L74.2323 5.48619L75.7469 9.42409H72.7177Z" fill="#2A3942"/>
+                <path d="M80.6657 4.05846L80.2286 3.99805L79.422 4.92074V4.04748L79.0033 3.99805V6.0741H79.422V5.49742L79.6437 5.23379L80.2778 6.0741H80.795L79.9392 4.91524L80.6657 4.05846Z" fill="#2A3942"/>
+                <path d="M82.6739 3.99805L81.9966 5.16239L81.3132 4.04748L80.9069 3.99805V6.0741H81.3132V4.77245L81.8796 5.66218H82.1382L82.6739 4.74499V6.0741H83.0802V4.04748L82.6739 3.99805Z" fill="#2A3942"/>
+              </svg>
+            </a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<div
+  id="champagneIcon"
+  style="display:none; position: fixed; bottom: 20px; left: 20px; z-index: 9999; cursor: pointer;"
+>
+  <svg
+    version="1.0"
+    xmlns="http://www.w3.org/2000/svg"
+    width="512.000000pt"
+    height="512.000000pt"
+    viewBox="0 0 512.000000 512.000000"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+    fill="#000000" stroke="none">
+    <path d="M4648 5092 c-59 -47 -116 -122 -139 -182 -27 -71 -34 -79 -148 -150
+    -114 -71 -133 -86 -160 -131 -52 -85 -11 -197 119 -323 121 -118 216 -152 306
+    -110 35 17 77 70 168 215 34 55 46 65 105 91 116 52 221 150 221 204 0 88
+    -195 318 -325 383 -74 37 -104 37 -147 3z m176 -86 c84 -60 179 -165 216 -239
+    31 -61 31 -77 2 -77 -63 0 -273 188 -326 291 -53 101 -11 110 108 25z m-163
+    -38 c58 -115 193 -249 309 -308 l44 -23 -29 -24 c-70 -58 -169 -80 -224 -49
+    -14 8 -31 12 -38 9 -24 -10 -14 -42 20 -59 17 -9 33 -18 35 -19 4 -3 -92 -156
+    -127 -203 -52 -71 -110 -78 -197 -26 -74 44 -124 93 -174 167 -66 98 -63 159
+    9 214 36 28 200 133 207 133 2 0 10 -16 18 -35 11 -25 21 -35 37 -35 19 0 20
+    4 15 33 -16 76 -17 108 -6 144 12 35 65 123 75 123 3 0 14 -19 26 -42z"/>
+    <path d="M2991 4802 c-48 -24 -73 -62 -78 -119 -8 -91 56 -163 146 -163 86 0
+    151 64 151 150 0 114 -117 185 -219 132z m115 -38 c36 -17 64 -58 64 -94 0
+    -53 -57 -110 -111 -110 -34 0 -86 38 -98 71 -15 44 -3 85 36 119 38 34 60 37
+    109 14z"/>
+    <path d="M3238 4364 c-38 -20 -61 -68 -54 -110 8 -41 57 -84 97 -84 106 0 147
+    128 60 187 -39 26 -65 28 -103 7z m86 -47 c28 -21 18 -78 -17 -95 -24 -12 -31
+    -11 -53 2 -15 11 -24 26 -24 43 0 52 53 80 94 50z"/>
+    <path d="M887 4364 c-21 -21 -5 -42 41 -53 65 -17 123 -53 166 -103 39 -46 76
+    -132 76 -179 l0 -30 -32 24 c-70 52 -157 59 -236 18 -77 -40 -129 -124 -117
+    -190 27 -143 165 -212 295 -146 45 23 118 101 121 129 1 6 7 -7 14 -29 30 -89
+    14 -217 -36 -286 -36 -51 -4 -81 39 -36 71 76 89 243 39 368 -17 41 -27 85
+    -27 117 0 164 -80 302 -211 365 -59 28 -120 43 -132 31z m191 -368 c15 -8 42
+    -30 61 -49 l33 -35 -25 -55 c-45 -99 -146 -149 -224 -110 -106 52 -109 188 -6
+    242 45 24 122 27 161 7z"/>
+    <path d="M2863 4190 c-30 -12 -63 -67 -63 -103 0 -44 58 -97 105 -97 47 0 71
+    13 90 50 23 45 19 85 -12 120 -31 33 -82 46 -120 30z m87 -60 c11 -11 20 -27
+    20 -35 0 -19 -44 -65 -62 -65 -28 0 -58 31 -58 60 0 56 60 80 100 40z"/>
+    <path d="M3727 3762 c-231 -231 -417 -425 -417 -435 0 -10 8 -17 18 -17 22 0
+    852 830 852 853 0 10 -8 17 -18 17 -9 0 -202 -185 -435 -418z"/>
+    <path d="M3847 4153 c-2 -5 -12 -31 -21 -59 -9 -28 -37 -82 -62 -119 -43 -67
+    -50 -95 -20 -95 32 0 135 192 136 253 0 25 -22 39 -33 20z"/>
+    <path d="M3576 3908 c-22 -77 -80 -167 -170 -264 -73 -79 -90 -114 -54 -114
+    19 0 167 170 210 241 42 69 73 152 64 174 -12 32 -35 14 -50 -37z"/>
+    <path d="M4043 3855 c-73 -33 -163 -94 -163 -110 0 -29 24 -25 86 15 35 24 93
+    53 127 65 36 13 63 29 65 39 5 24 -52 20 -115 -9z"/>
+    <path d="M3871 3610 c-30 -11 -79 -34 -109 -52 -56 -34 -232 -193 -232 -209 0
+    -5 7 -12 15 -15 9 -4 42 19 87 61 94 85 187 147 266 175 45 17 62 27 60 39 -5
+    23 -26 23 -87 1z"/>
+    <path d="M2806 3444 c-23 -25 -71 -75 -108 -112 -61 -62 -68 -74 -93 -154
+    l-26 -87 -287 -289 c-433 -436 -758 -719 -1132 -984 -278 -197 -507 -331 -931
+    -543 -179 -90 -230 -120 -227 -133 2 -9 11 -18 20 -20 10 -2 137 57 282 131
+    l265 134 27 -41 c15 -23 55 -77 90 -122 l63 -81 -1 -76 c0 -110 22 -169 92
+    -239 48 -48 68 -60 129 -78 53 -16 88 -21 129 -17 56 4 58 4 122 -47 51 -40
+    164 -124 177 -131 1 -1 -56 -117 -128 -260 -71 -142 -128 -265 -127 -274 2 -9
+    12 -16 23 -16 15 0 47 55 155 270 152 302 289 545 411 728 293 438 690 899
+    1202 1395 166 161 182 173 235 187 86 23 135 51 177 101 20 25 59 61 85 80 61
+    44 86 92 71 137 -7 21 -100 121 -278 298 -148 147 -278 272 -290 278 -47 24
+    -84 14 -127 -35z m377 -273 c285 -287 291 -295 243 -340 -22 -21 -25 -21 -60
+    -7 -20 8 -56 29 -82 47 -35 24 -49 28 -57 19 -14 -14 36 -59 95 -86 l37 -17
+    -50 -58 c-51 -58 -109 -89 -165 -89 -81 0 -414 314 -480 452 -15 32 -15 39 0
+    91 15 53 37 81 105 135 l24 19 48 -71 c57 -86 175 -216 195 -216 23 0 16 25
+    -17 56 -51 47 -148 173 -175 225 -19 38 -22 54 -14 69 13 23 38 39 65 40 13 0
+    112 -93 288 -269z m-508 -192 c60 -84 236 -257 328 -323 l67 -48 -284 -282
+    c-156 -154 -335 -337 -397 -406 -216 -238 -484 -570 -635 -787 l-66 -93 -72
+    59 c-91 75 -92 76 -99 138 -16 138 -134 253 -278 270 -48 6 -53 9 -115 82 -35
+    42 -64 81 -64 86 0 6 20 23 45 38 77 49 324 235 465 350 245 201 371 317 710
+    654 184 183 337 333 340 332 3 0 28 -32 55 -70z m-1606 -1408 l51 -65 -57 -21
+    c-32 -12 -74 -31 -93 -43 -57 -35 -137 -120 -167 -178 -15 -30 -31 -54 -34
+    -54 -7 0 -149 189 -149 199 0 4 42 31 93 59 50 28 135 78 187 111 52 34 100
+    60 106 58 6 -1 35 -31 63 -66z m237 -137 c59 -25 98 -60 127 -113 90 -165 -4
+    -396 -201 -493 -85 -42 -203 -50 -273 -20 -95 41 -149 122 -157 233 -11 161
+    101 325 267 390 60 23 184 25 237 3z m285 -385 c35 -28 63 -55 62 -60 -2 -5
+    -43 -75 -92 -156 -48 -82 -98 -167 -110 -191 l-22 -43 -72 51 c-40 27 -87 63
+    -106 79 l-34 28 48 24 c78 38 169 130 210 211 19 39 35 79 35 89 0 28 12 24
+    81 -32z"/>
+    <path d="M2335 2050 c-47 -47 -57 -62 -47 -72 10 -10 25 0 72 47 57 56 67 74
+    44 82 -5 2 -36 -24 -69 -57z"/>
+    <path d="M2045 1729 c-86 -100 -154 -187 -152 -192 8 -25 26 -14 74 45 28 35
+    99 117 157 183 58 66 106 126 106 133 0 35 -43 -5 -185 -169z"/>
+    <path d="M1175 942 c-47 -24 -113 -33 -158 -21 -49 13 -70 -1 -36 -25 49 -34
+    223 -9 251 37 18 29 -11 33 -57 9z"/>
+    <path d="M4143 3465 c-68 -29 -80 -120 -22 -169 45 -38 92 -35 135 8 51 51 43
+    119 -18 156 -39 23 -52 24 -95 5z m79 -52 c20 -18 24 -63 6 -81 -7 -7 -26 -12
+    -43 -12 -38 0 -55 16 -55 51 0 52 54 77 92 42z"/>
+    <path d="M4510 3278 c-46 -32 -71 -68 -77 -114 -11 -87 57 -166 145 -167 91
+    -1 152 61 152 154 0 114 -129 188 -220 127z m143 -54 c33 -33 41 -57 33 -99
+    -8 -40 -56 -85 -91 -85 -68 0 -115 44 -115 108 0 35 6 49 29 73 40 40 106 41
+    144 3z"/>
+    <path d="M3970 3093 c-79 -31 -92 -151 -19 -188 78 -41 159 8 159 94 0 60 -84
+    117 -140 94z m88 -76 c12 -24 11 -31 -2 -52 -21 -32 -52 -40 -81 -21 -29 19
+    -34 66 -9 91 26 26 76 16 92 -18z"/>
+    <path d="M275 2727 c-25 -39 -47 -146 -40 -196 10 -75 60 -166 112 -206 125
+    -96 301 -79 379 37 53 78 52 164 -2 236 -66 86 -203 86 -267 1 -40 -54 -31
+    -159 13 -159 18 0 19 6 17 56 -2 52 0 58 31 85 47 42 100 40 149 -4 31 -29 37
+    -41 40 -88 4 -45 1 -60 -19 -88 -40 -59 -71 -75 -152 -79 -82 -4 -129 13 -178
+    65 -63 66 -86 186 -53 278 8 22 15 47 15 56 0 27 -28 31 -45 6z"/>
+    <path d="M3592 1580 c3 -21 11 -25 81 -37 136 -23 220 -98 242 -216 8 -42 4
+    -44 -51 -21 -27 11 -60 15 -113 12 -195 -10 -327 -147 -280 -289 19 -56 59
+    -100 113 -125 73 -34 129 -32 208 9 52 26 71 44 105 95 24 35 48 82 54 105 18
+    63 25 64 58 13 78 -124 61 -286 -44 -408 -38 -45 -43 -65 -19 -75 23 -9 78 50
+    120 131 33 61 38 82 42 152 6 108 -14 175 -77 258 -40 53 -51 76 -60 131 -15
+    86 -48 151 -101 199 -58 53 -118 77 -207 83 -74 6 -75 6 -71 -17z m291 -341
+    c37 -20 39 -22 32 -57 -3 -20 -17 -59 -29 -87 -48 -104 -115 -155 -208 -155
+    -95 0 -158 61 -158 152 0 39 6 54 31 83 78 89 227 117 332 64z"/>
+    </g>
+  </svg>
+</div>
+
+<div
+  class="modal fade"
+  id="newsletterSuccessModal"
+  tabindex="-1"
+  aria-labelledby="newsletterSuccessLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+      </div>
+      <div class="modal-body">
+        <h5 class="modal-title w-100 mb-4" id="newsletterSuccessLabel">Bedankt voor het aanmelden!</h5>
+        <p class="text" id="discountModalLabel">10% korting op je eerste bubbels na inschrijving</p>
+        <p>
+          <span
+            id="couponCode"
+            style="cursor: pointer; padding: 10px; display: inline-block; background: #079e78; border-radius: 5px; margin-top: 24px; color: white;"
+            onclick="copyCoupon()"
+          >
+            10welkombubbels
+          </span>
+        </p>
+        <div id="copyMessage" style="display:none; margin-top: 10px; color: green;">Copied!</div>
+        <svg
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width="1060.000000pt"
+          height="1060.000000pt"
+          viewBox="0 0 1060.000000 1060.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g transform="translate(0.000000,1060.000000) scale(0.100000,-0.100000)"
+          fill="#000000" stroke="none">
+          <path d="M5535 9840 c-83 -33 -137 -93 -154 -170 -31 -140 94 -280 250 -280
+          96 0 179 48 223 130 25 45 28 60 24 118 -3 56 -9 75 -36 114 -62 90 -202 130
+          -307 88z m211 -122 c48 -48 57 -107 22 -157 -53 -78 -129 -100 -208 -59 -62
+          32 -93 80 -87 136 9 81 73 124 175 119 57 -3 66 -6 98 -39z"/>
+          <path d="M4212 9561 c-129 -82 -71 -271 83 -271 85 0 148 63 148 147 0 76 -59
+          134 -145 140 -41 3 -60 -1 -86 -16z"/>
+          <path d="M7235 9378 c-69 -24 -125 -106 -125 -184 0 -66 24 -110 79 -142 39
+          -23 57 -27 122 -27 67 0 79 3 112 28 172 131 18 397 -188 325z"/>
+          <path d="M6298 9260 c-38 -23 -363 -581 -503 -865 -133 -269 -162 -370 -115
+          -395 12 -6 29 -8 39 -5 18 6 80 80 138 165 80 118 472 928 508 1047 4 15 0 28
+          -14 42 -24 24 -29 25 -53 11z"/>
+          <path d="M5540 9220 c-13 -13 -20 -33 -20 -57 0 -21 -14 -141 -31 -268 -36
+          -276 -48 -574 -30 -735 7 -58 17 -111 23 -117 6 -7 23 -13 38 -13 15 0 32 6
+          37 13 6 6 20 66 32 132 28 147 44 482 39 803 -3 221 -3 224 -27 243 -29 24
+          -36 24 -61 -1z"/>
+          <path d="M4789 9097 c-8 -19 1 -49 56 -182 240 -577 443 -897 515 -810 39 47
+          -51 247 -338 745 -141 247 -158 270 -193 270 -21 0 -32 -7 -40 -23z"/>
+          <path d="M3926 8701 c-11 -12 -15 -27 -11 -40 11 -36 752 -547 1008 -695 211
+          -123 287 -140 287 -68 0 25 -16 42 -112 119 -152 122 -237 182 -441 311 -368
+          232 -651 392 -695 392 -11 0 -27 -9 -36 -19z"/>
+          <path d="M6845 8619 c-219 -117 -590 -344 -728 -446 -129 -96 -267 -229 -267
+          -258 0 -61 54 -59 185 10 174 89 330 197 675 463 226 175 222 171 218 199 -2
+          14 -12 32 -23 39 -18 12 -26 11 -60 -7z"/>
+          <path d="M3325 8084 c-73 -19 -115 -38 -139 -63 -28 -29 -85 -179 -189 -497
+          -264 -806 -445 -1534 -531 -2137 -43 -301 -51 -409 -50 -712 1 -252 4 -306 23
+          -410 42 -232 109 -397 212 -522 l51 -63 -16 -147 c-75 -666 -174 -1189 -257
+          -1355 -64 -127 -202 -162 -754 -193 -310 -17 -365 -22 -455 -41 -154 -31 -196
+          -74 -155 -155 55 -105 526 -327 985 -463 309 -91 586 -148 915 -188 148 -17
+          606 -18 700 0 143 27 206 73 207 151 2 126 -185 237 -546 325 -318 78 -424
+          149 -473 316 -46 157 36 508 338 1447 l42 133 36 5 c528 83 1030 814 1459
+          2125 160 489 322 1116 422 1635 11 61 28 123 36 138 71 127 -187 303 -691 474
+          -215 73 -498 143 -725 179 -95 15 -408 28 -445 18z m410 -155 c368 -59 847
+          -201 1106 -329 113 -55 192 -107 184 -121 -9 -14 -149 -11 -287 7 -408 51
+          -979 209 -1253 347 -74 37 -165 96 -165 107 0 25 226 19 415 -11z m-395 -173
+          c326 -196 1095 -405 1555 -421 66 -3 121 -5 122 -5 0 0 -5 -28 -13 -62 -7 -35
+          -25 -117 -39 -183 -34 -158 -31 -151 -55 -130 -53 48 -181 58 -318 25 -46 -11
+          -152 -47 -236 -80 -290 -113 -406 -135 -706 -135 -190 1 -244 4 -345 23 -157
+          29 -345 81 -351 97 -6 16 90 335 201 665 47 140 85 256 85 258 0 7 18 -3 100
+          -52z m1490 -864 c71 -35 72 -79 8 -337 -163 -659 -394 -1344 -614 -1820 -331
+          -712 -690 -1085 -1046 -1085 -93 0 -159 16 -257 61 -244 113 -356 379 -368
+          875 -9 355 29 711 133 1239 54 273 173 765 225 931 l10 31 92 -29 c215 -67
+          500 -105 712 -94 239 12 430 54 657 145 237 94 375 120 448 83z m-1901 -3338
+          c35 -14 85 -29 111 -35 l48 -10 -49 -147 c-121 -359 -265 -861 -314 -1099 -71
+          -339 9 -555 251 -680 93 -48 164 -72 334 -112 69 -16 164 -43 211 -61 96 -35
+          205 -98 192 -111 -24 -24 -140 -34 -388 -33 -211 0 -292 5 -430 23 -412 54
+          -830 163 -1220 315 -138 55 -425 193 -425 205 0 10 91 17 400 31 339 16 499
+          36 648 82 215 66 275 155 366 549 47 203 97 512 138 847 28 231 35 271 48 266
+          8 -3 44 -17 79 -30z"/>
+          <path d="M4260 7135 c-59 -31 -63 -97 -9 -137 25 -19 28 -19 57 -4 57 29 69
+          90 27 131 -27 28 -39 30 -75 10z"/>
+          <path d="M3581 7114 c-30 -38 -28 -87 5 -113 34 -27 64 -27 92 -1 38 36 28
+          101 -19 125 -40 21 -55 19 -78 -11z"/>
+          <path d="M4688 6693 c-8 -10 -38 -99 -67 -198 -290 -994 -461 -1475 -677
+          -1907 -186 -372 -360 -591 -542 -680 -82 -41 -89 -43 -176 -42 -288 2 -441
+          167 -513 554 -24 131 -24 525 0 730 48 394 154 897 276 1305 30 102 29 126 -5
+          139 -30 12 -60 -19 -78 -81 -191 -653 -285 -1140 -305 -1588 -22 -493 54 -819
+          234 -1001 114 -115 232 -159 409 -152 96 3 106 6 190 47 231 115 468 435 692
+          936 155 348 292 733 464 1304 186 622 183 611 164 632 -21 24 -46 24 -66 2z"/>
+          <path d="M3279 6377 c-53 -41 -59 -99 -17 -144 32 -34 73 -30 114 11 43 43 44
+          77 5 117 -31 31 -74 38 -102 16z"/>
+          <path d="M3980 6265 c-23 -19 -51 -35 -61 -35 -31 0 -77 -28 -84 -50 -7 -23 9
+          -56 42 -87 13 -13 23 -34 23 -50 0 -36 25 -73 51 -73 10 0 36 16 58 35 27 25
+          48 35 70 35 41 0 88 24 96 50 8 24 -6 51 -44 83 -19 16 -32 38 -37 63 -3 22
+          -11 45 -17 52 -17 22 -54 13 -97 -23z"/>
+          <path d="M3210 5960 c-26 -14 -46 -18 -81 -13 -71 8 -90 -6 -87 -70 1 -29 -4
+          -67 -10 -85 -10 -30 -9 -36 13 -58 13 -13 34 -24 47 -24 14 0 34 -13 51 -35
+          21 -26 36 -35 58 -35 28 0 70 30 80 57 2 7 29 20 59 30 48 16 55 22 58 46 3
+          22 -5 36 -37 65 -28 25 -41 46 -41 63 0 32 -35 79 -58 79 -9 -1 -33 -9 -52
+          -20z"/>
+          <path d="M3786 5379 c-14 -17 -26 -34 -26 -38 0 -4 -11 -13 -25 -19 -36 -17
+          -46 -50 -27 -87 9 -16 15 -38 13 -49 -9 -63 34 -94 95 -67 35 16 42 16 70 3
+          64 -30 118 13 96 75 -7 22 -6 36 5 56 20 40 0 78 -49 92 -20 5 -46 22 -58 38
+          -29 36 -62 35 -94 -4z"/>
+          <path d="M3362 5307 c-27 -29 -38 -78 -22 -107 15 -27 75 -53 107 -45 27 6 63
+          59 63 92 0 35 -11 53 -41 68 -41 22 -82 19 -107 -8z"/>
+          <path d="M2927 4932 c-10 -10 -17 -33 -17 -51 0 -17 -9 -44 -21 -60 -32 -43
+          -23 -91 20 -113 19 -10 44 -29 56 -44 29 -37 75 -37 113 -1 19 18 39 27 60 27
+          32 0 72 29 72 53 0 6 -9 26 -19 44 -11 17 -21 50 -23 74 -4 58 -37 83 -91 68
+          -30 -8 -42 -7 -59 6 -30 20 -71 19 -91 -3z"/>
+          <path d="M3390 4445 c-13 -14 -33 -25 -45 -25 -27 0 -55 -29 -55 -58 0 -11 10
+          -29 23 -39 13 -10 26 -30 30 -44 4 -15 22 -34 46 -47 43 -24 63 -21 91 13 7 9
+          28 22 47 30 45 19 61 56 39 89 -9 14 -26 28 -39 32 -12 3 -31 20 -42 37 -27
+          42 -63 46 -95 12z"/>
+          <path d="M7030 7714 c-538 -47 -1330 -304 -1552 -503 -76 -68 -95 -122 -63
+          -179 8 -15 31 -110 51 -212 172 -880 467 -1842 760 -2474 337 -728 720 -1151
+          1091 -1204 l47 -7 47 -145 c151 -461 278 -904 325 -1130 47 -229 25 -359 -80
+          -458 -85 -80 -138 -103 -392 -167 -282 -71 -453 -155 -516 -254 -39 -62 -37
+          -95 10 -141 50 -51 136 -76 304 -91 520 -45 1337 107 1964 367 463 191 629
+          342 461 419 -79 37 -204 53 -527 70 -414 22 -505 33 -639 77 -91 29 -133 71
+          -171 169 -80 207 -172 715 -235 1301 l-18 157 52 58 c104 117 187 333 222 583
+          21 141 18 603 -4 805 -77 700 -293 1596 -612 2533 -121 357 -134 379 -228 407
+          -51 15 -219 26 -297 19z m229 -143 l24 -6 -34 -29 c-57 -49 -286 -152 -476
+          -215 -412 -137 -987 -248 -1158 -225 l-50 7 33 26 c87 73 374 195 657 280 265
+          79 527 136 760 164 52 7 219 5 244 -2z m186 -397 c83 -249 205 -642 205 -662
+          0 -15 -139 -57 -285 -87 -318 -64 -634 -56 -905 22 -47 13 -147 49 -224 79
+          -184 73 -286 97 -396 92 -65 -2 -95 -8 -129 -26 -24 -13 -44 -22 -46 -20 -1 2
+          -19 82 -39 178 -21 96 -40 183 -43 193 -4 15 6 17 111 17 379 0 1097 180 1476
+          370 52 27 113 61 135 78 22 16 44 26 48 22 5 -4 46 -120 92 -256z m-1417 -675
+          c41 -11 122 -40 180 -64 221 -89 390 -128 619 -145 233 -16 506 15 735 84 62
+          19 116 32 119 28 8 -8 116 -424 159 -609 80 -346 144 -704 182 -1017 30 -249
+          32 -696 5 -861 -47 -278 -151 -472 -300 -559 -97 -57 -182 -79 -302 -80 -94 0
+          -121 4 -183 26 -490 176 -961 1024 -1373 2472 -82 287 -139 517 -150 598 -16
+          127 20 163 156 154 44 -3 113 -15 153 -27z m1746 -3361 c30 -312 117 -867 170
+          -1084 93 -376 147 -448 388 -518 145 -42 307 -60 668 -76 307 -13 356 -18 339
+          -35 -8 -7 -63 -38 -124 -68 -435 -217 -1044 -393 -1560 -451 -279 -31 -647
+          -29 -745 6 l-33 11 24 20 c68 55 255 124 469 172 112 26 232 72 300 116 208
+          134 271 336 205 652 -49 236 -186 718 -314 1100 -32 97 -45 150 -37 152 6 1
+          40 10 76 19 36 10 83 25 105 36 22 10 45 19 51 19 7 1 14 -28 18 -71z"/>
+          <path d="M6266 6746 c-28 -27 -33 -55 -14 -89 28 -53 84 -63 117 -21 27 34 27
+          67 -1 98 -35 39 -72 43 -102 12z"/>
+          <path d="M6926 6739 c-36 -29 -37 -89 -1 -117 45 -35 115 -1 115 56 0 72 -59
+          104 -114 61z"/>
+          <path d="M5845 6314 c-20 -20 -29 20 100 -424 239 -820 388 -1234 600 -1665
+          221 -448 437 -712 657 -802 125 -50 300 -41 430 25 191 95 309 310 354 642 16
+          125 18 457 4 620 -15 164 -56 438 -91 614 -65 325 -212 869 -240 887 -24 15
+          -48 10 -63 -13 -13 -21 -10 -39 40 -203 211 -700 312 -1412 263 -1852 -43
+          -387 -205 -614 -466 -654 -149 -22 -258 25 -409 175 -244 245 -470 687 -729
+          1432 -65 188 -173 535 -289 928 -47 159 -91 293 -98 298 -21 12 -45 9 -63 -8z"/>
+          <path d="M7244 6004 c-32 -16 -54 -50 -54 -85 0 -29 62 -89 92 -89 56 0 100
+          67 78 119 -24 58 -68 79 -116 55z"/>
+          <path d="M6523 5908 c-6 -7 -13 -30 -17 -50 -4 -21 -17 -45 -30 -55 -36 -29
+          -58 -69 -51 -93 8 -24 60 -50 101 -50 16 0 41 -13 65 -35 22 -19 46 -35 54
+          -35 26 0 55 38 55 71 0 22 11 43 35 70 19 22 35 45 35 52 0 28 -32 55 -77 66
+          -26 7 -62 25 -80 42 -35 30 -74 38 -90 17z"/>
+          <path d="M7296 5578 c-9 -12 -16 -35 -16 -51 0 -21 -11 -39 -40 -66 -28 -25
+          -40 -45 -40 -63 0 -30 17 -43 72 -53 24 -5 43 -16 54 -34 40 -61 82 -67 128
+          -17 17 18 45 37 63 40 17 4 37 14 44 22 15 18 14 70 -1 89 -6 8 -8 29 -4 54 9
+          59 -6 72 -75 70 -36 -1 -67 4 -88 14 -44 23 -79 21 -97 -5z"/>
+          <path d="M6717 5000 c-14 -16 -33 -30 -42 -30 -24 0 -53 -18 -65 -41 -8 -15
+          -7 -27 4 -50 12 -23 13 -36 4 -54 -15 -33 -2 -74 27 -87 19 -9 33 -8 63 4 33
+          13 43 13 63 2 56 -31 113 -3 108 53 -2 15 2 38 9 50 7 12 12 33 12 46 0 24
+          -27 57 -47 57 -6 0 -16 14 -23 30 -24 57 -75 66 -113 20z"/>
+          <path d="M7153 4948 c-58 -15 -78 -70 -48 -129 28 -53 92 -59 140 -12 30 31
+          31 52 5 102 -21 42 -46 52 -97 39z"/>
+          <path d="M7578 4555 c-20 -11 -33 -12 -53 -5 -55 21 -95 -8 -95 -69 0 -17 -9
+          -48 -21 -70 -32 -62 -7 -101 65 -101 12 0 33 -11 46 -25 34 -36 81 -34 113 5
+          14 16 36 32 51 36 52 13 64 64 27 114 -12 16 -21 44 -21 63 0 60 -52 84 -112
+          52z"/>
+          <path d="M7110 4058 c-10 -18 -33 -39 -49 -46 -56 -25 -52 -81 7 -111 20 -10
+          46 -28 56 -40 11 -12 30 -21 44 -21 30 0 92 45 92 67 0 9 11 26 25 39 43 39
+          25 88 -36 101 -15 3 -36 14 -45 24 -28 31 -71 25 -94 -13z"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="firstOrderDiscountModal"
+  tabindex="-1"
+  aria-labelledby="discountModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+      <div class="modal-header border-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5 class="modal-title">Word lid van OnlyChamps</h5>
+
+        <p>Sluit je aan en krijg 10% korting op je eerste bubbels plus exclusieve releases en insider deals</p>
+
+        <div class="footer-block__newsletter">
+          {%- form 'customer', id: 'ContactFooterNews', class: 'newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="d-flex">
+              <input
+                id="NewsletterFormNewsModal"
+                type="email"
+                name="contact[email]"
+                class="form-control"
+                value="{{ form.email }}"
+                placeholder="Vul je e-mailadres in"
+                required
+              >
+              <button type="submit" class="btn btn-primary ms-2" name="commit" id="SubscribeNewsModal">
+                Laat mij binnen
+              </button>
+            </div>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cartPopup" tabindex="-1" aria-labelledby="cartPopupLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <h5 class="mb-5" id="cartPopupLabel">Product toegevoegd aan winkelwagen!</h5>
+      <div class="d-flex justify-content-center gap-3 align-items-center">
+        <a href="#" class="btn btn-link close-and-refresh">Verder winkelen</a>
+
+              <a href="{{ routes.cart_url }}" class="btn btn-primary">Ga naar winkelwagen</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "link_list",
+      "name": "t:sections.footer.blocks.link_list.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "t:sections.footer.blocks.link_list.settings.heading.default",
+          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label"
+        }
+      ]
+    },
+    {
+      "type": "brand_information",
+      "name": "t:sections.footer.blocks.brand_information.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.footer.blocks.brand_information.settings.paragraph.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "default": true,
+          "label": "t:sections.footer.blocks.brand_information.settings.show_social.label",
+          "info": "t:sections.footer.blocks.brand_information.settings.show_social.info"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.footer.blocks.text.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "t:sections.footer.blocks.text.settings.heading.default",
+          "label": "t:sections.footer.blocks.text.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "default": "t:sections.footer.blocks.text.settings.subtext.default",
+          "label": "t:sections.footer.blocks.text.settings.subtext.label"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 550,
+          "step": 5,
+          "unit": "px",
+          "label": "Width",
+          "default": 100
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            {
+              "value": "",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Footer logo"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__1.content",
+      "info": "t:sections.footer.settings.header__1.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.newsletter_enable.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "newsletter_heading",
+      "default": "t:sections.footer.settings.newsletter_heading.default",
+      "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__9.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_follow_on_shop",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_follow_on_shop.label",
+      "info": "t:sections.footer.settings.enable_follow_on_shop.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.footer.settings.show_social.label",
+      "info": "t:sections.footer.settings.show_social.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_country_selector.label",
+      "info": "t:sections.footer.settings.enable_country_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_language_selector.label",
+      "info": "t:sections.footer.settings.enable_language_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.payment_enable.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "default": true,
+      "label": "t:sections.footer.settings.show_policy.label",
+      "info": "t:sections.footer.settings.show_policy.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.footer.settings.margin_top.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }
+}
+{% endschema %}
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const onlyChampsNewsletterPage = document.querySelector('[data-onlychamps-newsletter-page="true"]');
+
+    if (urlParams.get('customer_posted') === 'true') {
+      if (onlyChampsNewsletterPage) {
+        return;
+      }
+
+      const modal = new bootstrap.Modal(document.getElementById('newsletterSuccessModal'));
+      modal.show();
+
+      localStorage.setItem('userSubscribed', 'true');
+
+      const newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  });
+
+  document.querySelectorAll('.logo-footer').forEach((logo) => {
+    logo.addEventListener('mouseenter', () => {
+      logo.querySelectorAll('i').forEach((i) => {
+        const x = Math.random() * 200 - 100 + 'px';
+        const y = Math.random() * 200 - 100 + 'px';
+        const r = Math.random() * 360 + 'deg';
+        const h = Math.floor(Math.random() * 360);
+        i.style.setProperty('--x', x);
+        i.style.setProperty('--y', y);
+        i.style.setProperty('--r', r);
+        i.style.backgroundColor = `hsl(${h}, 100%, 50%)`;
+        i.style.animation = 'bang 700ms ease-out forwards';
+      });
+    });
+
+    logo.addEventListener('mouseleave', () => {
+      logo.querySelectorAll('i').forEach((i) => {
+        i.style.animation = 'none';
+        i.offsetHeight;
+        i.style.opacity = 0;
+      });
+    });
+  });
+
+  window.copyCoupon = function () {
+    var coupon = document.getElementById('couponCode');
+    var range = document.createRange();
+    range.selectNode(coupon);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    try {
+      var successful = document.execCommand('copy');
+      if (successful) {
+        var copyMsg = document.getElementById('copyMessage');
+        copyMsg.style.display = 'block';
+        setTimeout(function () {
+          copyMsg.style.display = 'none';
+        }, 2000);
+      } else {
+        console.error('Copy command was unsuccessful');
+      }
+    } catch (err) {
+      console.error('Oops, unable to copy', err);
+    }
+
+    window.getSelection().removeAllRanges();
+  };
+
+  document.querySelectorAll('.add-to-cart-link').forEach((link) => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const variantId = this.getAttribute('data-variant-id');
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: 1,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const cartPopup = new bootstrap.Modal(document.getElementById('cartPopup'));
+          cartPopup.show();
+        })
+        .catch((error) => {
+          console.error('Error adding to cart:', error);
+        });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const champagneIcon = document.getElementById('champagneIcon');
+
+    function hasSeenDiscountModal() {
+      return sessionStorage.getItem('discountModalShown') === 'true';
+    }
+
+    function hasSubscribedToNewsletter() {
+      return localStorage.getItem('userSubscribed') === 'true';
+    }
+
+    function shouldShowIcon() {
+      var path = window.location.pathname;
+      return /^\/products\/[^/]+$/.test(path) || /^\/collections\/[^/]+$/.test(path) || path === '/collections';
+    }
+
+    if (shouldShowIcon() && !hasSeenDiscountModal() && !hasSubscribedToNewsletter()) {
+      champagneIcon.style.display = 'block';
+
+      champagneIcon.addEventListener('click', function () {
+        var discountModal = new bootstrap.Modal(document.getElementById('firstOrderDiscountModal'));
+        discountModal.show();
+        champagneIcon.style.display = 'none';
+        sessionStorage.setItem('discountModalShown', 'true');
+      });
+    }
+
+    if (!hasSeenDiscountModal() && !hasSubscribedToNewsletter()) {
+      setTimeout(() => {
+        const discountModal = new bootstrap.Modal(document.getElementById('firstOrderDiscountModal'));
+        discountModal.show();
+        sessionStorage.setItem('discountModalShown', 'true');
+      }, 5000);
+    }
+
+    function triggerBounce() {
+      champagneIcon.style.animation = 'anime-bounce 1s ease';
+      setTimeout(() => {
+        champagneIcon.style.animation = '';
+      }, 1000);
+    }
+
+    setInterval(triggerBounce, 20000);
+    triggerBounce();
+  });
+
+  document.querySelector('.close-and-refresh')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    const modal = bootstrap.Modal.getInstance(document.getElementById('cartPopup'));
+    modal.hide();
+    setTimeout(() => {
+      location.reload();
+    }, 300);
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const icon = document.getElementById('champagneIcon');
+
+    function triggerBounce() {
+      icon.style.animation = 'anime-bounce 1s ease';
+
+      setTimeout(() => {
+        icon.style.animation = '';
+      }, 1000);
+    }
+
+    setInterval(triggerBounce, 20000);
+
+    triggerBounce();
+  });
+{% endjavascript %}

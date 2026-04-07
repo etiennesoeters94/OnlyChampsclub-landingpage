@@ -1,0 +1,167 @@
+<section class="section-over-ons-page over-champagne">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <h1>{{ page.title }}</h1>
+        <p class="text top">{{ page.content | strip_html }}</p>
+      </div>
+
+      <div class="col-12">
+        {% if section.settings.image_1 != blank %}
+          <figure class="img-1">
+            <img src="{{ section.settings.image_1 | image_url }}" alt="About image 1" class="img-fluid" width="{{ section.settings.image_1.width }}" height="{{ section.settings.image_1.height }}">
+          </figure>
+        {% endif %}
+      </div>
+
+      <div class="col-12 col-lg-8">
+        <h2>{{ section.settings.heading_1 }}</h2>
+        <p class="text content">{{ section.settings.text_1 | newline_to_br }}</p>
+      </div>
+
+      <div class="col-12 champagne-gallery">
+        <div class="row gx-2 gy-2">
+          <div class="col-6">
+            {% if section.settings.gallery_image_1 != blank %}
+              <figure>
+                <img
+                  src="{{ section.settings.gallery_image_1 | image_url }}"
+                  alt="Gallery image 1"
+                  class="img-fluid w-100 h-100 object-fit-cover" width="{{ section.settings.gallery_image_1.width }}" height="{{ section.settings.gallery_image_1.height }}">
+              </figure>
+            {% endif %}
+          </div>
+          <div class="col-6 d-flex flex-wrap">
+            {% for i in (2..5) %}
+              {% assign img_id = 'gallery_image_' | append: i %}
+              {% if section.settings[img_id] != blank %}
+                <div class="col-6">
+                  <figure>
+                    <img
+                      src="{{ section.settings[img_id] | image_url }}"
+                      alt="Gallery image {{ i }}"
+                      class="img-fluid w-100 object-fit-cover" width="{{ section.settings[img_id].width }}" height="{{ section.settings[img_id].height }}">
+                  </figure>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-8 margin-set">
+        <h2>{{ section.settings.heading_2 }}</h2>
+        <p class="text content">{{ section.settings.text_2 | newline_to_br }}</p>
+      </div>
+
+      <div class="col-12">
+        {% if section.settings.image_3 != blank %}
+          <figure class="img-3">
+            <img src="{{ section.settings.image_3 | image_url }}" alt="About image 3" class="img-fluid" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}">
+          </figure>
+        {% endif %}
+      </div>
+
+      <div class="col-12 col-lg-8 margin-set">
+        <h2>{{ section.settings.heading_3 }}</h2>
+        <p class="text content">{{ section.settings.text_3 | newline_to_br }}</p>
+      </div>
+
+      <div class="col-12 col-lg-8">
+        <h2>{{ section.settings.heading_4 }}</h2>
+        <p class="text content">{{ section.settings.text_4 | newline_to_br }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Champagne Section",
+  "tag": "section",
+  "class": "over-ons-page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "First Image"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "First Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1",
+      "label": "First Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_1",
+      "label": "Gallery Image 1 (Large Left)"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_2",
+      "label": "Gallery Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_3",
+      "label": "Gallery Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_4",
+      "label": "Gallery Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_5",
+      "label": "Gallery Image 5"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Second Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_2",
+      "label": "Second Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Third Image"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Third Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_3",
+      "label": "Third Text"
+    },
+    {
+      "type": "text",
+      "id": "heading_4",
+      "label": "Third Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_4",
+      "label": "Third Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Champagne Section",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

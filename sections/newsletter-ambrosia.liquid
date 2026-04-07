@@ -1,0 +1,93 @@
+<section class="newsletter-bubbles-section">
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-12 col-md-8 col-lg-7">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            class="img-fluid" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}">
+        {% endif %}
+      </div>
+
+      <div class="col-12 col-md-4 col-lg-5">
+        <div class="box-blue">
+          <h4 class="text-center">{{ section.settings.title }}</h4>
+          <p class="text-center">{{ section.settings.subtitle }}</p>
+
+          {%- form 'customer', id: 'ContactNewsletterBubbles', class: 'newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="d-block d-md-flex flex-column flex-md-row gap-2">
+              <input
+                id="NewsletterFormNewsBubbles"
+                type="email"
+                name="contact[email]"
+                class="form-control"
+                value="{{ form.email }}"
+                placeholder="{{ section.settings.placeholder }}"
+                required
+              >
+              <button type="submit" class="btn btn-primary" name="commit" id="SubscribeNewsBubbles">
+                {{ section.settings.button_text }}
+              </button>
+            </div>
+          {%- endform -%}
+
+          {% if section.settings.legal_notice != blank %}
+            <div class="text-form">{{ section.settings.legal_notice }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter Bubbles",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Altijd op de hoogte van de beste bubbels!"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Schrijf je in voor onze nieuwsbrief en ontvang de mooiste aanbiedingen en verhalen..."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Placeholder",
+      "default": "Vul je e-mailadres in"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Inschrijven"
+    },
+    {
+      "type": "richtext",
+      "id": "legal_notice",
+      "label": "Legal Notice",
+      "default": "<p>Door je in te schrijven ga je akkoord met ons <a href=\"/pages/privacybeleid\">privacybeleid</a>.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Bubbles",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

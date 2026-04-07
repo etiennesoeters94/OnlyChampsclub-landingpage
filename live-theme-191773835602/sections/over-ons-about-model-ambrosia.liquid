@@ -1,0 +1,127 @@
+<section class="section-over-ons-page model">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6 col-lg-7">
+        {% if section.settings.image_3 != blank %}
+          <figure class="img-3">
+            <img src="{{ section.settings.image_3 | image_url }}" alt="About image 3" class="img-fluid" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}">
+          </figure>
+        {% endif %}
+      </div>
+      <div class="col-12 col-md-6 col-lg-5">
+        <h3>{{ section.settings.heading_2 }}</h3>
+        <p class="text menor">{{ section.settings.text_2 | newline_to_br }}</p>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-7 third-section mobile d-block d-md-none">
+        {% if section.settings.image_4 != blank %}
+          <figure class="img-4">
+            <img src="{{ section.settings.image_4 | image_url }}" alt="About image 4" class="img-fluid" width="{{ section.settings.image_4.width }}" height="{{ section.settings.image_4.height }}">
+          </figure>
+        {% endif %}
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-5 third-section">
+        <h3>{{ section.settings.heading_3 }}</h3>
+        <p class="text menor">{{ section.settings.text_3 | newline_to_br }}</p>
+      </div>
+      <div class="col-12 col-md-6 col-lg-7 third-section mobile d-none d-md-block">
+        {% if section.settings.image_4 != blank %}
+          <figure class="img-4">
+            <img src="{{ section.settings.image_4 | image_url }}" alt="About image 4" class="img-fluid" width="{{ section.settings.image_4.width }}" height="{{ section.settings.image_4.height }}">
+          </figure>
+        {% endif %}
+      </div>
+
+      <div class="col-12 col-md-5 third-section">
+        <h2>{{ section.settings.heading_1 }}</h2>
+      </div>
+      <div class="col-12 col-md-7 third-section">
+        <p class="text content">{{ section.settings.text_1 | newline_to_br }}</p>
+      </div>
+
+      <div class="col-12">
+        {% if section.settings.image_2 != blank %}
+          <figure class="img-2">
+            <img src="{{ section.settings.image_2 | image_url }}" alt="About image 2" class="img-fluid" width="{{ section.settings.image_2.width }}" height="{{ section.settings.image_2.height }}">
+          </figure>
+        {% endif %}
+      </div>
+      <div class="col-12 col-lg-7">
+        <h3>{{ section.settings.heading_4 }}</h3>
+        <p>{{ section.settings.text_4 | newline_to_br }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Section Model",
+  "tag": "section",
+  "class": "over-ons-page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "First Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1",
+      "label": "First Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Second Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Third Image"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Second Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_2",
+      "label": "Second Text"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Third Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_3",
+      "label": "Third Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Fourth Image"
+    },
+    {
+      "type": "text",
+      "id": "heading_4",
+      "label": "Fourth Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_4",
+      "label": "Fourth Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Section Model",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

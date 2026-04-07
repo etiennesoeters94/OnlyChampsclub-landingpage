@@ -1,0 +1,66 @@
+<section class="benefits-list-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-7">
+        <h4>{{ section.settings.title }}</h4>
+        <ul class="list-unstyled">
+          {% for block in section.blocks %}
+            <li class="d-flex align-items-center gap-2">
+              <span class="flex-shrink-0" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M9.99997 15.6807L6.70697 12.3877L5.29297 13.8017L9.99997 18.5087L19.707 8.80169L18.293 7.3877L9.99997 15.6807Z" fill="#F26336"/>
+                </svg>
+              </span>
+              <span class="text-body">{{ block.settings.text }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits List",
+  "tag": "section",
+  "class": "section-benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "Example benefit item"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Benefits List",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": { "text": "Not a standard 9-to-5 job, with varied working hours and a nice team;" }
+        },
+        { "type": "benefit", "settings": { "text": "A revenue bonus based on your sales results;" } },
+        { "type": "benefit", "settings": { "text": "A pension scheme according to the CLA;" } },
+        { "type": "benefit", "settings": { "text": "Extra allowance on holidays." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

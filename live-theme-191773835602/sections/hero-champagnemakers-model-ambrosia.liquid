@@ -1,0 +1,74 @@
+<section class="section-hero-champagnemakers">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-md-6 d-block d-md-none">
+        <figure class="figure-mobile">
+          <img
+            src="{{ section.settings.mobile_image | image_url }}"
+            alt="{{ section.settings.mobile_image.alt | escape }}"
+            class="img-fluid" width="{{ section.settings.mobile_image.width }}" height="{{ section.settings.mobile_image.height }}">
+        </figure>
+      </div>
+      <div class="col-12 col-lg-6">
+        <h1>{{ section.settings.title }}</h1>
+        <div class="description">
+          {{ section.settings.description }}
+        </div>
+        <a href="{{ section.settings.button_link }}" class="btn btn-primary">
+          {{ section.settings.button_label }}
+        </a>
+      </div>
+      <div class="col-12 col-md-6 d-none d-md-block">
+        <figure>
+          <img
+            src="{{ section.settings.mobile_image | image_url }}"
+            alt="{{ section.settings.mobile_image.alt | escape }}"
+            class="img-fluid" width="{{ section.settings.mobile_image.width }}" height="{{ section.settings.mobile_image.height }}">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero model",
+  "tag": "section",
+  "class": "hero-model",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Your Hero Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Your hero description goes here.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero model"
+    }
+  ]
+}
+{% endschema %}

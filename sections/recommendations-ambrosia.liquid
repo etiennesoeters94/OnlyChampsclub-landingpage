@@ -1,0 +1,106 @@
+<section class="recommendations-section">
+  <div class="container">
+    {% if section.settings.section_title != blank %}
+      <h2 class="text-center">{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    <div class="row justify-content-center box-content">
+      {% for block in section.blocks %}
+        <div class="col-6 text-center">
+          {% if block.settings.image != blank %}
+            <figure>
+              <img
+                src="{{ block.settings.image | image_url: width: 600 }}"
+                srcset="
+                  {{ block.settings.image | image_url: width: 400 }} 400w,
+                  {{ block.settings.image | image_url: width: 600 }} 600w,
+                  {{ block.settings.image | image_url: width: 800 }} 800w,
+                  {{ block.settings.image | image_url: width: 1000 }} 1000w
+                "
+                sizes="(max-width: 768px) 100vw, (max-width: 1199px) 50vw, 570px"
+                alt="{{ block.settings.title | escape }}"
+                class="img-fluid"
+               
+                width="600"
+                height="653"
+              >
+            </figure>
+          {% endif %}
+
+          <h3>{{ block.settings.title }}</h3>
+
+          <p class="text">
+            {{ block.settings.description }}
+          </p>
+
+          {% if block.settings.cta_text != blank and block.settings.cta_link != blank %}
+            <a href="{{ block.settings.cta_link }}" class="btn btn-link">
+              {{ block.settings.cta_text }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#1468A7"/>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Recommendations",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "Our Recommendations"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "recommendation_card",
+      "name": "Recommendation card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "Name's Favorites"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Card description",
+          "default": "A short description about this person's champagne selection."
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA text",
+          "default": "Discover the selection"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Recommendations",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,160 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "disabled": true,
+      "settings": {
+        "title": "Collections",
+        "sort": "alphabetical",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "columns_mobile": "2"
+      }
+    },
+    "breadcrumb_ambrosia_WneECi": {
+      "type": "breadcrumb-ambrosia",
+      "settings": {
+        "shop_label": "Shop",
+        "shop_link": "shopify://collections"
+      }
+    },
+    "champagnes_ambrosia_RwkPNU": {
+      "type": "champagnes-ambrosia",
+      "settings": {
+        "title": "Meest Gewilde Champagnes",
+        "text": "Ontdek onze best verkochte champagnes – favorieten gekozen door echte liefhebbers.",
+        "collection": "champagne-bestsellers"
+      }
+    },
+    "champagnes_categorie_ambrosia_rxHqLr": {
+      "type": "champagnes-categorie-ambrosia",
+      "blocks": {
+        "collection_ktJQJV": {
+          "type": "collection",
+          "settings": {
+            "collection": "blanc-de-blancs-champagne"
+          }
+        },
+        "collection_iEADrW": {
+          "type": "collection",
+          "settings": {
+            "collection": "blanc-de-noirs-champagne"
+          }
+        },
+        "collection_HWbTKX": {
+          "type": "collection",
+          "settings": {
+            "collection": "champagne-blends"
+          }
+        },
+        "collection_eT6djr": {
+          "type": "collection",
+          "settings": {
+            "collection": "rose-champagne-roze-bubbels"
+          }
+        },
+        "collection_fxYNyg": {
+          "type": "collection",
+          "settings": {
+            "collection": "specials"
+          }
+        },
+        "collection_nCwbx3": {
+          "type": "collection",
+          "settings": {
+            "collection": "vintage"
+          }
+        },
+        "collection_h8t8KV": {
+          "type": "collection",
+          "settings": {
+            "collection": "magnum-champagne-bestellen"
+          }
+        },
+        "collection_XQiKrG": {
+          "type": "collection",
+          "settings": {
+            "collection": "gifts-accessoires"
+          }
+        }
+      },
+      "block_order": [
+        "collection_ktJQJV",
+        "collection_iEADrW",
+        "collection_HWbTKX",
+        "collection_eT6djr",
+        "collection_fxYNyg",
+        "collection_nCwbx3",
+        "collection_h8t8KV",
+        "collection_XQiKrG"
+      ],
+      "settings": {
+        "title": "Champagnes per Categorie",
+        "subtitle": "Ontdek onze selectie champagnes, ingedeeld op stijl en type, perfect voor elke gelegenheid"
+      }
+    },
+    "champagne_makers_LcMiVr": {
+      "type": "champagne-makers",
+      "settings": {
+        "title": "Champagne makers",
+        "subtitle": "Verken champagnes van traditionele huizen en sterke producenten uit de Champagne-regio",
+        "champagne_makers_collections": [
+          "lamiable",
+          "gamet",
+          "copin-cautel"
+        ],
+        "button_link": "shopify://collections/champagnemakers",
+        "button_label": "Alle champagnemakers"
+      }
+    },
+    "recommendations_ambrosia_7mUxRT": {
+      "type": "recommendations-ambrosia",
+      "blocks": {
+        "recommendation_card_4W4QKM": {
+          "type": "recommendation_card",
+          "settings": {
+            "image": "shopify://shop_images/Etienne_s_favorieten.jpg",
+            "title": "Etienne's Favorieten",
+            "description": "Ik (Etienne) vertrouw op mijn smaak. Geen ingewikkelde theorieën, maar puur genieten. De champagnes die je hier vindt, hebben allemaal dat speciale karakter: elegant, eigenzinnig, soms een tikje wild, maar altijd perfect in balans. Ze zijn stuk voor stuk gekozen om momenten onvergetelijk te maken.",
+            "cta_text": "Ontdek Etienne’s Selectie",
+            "cta_link": "shopify://collections/etiennes-favorieten"
+          }
+        },
+        "recommendation_card_RdTDwJ": {
+          "type": "recommendation_card",
+          "settings": {
+            "image": "shopify://shop_images/EDIT_X_STUDIO_BAYBEE-0121.jpg",
+            "title": "Rens' Favorieten",
+            "description": "Ik (Rens) heb een zwak voor champagnes die je bijblijven. Geen dertien-in-een-dozijn bubbels, maar flessen met karakter – onverwacht, eigenzinnig en altijd vol smaak. Ik kies op gevoel en laat me graag verrassen. Als het spannend is in het glas, mag je me er letterlijk voor wakker maken.",
+            "cta_text": "Ontdek Rens's Selectie",
+            "cta_link": "shopify://collections/rens-favorieten"
+          }
+        }
+      },
+      "block_order": [
+        "recommendation_card_4W4QKM",
+        "recommendation_card_RdTDwJ"
+      ],
+      "settings": {
+        "section_title": "Onze Aanbevelingen"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "breadcrumb_ambrosia_WneECi",
+    "champagnes_ambrosia_RwkPNU",
+    "champagnes_categorie_ambrosia_rxHqLr",
+    "champagne_makers_LcMiVr",
+    "recommendations_ambrosia_7mUxRT"
+  ]
+}

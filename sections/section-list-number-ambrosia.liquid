@@ -1,0 +1,61 @@
+<section class="benefits-list-section number">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-7">
+        <h4>{{ section.settings.title }}</h4>
+        <ol>
+          {% for block in section.blocks %}
+            <li class="text-body">
+              <span class="text-body">{{ block.settings.text }}</span>
+            </li>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits List Number",
+  "tag": "section",
+  "class": "section-benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "Example benefit item"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Benefits List Number",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": { "text": "Not a standard 9-to-5 job, with varied working hours and a nice team;" }
+        },
+        { "type": "benefit", "settings": { "text": "A revenue bonus based on your sales results;" } },
+        { "type": "benefit", "settings": { "text": "A pension scheme according to the CLA;" } },
+        { "type": "benefit", "settings": { "text": "Extra allowance on holidays." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

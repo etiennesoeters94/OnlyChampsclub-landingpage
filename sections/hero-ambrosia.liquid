@@ -1,0 +1,179 @@
+<section class="hero-slider" style="background-color: {{ section.settings.background_color }};">
+  <div class="container">
+    <div class="swiper heroSwiper position-relative">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="row align-items-center flex-column-reverse flex-md-row">
+              <div class="col-12 col-md-6 text-content">
+                {% if block.settings.pre_title != blank %}
+                  <p class="pre-title">{{ block.settings.pre_title }}</p>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <h1 class="h1">{{ block.settings.title }}</h1>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <p class="text">{{ block.settings.text }}</p>
+                {% endif %}
+                {% if block.settings.button_link != blank %}
+                  {% if block.settings.use_svg_cta %}
+                    <a href="{{ block.settings.button_link }}" class="svg-cta" title="{{ block.settings.title }}">
+                      <svg
+                        class="icon-svg"
+                        width="46"
+                        height="46"
+                        viewBox="0 0 46 46"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M33.2222 0H12.7778C5.72082 0 0 5.72082 0 12.7778V33.2222C0 40.2791 5.72082 46 12.7778 46H33.2222C40.2791 46 46 40.2791 46 33.2222V12.7778C46 5.72082 40.2791 0 33.2222 0ZM41.5278 33.2222C41.5137 37.8033 37.8033 41.5137 33.2222 41.5278H12.7778C8.19656 41.5137 4.48625 37.8033 4.47222 33.2222V12.7778C4.48625 8.19656 8.19656 4.48625 12.7778 4.47222H33.2222C37.8033 4.48625 41.5137 8.19656 41.5278 12.7778V33.2222ZM35.1389 13.4167C36.5503 13.4167 37.6944 12.2725 37.6944 10.8611C37.6944 9.44973 36.5503 8.30556 35.1389 8.30556C33.7275 8.30556 32.5833 9.44973 32.5833 10.8611C32.5833 12.2725 33.7275 13.4167 35.1389 13.4167ZM23 11.5C16.6487 11.5 11.5 16.6487 11.5 23C11.5 29.3513 16.6487 34.5 23 34.5C29.3513 34.5 34.5 29.3513 34.5 23C34.5069 19.9479 33.2974 17.0189 31.1392 14.8608C28.981 12.7026 26.0521 11.4932 23 11.5ZM15.9722 23C15.9722 26.8814 19.1186 30.0278 23 30.0278C26.8814 30.0278 30.0278 26.8814 30.0278 23C30.0278 19.1186 26.8814 15.9722 23 15.9722C19.1186 15.9722 15.9722 19.1186 15.9722 23Z" fill="#1468a7"/>
+                      </svg>
+                    </a>
+                  {% elsif block.settings.button_label != blank %}
+                    <a
+                      href="{{ block.settings.button_link }}"
+                      class="btn btn-primary"
+                      title="{{ block.settings.title }}"
+                    >
+                      {{- block.settings.button_label -}}
+                    </a>
+                  {% endif %}
+                {% endif %}
+              </div>
+              <div class="col-12 col-md-6 text-center">
+                {% if block.settings.image != blank %}
+                  {% if block.settings.image != blank %}
+                    <picture>
+                      <source
+                        srcset="{{ block.settings.image | image_url: width: 1200, format: 'webp' }}"
+                        type="image/webp"
+                      >
+                      <img
+                        src="{{ block.settings.image | image_url: width: 1200 }}"
+                        srcset="
+                          {{ block.settings.image | image_url: width: 400 }} 400w,
+                          {{ block.settings.image | image_url: width: 600 }} 600w,
+                          {{ block.settings.image | image_url: width: 800 }} 800w,
+                          {{ block.settings.image | image_url: width: 1000 }} 1000w,
+                          {{ block.settings.image | image_url: width: 1200 }} 1200w
+                        "
+                        sizes="(max-width: 768px) 100vw, (max-width: 1199px) 600px, 1200px"
+                        alt="{{ block.settings.image.alt | escape }}"
+                        width="1200"
+                        height="800"
+                        {% unless forloop.first %}
+                         
+                        {% else %}
+                          fetchpriority="high"
+                        {% endunless %}
+                      >
+                    </picture>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="swiper-pagination d-none d-md-block"></div>
+
+      <div class="swiper-button-prev d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M13.586 17.414L7.879 11.707L13.586 6L15 7.414L10.707 11.707L15 16L13.586 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+      <div class="swiper-button-next d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  window.requestAnimationFrame(() => {
+    new Swiper('.heroSwiper', {
+      loop: false,
+      spaceBetween: 2,
+      autoplay: {
+        delay: 5000,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Hero Slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffe562"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "pre_title",
+          "label": "Pre-title"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Lees meer"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_svg_cta",
+          "label": "Use SVG as CTA"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

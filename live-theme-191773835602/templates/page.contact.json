@@ -1,0 +1,29 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "contact_section_ambrosia_jBKygb": {
+      "type": "contact-section-ambrosia",
+      "settings": {
+        "contact_image": "shopify://shop_images/Vector_1.png",
+        "title": "Neem contact op",
+        "subtitle": "Ons vriendelijke team helpt je graag verder.",
+        "email": "onlychamps@vinambrosia.com",
+        "phone": "+31850831537",
+        "address": "Generaal van Dedemlaan 98, 5623 GH Eindhoven",
+        "btw": "NL866265089B01",
+        "kvk": "93068069"
+      }
+    }
+  },
+  "order": [
+    "contact_section_ambrosia_jBKygb"
+  ]
+}

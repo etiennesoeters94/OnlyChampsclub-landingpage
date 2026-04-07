@@ -1,0 +1,79 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "champagnes_ambrosia_xq9NYF": {
+      "type": "champagnes-ambrosia",
+      "name": "Champagne Slider",
+      "settings": {
+        "title": "Meest Gewilde Champagnes",
+        "text": "Ontdek onze best verkochte champagnes – favorieten gekozen door echte liefhebbers.",
+        "collection": "champagne-bestsellers"
+      }
+    },
+    "champagne_makers_j6p4QB": {
+      "type": "champagne-makers",
+      "name": "Blog Posts Section",
+      "settings": {
+        "title": "Champagne makers",
+        "subtitle": "Verken champagnes van traditionele huizen en sterke producenten uit de Champagne-regio",
+        "button_link": "shopify://blogs/champagne-verhalen",
+        "button_label": "Alle champagnemakers"
+      }
+    },
+    "recommendations_ambrosia_j9mGMb": {
+      "type": "recommendations-ambrosia",
+      "blocks": {
+        "recommendation_card_gnXitF": {
+          "type": "recommendation_card",
+          "settings": {
+            "image": "shopify://shop_images/c06459b5ef8da1ca7aac6225d74099da17cb64a5.jpg",
+            "title": "Etienne’s Favorieten",
+            "description": "Etienne, een ervaren sommelier, kiest champagnes met finesse, balans en complexiteit. Zijn selectie bestaat uit elegante bubbels waar hij altijd van geniet.",
+            "cta_text": "Ontdek Etienne’s Selectie",
+            "cta_link": "#"
+          }
+        },
+        "recommendation_card_z6jxft": {
+          "type": "recommendation_card",
+          "settings": {
+            "image": "shopify://shop_images/536a08b8209ea5080ce7f723ea6361e024d32b9b.jpg",
+            "title": "Rens’ Favorieten",
+            "description": "Etienne, een ervaren sommelier, kiest champagnes met finesse, balans en complexiteit. Zijn selectie bestaat uit elegante bubbels waar hij altijd van geniet.",
+            "cta_text": "Ontdek Etienne’s Selectie",
+            "cta_link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "recommendation_card_gnXitF",
+        "recommendation_card_z6jxft"
+      ],
+      "name": "Recommendations",
+      "settings": {
+        "section_title": "Our Recommendations"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "champagnes_ambrosia_xq9NYF",
+    "champagne_makers_j6p4QB",
+    "recommendations_ambrosia_j9mGMb",
+    "main"
+  ]
+}

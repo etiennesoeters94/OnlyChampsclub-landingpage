@@ -1,0 +1,112 @@
+{% if settings.enable_ai_chat %}
+  {{ 'ai-chat-widget.css' | asset_url | stylesheet_tag }}
+  <style>
+    .onlychamps-chat {
+      {% unless settings.ai_chat_toggle_color == blank %}--chat-toggle-bg: {{ settings.ai_chat_toggle_color }};{% endunless %}
+      {% unless settings.ai_chat_toggle_hover_color == blank %}--chat-toggle-hover: {{ settings.ai_chat_toggle_hover_color }};{% endunless %}
+      {% unless settings.ai_chat_accent_color == blank %}--chat-accent: {{ settings.ai_chat_accent_color }};{% endunless %}
+      {% unless settings.ai_chat_accent_hover_color == blank %}--chat-accent-hover: {{ settings.ai_chat_accent_hover_color }};{% endunless %}
+    }
+  </style>
+  <div class="onlychamps-chat" data-onlychamps-chat>
+    <button
+      class="onlychamps-chat__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="OnlyChampsChatPanel"
+      data-chat-toggle
+    >
+      {% comment %}theme-check-disable RemoteAsset{% endcomment %}
+      <img
+        src="{% if settings.ai_chat_toggle_logo != blank %}{{ settings.ai_chat_toggle_logo | image_url: width: 96 }}{% else %}{{ 'OnlyChamps_Logo_Collection2026_Primair_cropped.png' | asset_url }}{% endif %}"
+        alt="OnlyChamps"
+        class="onlychamps-chat__toggle-logo"
+        width="44"
+        height="44"
+      >
+      {% comment %}theme-check-enable RemoteAsset{% endcomment %}
+      <span class="onlychamps-chat__toggle-copy">
+        <span class="onlychamps-chat__toggle-eyebrow">OnlyChamps Sommelier</span>
+        <span class="onlychamps-chat__toggle-title">Advies & FAQ</span>
+      </span>
+    </button>
+
+    <section
+      id="OnlyChampsChatPanel"
+      class="onlychamps-chat__panel"
+      aria-hidden="true"
+      data-chat-panel
+    >
+      <div class="onlychamps-chat__header">
+        <div class="onlychamps-chat__header-top">
+          <div class="onlychamps-chat__header-left">
+            {% comment %}theme-check-disable RemoteAsset{% endcomment %}
+            <img
+              src="{% if settings.ai_chat_header_logo != blank %}{{ settings.ai_chat_header_logo | image_url: width: 640 }}{% else %}{{ 'OnlyChamps_Logo_Collection2026_Secundair_cropped.png' | asset_url }}{% endif %}"
+              alt="OnlyChamps"
+              class="onlychamps-chat__header-logo"
+              height="32"
+              width="320"
+            >
+            {% comment %}theme-check-enable RemoteAsset{% endcomment %}
+            <span class="onlychamps-chat__pill">
+              <span class="onlychamps-chat__dot"></span>
+              Digitale sommelier
+            </span>
+            <p class="onlychamps-chat__intro">{{ settings.ai_chat_intro | escape }}</p>
+          </div>
+          <button class="onlychamps-chat__close" type="button" aria-label="Sluit chat" data-chat-close>&times;</button>
+        </div>
+      </div>
+
+      <div class="onlychamps-chat__body">
+        <div class="onlychamps-chat__messages" data-chat-messages></div>
+        <div class="onlychamps-chat__suggestions" data-chat-suggestions></div>
+      </div>
+
+      <div class="onlychamps-chat__composer">
+        <form class="onlychamps-chat__form" data-chat-form>
+          <input
+            class="onlychamps-chat__input"
+            type="text"
+            name="message"
+            placeholder="{{ settings.ai_chat_placeholder | escape }}"
+            autocomplete="off"
+            data-chat-input
+          >
+          <button class="onlychamps-chat__submit" type="submit" data-chat-submit>Verstuur</button>
+        </form>
+
+        <p class="onlychamps-chat__meta">
+          Deze assistent helpt met advies en FAQ. Voor order-specifieke support:
+          {% if settings.social_whatsapp_link != blank %}
+            <a href="{{ settings.social_whatsapp_link }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          {% endif %}
+          {% if settings.social_whatsapp_link != blank and settings.social_mail_link != blank %}
+            of
+          {% endif %}
+          {% if settings.social_mail_link != blank %}
+            <a href="{{ settings.social_mail_link }}">e-mail</a>
+          {% endif %}
+        </p>
+      </div>
+
+      <script type="application/json" data-chat-config>
+        {
+          "shopName": {{ shop.name | json }},
+          "welcomeMessage": {{ settings.ai_chat_welcome | json }},
+          "endpoint": {{ settings.ai_chat_endpoint | json }},
+          "whatsappUrl": {{ settings.social_whatsapp_link | json }},
+          "emailUrl": {{ settings.social_mail_link | json }},
+          "defaultSuggestions": [
+            "Ik zoek een cadeau",
+            "Welke champagne past bij een diner?",
+            "Ik zoek iets onder 60 euro"
+          ]
+        }
+      </script>
+    </section>
+  </div>
+
+  <script src="{{ 'ai-chat-widget.js' | asset_url }}" defer="defer"></script>
+{% endif %}

@@ -1,0 +1,149 @@
+<section class="champagne-section overflow-hidden">
+  <div class="container text-center content-text">
+    {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <p class="text">{{ section.settings.text }}</p>
+    {% endif %}
+  </div>
+
+  <div class="position-relative">
+    <div class="champagne-swiper-outer overflow-visible">
+      <div class="swiper champagneSwiper px-3 px-lg-0">
+        <div class="swiper-wrapper">
+          {% assign products = collections[section.settings.collection].products %}
+          {% for product in products %}
+            <div class="swiper-slide">
+              <div class="product-card text-center">
+                {% assign first_variant = product.variants.first %}
+                {% if first_variant.inventory_quantity == 0 and first_variant.inventory_policy == 'deny' %}
+                  <div class="sold-out-badge">Uitverkocht</div>
+                {% endif %}
+                {% if product.featured_image != blank %}
+                  <div class="product-image">
+                    <a href="{{ product.url }}">
+                      <img
+                        src="{{ product.featured_image | image_url: width: 300 }}"
+                        srcset="
+                          {{ product.featured_image | image_url: width: 200 }} 200w,
+                          {{ product.featured_image | image_url: width: 300 }} 300w,
+                          {{ product.featured_image | image_url: width: 400 }} 400w
+                        "
+                        sizes="(max-width: 768px) 100vw, 270px"
+                        alt="{{ product.title }}"
+                        class="img-fluid"
+                       
+                        width="270"
+                        height="472"
+                      >
+                    </a>
+                  </div>
+                {% endif %}
+                <!-- <div class="product-vendor">Champagnemaker</div> -->
+                <div class="product-title">
+                  <a href="{{ product.url }}" class="text-decoration-none">{{ product.title }}</a>
+                </div>
+                <div class="product-price">
+                  <span class="product-price__current">{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price %}
+                    <span class="product-price__compare">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                </div>
+                <a
+                  href="javascript:void(0);"
+                  class="btn btn-primary add-to-cart-link"
+                  data-variant-id="{{ product.variants.first.id }}"
+                >
+                  In Winkelwagen
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="swiper-pagination d-none d-md-block"></div>
+
+        <div class="swiper-button-prev d-block d-md-none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M13.586 17.414L7.879 11.707L13.586 6L15 7.414L10.707 11.707L15 16L13.586 17.414Z" fill="#2A3942"/>
+          </svg>
+        </div>
+        <div class="swiper-button-next d-block d-md-none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#2A3942"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.champagneSwiper', {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      centeredSlides: true,
+      spaceBetween: 32,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+          centeredSlides: false,
+        },
+        768: {
+          slidesPerView: 4,
+          centeredSlides: false,
+          spaceBetween: 16,
+        },
+        992: {
+          slidesPerView: 5,
+          centeredSlides: true,
+        },
+      },
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Champagne Slider",
+  "tag": "section",
+  "class": "champagne-slider-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Meest Gewilde Champagnes"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Section Text",
+      "default": "Ontdek onze best verkochte champagnes – favorieten gekozen door echte liefhebbers."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Product Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Champagne Slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,64 @@
+<section class="hero-404-page text-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        {% if section.settings.dog_image %}
+          <figure>
+            <img src="{{ section.settings.dog_image | image_url }}" alt="Dog" class="img-fluid" loading="lazy" width="{{ section.settings.dog_image.width }}" height="{{ section.settings.dog_image.height }}">
+          </figure>
+        {% endif %}
+
+        <h1>{{ section.settings.title }}</h1>
+        <div>{{ section.settings.subtitle }}</div>
+
+        <a href="{{ section.settings.button_url }}" class="btn btn-primary">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom 404 Page",
+  "tag": "section",
+  "class": "page-404-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "dog_image",
+      "label": "Dog image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Oeps... Pagina niet gevonden!"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Supporting text",
+      "default": "<p>Het lijkt erop dat deze pagina verdwenen is in een zee van bubbels.<br>Ga terug naar de homepage en ontdek onze heerlijke champagnes!</p>"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Terug naar de homepage"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom 404 Page"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {}
+    },
+    "hero_404_ambrosia_tAqchD": {
+      "type": "hero-404-ambrosia",
+      "name": "Custom 404 Page",
+      "settings": {
+        "dog_image": "shopify://shop_images/Vector_54.png",
+        "title": "Oeps... Pagina niet gevonden!",
+        "subtitle": "<p>Het lijkt erop dat deze pagina verdwenen is in een zee van bubbels. Ga terug naar de homepage en ontdek onze heerlijke champagnes!</p>",
+        "button_url": "/",
+        "button_text": "Terug naar de homepage"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_404_ambrosia_tAqchD"
+  ]
+}

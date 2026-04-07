@@ -1,0 +1,157 @@
+<section class="about-accordion-section">
+  <div class="container">
+    <div class="row align-items-lg-center">
+      <div class="col-12">
+        <h2 class="text-center">
+          {{ section.settings.main_title }}
+        </h2>
+      </div>
+      <div class="col-md-6 text-center">
+        {% if section.settings.bottle_image != blank %}
+          <figure class="accordion-figure">
+            <img
+              id="accordion-image"
+              src="{{ section.settings.bottle_image | image_url: width: 500 }}"
+              alt="Bottle"
+              class="img-fluid"
+
+              width="500"
+              height="750"
+            >
+          </figure>
+        {% endif %}
+      </div>
+
+      <div class="col-md-6">
+        <div class="accordion" id="aboutAccordion">
+          {% for block in section.blocks %}
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="heading-{{ forloop.index }}">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse-{{ forloop.index }}"
+                  aria-expanded="false"
+                  aria-controls="collapse-{{ forloop.index }}"
+                  data-image="{{ block.settings.accordion_image | image_url: width: 500 }}"
+                >
+                  {{ block.settings.accordion_title }}
+                </button>
+              </h3>
+              <div
+                id="collapse-{{ forloop.index }}"
+                class="accordion-collapse collapse"
+                aria-labelledby="heading-{{ forloop.index }}"
+                data-bs-parent="#aboutAccordion"
+              >
+                <div class="accordion-body">
+                  {{ block.settings.accordion_content }}
+                  {% if block.settings.cta_text != blank and block.settings.cta_link != blank %}
+                    <a href="{{ block.settings.cta_link }}" class="btn btn-link">
+                      {{ block.settings.cta_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    const accordionButtons = document.querySelectorAll('#aboutAccordion .accordion-button');
+    const image = document.getElementById('accordion-image');
+
+    accordionButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const newImage = this.getAttribute('data-image');
+
+        if (newImage && image.src !== newImage) {
+          // Oculta com transição para a esquerda
+          image.classList.remove('show');
+
+          setTimeout(() => {
+            image.src = newImage;
+
+            // Força reflow
+            void image.offsetWidth;
+
+            // Exibe com animação
+            image.classList.add('show');
+          }, 400); // tempo da transição
+        }
+      });
+    });
+
+    // Exibe a imagem inicial com animação
+    image.classList.add('show');
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "About Accordion",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bottle_image",
+      "label": "Default Bottle image"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Section title",
+      "default": "Discover Our Champagne Types"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion_item",
+      "name": "Accordion item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "accordion_title",
+          "label": "Accordion title",
+          "default": "Blanc de Blancs"
+        },
+        {
+          "type": "textarea",
+          "id": "accordion_content",
+          "label": "Accordion content",
+          "default": "The essence of refinement: made from 100% Chardonnay. Fresh, elegant, and lively, with refined citrus and mineral notes."
+        },
+        {
+          "type": "image_picker",
+          "id": "accordion_image",
+          "label": "Accordion image"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA text",
+          "default": "Bekijk alles"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "About Accordion",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

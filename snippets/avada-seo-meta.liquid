@@ -1,0 +1,62 @@
+{% comment %}theme-check-disable UnusedAssign{% endcomment %}
+{%- assign avada_seo_ovr_product_ids = ",10000278454610," -%}
+{%- assign avada_seo_ovr_collection_ids = ",623183331666," -%}
+{%- assign avada_seo_ovr_article_ids = ",611193389394,611193225554,611194044754," -%}
+  
+{%- if request.page_type == 'product' -%}
+{%-  if avada_seo_ovr_product_ids contains product.id  -%}
+{%- if product.metafields.multilingual_meta_tag.description_tag.value[shop.locale] -%}
+{%- capture avada_seo_meta_description -%}
+{{ product.metafields.multilingual_meta_tag.description_tag.value[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- if product.metafields.multilingual_meta_tag.title_tag.value[shop.locale] -%}
+{%- capture avada_seo_meta_title -%}
+{{ product.metafields.multilingual_meta_tag.title_tag.value[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}
+  
+{%- if request.page_type == 'collection' -%}
+{%-  if avada_seo_ovr_collection_ids contains collection.id  -%}
+{%- if collection.metafields.multilingual_meta_tag.description_tag.value[shop.locale] -%}
+{%- capture avada_seo_meta_description -%}
+{{ collection.metafields.multilingual_meta_tag.description_tag.value[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- if collection.metafields.multilingual_meta_tag.title_tag.value[shop.locale] -%}
+{%- capture avada_seo_meta_title -%}
+{{ collection.metafields.multilingual_meta_tag.title_tag.value[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}
+  
+{%- if request.page_type == 'article' -%}
+{%-  if avada_seo_ovr_article_ids contains article.id  -%}
+{%- if article.metafields.multilingual_meta_tag.description_tag.value[shop.locale] -%}
+{%- capture avada_seo_meta_description -%}
+{{ article.metafields.multilingual_meta_tag.description_tag.value[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- if article.metafields.multilingual_meta_tag.title_tag.value[shop.locale] -%}
+{%- capture avada_seo_meta_title -%}
+{{ article.metafields.multilingual_meta_tag.title_tag.value[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}
+  
+{%- if request.page_type == 'page' -%}
+{%-  if avada_seo_ovr_page_ids contains page.id  -%}
+{%- if page.metafields.multilingual_meta_tag.description_tag.value[shop.locale] -%}
+{%- capture avada_seo_meta_description -%}
+{{ page.metafields.multilingual_meta_tag.description_tag.value[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+
+{% comment %}theme-check-enable UnusedAssign{% endcomment %}
+{%- endif -%}
+{%- endif -%}
+

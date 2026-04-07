@@ -1,0 +1,82 @@
+<section class="bottom-green-section still-question">
+  <div class="container position-relative">
+    <div class="d-none d-md-flex justify-content-center flex-wrap box-instagram">
+      {% for block in section.blocks limit: 1 %}
+        {% if block.settings.photo != blank %}
+          <figure>
+            <img
+              src="{{ block.settings.photo | image_url }}"
+              alt="Photo"
+              class="img-fluid" width="{{ block.settings.photo.width }}" height="{{ block.settings.photo.height }}">
+          </figure>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="box-green">
+      {% if section.settings.title != blank %}
+        <h3>{{ section.settings.title }}</h3>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <p class="text">{{ section.settings.subtitle }}</p>
+      {% endif %}
+
+      {% if section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="btn btn-primary" target="_blank">
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Still questions",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Heb je toch nog vragen?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Pop ons gerust wat vragen door!"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Contact"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 1,
+  "presets": [
+    {
+      "name": "Still questions"
+    }
+  ]
+}
+{% endschema %}

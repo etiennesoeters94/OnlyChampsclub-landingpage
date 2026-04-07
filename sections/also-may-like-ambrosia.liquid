@@ -1,0 +1,117 @@
+<section class="recommended-products-section">
+  <div class="container">
+    {% if section.settings.section_title != blank %}
+      <h2>{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    <product-recommendations
+      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&limit=4"
+      data-section-id="{{ section.id }}"
+      data-product-id="{{ product.id }}"
+    >
+      {% if recommendations.performed and recommendations.products_count > 0 %}
+        <div class="swiper recommended-swiper">
+          <div class="swiper-wrapper">
+            {% for product in recommendations.products %}
+              <div class="swiper-slide">
+                <div class="product-card products-items text-center">
+                  {% assign first_variant = product.variants.first %}
+                  {% if first_variant.inventory_quantity == 0 and first_variant.inventory_policy == 'deny' %}
+                    <div class="sold-out-badge">Uitverkocht</div>
+                  {% endif %}
+                  {% if product.featured_image %}
+                    <div class="product-image">
+                      <a href="{{ product.url }}">
+                        <img
+                          src="{{ product.featured_image | image_url }}"
+                          alt="{{ product.title }}"
+                          class="img-fluid" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+                      </a>
+                    </div>
+                  {% endif %}
+                  <!-- <div class="product-vendor">Champagnemaker</div> -->
+                  <div class="product-title">
+                    <a href="{{ product.url }}" class="text-decoration-none">{{ product.title }}</a>
+                  </div>
+                  <div class="product-price">
+                    <span class="product-price__current">{{ product.price | money }}</span>
+                    {% if product.compare_at_price > product.price %}
+                      <span class="product-price__compare">{{ product.compare_at_price | money }}</span>
+                    {% endif %}
+                  </div>
+                  <a href="{{ product.url }}" class="btn btn-primary">In Winkelwagen</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class="swiper-button-prev d-block d-md-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M13.586 17.414L7.879 11.707L13.586 6L15 7.414L10.707 11.707L15 16L13.586 17.414Z" fill="#2A3942"/>
+            </svg>
+          </div>
+          <div class="swiper-button-next d-block d-md-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#2A3942"/>
+            </svg>
+          </div>
+        </div>
+      {% endif %}
+    </product-recommendations>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    function initSwiperWhenReady() {
+      const swiperEl = document.querySelector('.recommended-swiper');
+      const slides = swiperEl?.querySelectorAll('.swiper-slide') || [];
+
+      if (!swiperEl || slides.length < 2) {
+        setTimeout(initSwiperWhenReady, 100);
+        return;
+      }
+
+      if (swiperEl.classList.contains('swiper-initialized')) return;
+
+      new Swiper(swiperEl, {
+        slidesPerView: 2,
+        spaceBetween: 16,
+        navigation: {
+          nextEl: swiperEl.querySelector('.swiper-button-next'),
+          prevEl: swiperEl.querySelector('.swiper-button-prev'),
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 32,
+          },
+        },
+      });
+
+      swiperEl.classList.add('swiper-initialized');
+    }
+
+    initSwiperWhenReady();
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "You may also like",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title section",
+      "default": "Aanbevolen voor jou"
+    }
+  ],
+  "presets": [
+    {
+      "name": "You may also like"
+    }
+  ]
+}
+{% endschema %}

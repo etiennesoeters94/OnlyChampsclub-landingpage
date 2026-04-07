@@ -1,0 +1,119 @@
+{% paginate collection.products by 8 %}
+  <section class="collection-section champagnemakers">
+    <div class="container">
+      <div class="text-center">
+        <h1>{{ collection.title }}</h1>
+        <div class="description">
+          {% if collection.description != blank %}
+            {{ collection.description }}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="d-none justify-content-between align-items-center infos-top">
+        {% assign products_in_page = 0 %}
+        {% for product in collection.products %}
+          {% assign products_in_page = products_in_page | plus: 1 %}
+        {% endfor %}
+        <span class="small-content">
+          {{ products_in_page }} product{% if products_in_page != 1 %}en{% endif %}
+        </span>
+      </div>
+
+      <div class="row g-5">
+        {% for product in collection.products %}
+          <div class="col-12 col-md-4">
+            <div class="product-card products-items text-center">
+              {% if product.featured_image != blank %}
+                <div class="product-image products-items">
+                  <a href="{{ product.url }}">
+                    <img
+                      src="{{ product.featured_image | image_url }}"
+                      alt="{{ product.title }}"
+                      class="img-fluid" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+                  </a>
+                </div>
+              {% endif %}
+              <div class="product-title">
+                <a href="{{ product.url }}" class="text-decoration-none">{{ product.title }}</a>
+              </div>
+              <p class="card-text">
+                {{ product.description | strip_html }}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <nav class="pagination-nav d-flex justify-content-center">
+          <ul class="pagination">
+            <li class="page-item {% unless paginate.previous %}disabled{% endunless %}">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}" class="page-link svg left">
+              {% else %}
+                <span class="page-link svg left">
+              {% endif %}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M13.586 18.0141L7.879 12.3071L13.586 6.6001L15 8.0141L10.707 12.3071L15 16.6001L13.586 18.0141Z" fill="#1468A7"/>
+              </svg>
+              vorige pagina
+              {% if paginate.previous %}
+                </a>
+              {% else %}
+                </span>
+              {% endif %}
+            </li>
+
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <li class="page-item">
+                  <a href="{{ part.url }}" class="page-link">{{ part.title }}</a>
+                </li>
+              {% else %}
+                <li class="page-item {% if part.title == paginate.current_page %}active{% endif %}">
+                  <span class="page-link">{{ part.title }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+
+            <li class="page-item {% unless paginate.next %}disabled{% endunless %}">
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}" class="page-link svg right">
+              {% else %}
+                <span class="page-link svg right">
+              {% endif %}
+              volgende pagina
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M10.414 18.0141L16.121 12.3071L10.414 6.6001L9 8.0141L13.293 12.3071L9 16.6001L10.414 18.0141Z" fill="#1468A7"/>
+              </svg>
+              {% if paginate.next %}
+                </a>
+              {% else %}
+                </span>
+              {% endif %}
+            </li>
+          </ul>
+        </nav>
+      {% endif %}
+    </div>
+  </section>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Products Section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products"
+    }
+  ]
+}
+{% endschema %}

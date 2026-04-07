@@ -1,0 +1,73 @@
+<section class="section-video-cover text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>{{ section.settings.title }}</h2>
+        <div class="video-wrapper position-relative d-inline-block" data-youtube="{{ section.settings.youtube_url }}">
+          {% if section.settings.cover_image != blank %}
+            <img
+              src="{{ section.settings.cover_image | image_url }}"
+              alt="{{ section.settings.title | escape }}"
+              class="img-fluid video-cover"
+              loading="lazy" width="{{ section.settings.cover_image.width }}" height="{{ section.settings.cover_image.height }}">
+          {% endif %}
+          <button class="play-button position-absolute top-50 start-50 translate-middle" aria-label="Play video">
+            <svg xmlns="http://www.w3.org/2000/svg" width="104" height="103" viewBox="0 0 104 103" fill="none">
+              <path d="M51.959 0.594727C80.3878 0.594733 103.418 23.2131 103.418 51.0947C103.418 78.9764 80.3878 101.595 51.959 101.595C23.5302 101.595 0.5 78.9764 0.5 51.0947C0.5 23.2131 23.5302 0.594727 51.959 0.594727Z" stroke="white"/>
+              <path d="M76.4102 51.0947L39.7332 30.3101V71.8793L76.4102 51.0947Z" fill="white"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.video-wrapper').forEach((wrapper) => {
+      wrapper.querySelector('.play-button').addEventListener('click', function () {
+        const videoUrl = wrapper.dataset.youtube;
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', videoUrl + '?autoplay=1&rel=0');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allowfullscreen', 'true');
+        iframe.setAttribute('allow', 'autoplay');
+        iframe.classList.add('w-100', 'h-100');
+        wrapper.innerHTML = '';
+        wrapper.appendChild(iframe);
+      });
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Video with cover",
+  "tag": "section",
+  "class": "video-cover-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Watch our story"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Video cover image"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube video URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video with cover"
+    }
+  ]
+}
+{% endschema %}

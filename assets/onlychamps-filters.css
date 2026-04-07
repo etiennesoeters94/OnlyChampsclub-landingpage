@@ -1,0 +1,164 @@
+[data-oc-product-card-wrapper].oc-filter-hidden {
+  display: none !important;
+}
+
+/* Consistente uitlijning van de 'In Winkelwagen' knop op alle schermbreedtes */
+[data-oc-product-card-wrapper] {
+  display: flex;
+}
+
+[data-oc-product-card-wrapper] .product-card.products-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+[data-oc-product-card-wrapper] .product-card.products-items .product-title a {
+  min-height: 0;
+}
+
+[data-oc-product-card-wrapper] .product-card.products-items .product-price {
+  margin-top: auto;
+}
+
+[data-oc-product-card-wrapper] .product-card.products-items .add-to-cart-link {
+  margin-top: 0;
+}
+
+.oc-filter-panel {
+  border: 1px solid #e8e8e8;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+@media (min-width: 768px) {
+  .oc-filter-panel {
+    position: sticky;
+    top: 96px;
+    max-height: calc(100vh - 112px);
+    overflow-y: auto;
+  }
+}
+
+.oc-filter-group {
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.oc-filter-group:last-child {
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.oc-filter-group > summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  list-style: none;
+}
+
+.oc-filter-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.oc-filter-group > summary::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  margin-top: -4px;
+}
+
+.oc-filter-group[open] > summary::after {
+  transform: rotate(225deg);
+  margin-top: 4px;
+}
+
+.oc-filter-group__content {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.oc-filter-group__content label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  font-size: 14px;
+}
+
+.oc-filter-actions {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.oc-no-results {
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+.oc-mobile-filters {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.oc-mobile-filters__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.oc-mobile-filters__drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(92vw, 420px);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.oc-mobile-filters__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #efefef;
+}
+
+.oc-mobile-filters__header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.oc-mobile-filters__content {
+  overflow-y: auto;
+  padding: 16px;
+}
+
+body.oc-mobile-filters-open {
+  overflow: hidden;
+}
+
+@media (max-width: 767.98px) {
+  .oc-filter-group > summary {
+    font-size: 1.5rem;
+  }
+}

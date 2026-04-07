@@ -1,0 +1,989 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "logo": "shopify://shop_images/OnlyChamps_Logo_Collection2026_Primair.png",
+    "logo_width": 210,
+    "type_header_font": "assistant_n4",
+    "heading_scale": 100,
+    "type_body_font": "assistant_n4",
+    "body_scale": 100,
+    "page_width": 1200,
+    "spacing_sections": 0,
+    "spacing_grid_horizontal": 8,
+    "spacing_grid_vertical": 8,
+    "buttons_border_thickness": 1,
+    "buttons_border_opacity": 100,
+    "buttons_radius": 0,
+    "buttons_shadow_opacity": 0,
+    "buttons_shadow_horizontal_offset": 0,
+    "buttons_shadow_vertical_offset": 4,
+    "buttons_shadow_blur": 5,
+    "variant_pills_border_thickness": 1,
+    "variant_pills_border_opacity": 55,
+    "variant_pills_radius": 40,
+    "variant_pills_shadow_opacity": 0,
+    "variant_pills_shadow_horizontal_offset": 0,
+    "variant_pills_shadow_vertical_offset": 4,
+    "variant_pills_shadow_blur": 5,
+    "inputs_border_thickness": 1,
+    "inputs_border_opacity": 55,
+    "inputs_radius": 0,
+    "inputs_shadow_opacity": 0,
+    "inputs_shadow_horizontal_offset": 0,
+    "inputs_shadow_vertical_offset": 12,
+    "inputs_shadow_blur": 5,
+    "card_style": "standard",
+    "card_image_padding": 0,
+    "card_text_alignment": "left",
+    "card_color_scheme": "scheme-2",
+    "card_border_thickness": 0,
+    "card_border_opacity": 10,
+    "card_corner_radius": 0,
+    "card_shadow_opacity": 0,
+    "card_shadow_horizontal_offset": 0,
+    "card_shadow_vertical_offset": 4,
+    "card_shadow_blur": 5,
+    "collection_card_style": "standard",
+    "collection_card_image_padding": 0,
+    "collection_card_text_alignment": "left",
+    "collection_card_color_scheme": "scheme-2",
+    "collection_card_border_thickness": 0,
+    "collection_card_border_opacity": 10,
+    "collection_card_corner_radius": 0,
+    "collection_card_shadow_opacity": 0,
+    "collection_card_shadow_horizontal_offset": 0,
+    "collection_card_shadow_vertical_offset": 4,
+    "collection_card_shadow_blur": 5,
+    "blog_card_style": "standard",
+    "blog_card_image_padding": 0,
+    "blog_card_text_alignment": "left",
+    "blog_card_color_scheme": "scheme-2",
+    "blog_card_border_thickness": 0,
+    "blog_card_border_opacity": 10,
+    "blog_card_corner_radius": 0,
+    "blog_card_shadow_opacity": 0,
+    "blog_card_shadow_horizontal_offset": 0,
+    "blog_card_shadow_vertical_offset": 4,
+    "blog_card_shadow_blur": 5,
+    "text_boxes_border_thickness": 0,
+    "text_boxes_border_opacity": 10,
+    "text_boxes_radius": 0,
+    "text_boxes_shadow_opacity": 0,
+    "text_boxes_shadow_horizontal_offset": 0,
+    "text_boxes_shadow_vertical_offset": 4,
+    "text_boxes_shadow_blur": 5,
+    "media_border_thickness": 1,
+    "media_border_opacity": 5,
+    "media_radius": 0,
+    "media_shadow_opacity": 0,
+    "media_shadow_horizontal_offset": 0,
+    "media_shadow_vertical_offset": 4,
+    "media_shadow_blur": 5,
+    "popup_border_thickness": 1,
+    "popup_border_opacity": 10,
+    "popup_corner_radius": 0,
+    "popup_shadow_opacity": 5,
+    "popup_shadow_horizontal_offset": 0,
+    "popup_shadow_vertical_offset": 4,
+    "popup_shadow_blur": 5,
+    "drawer_border_thickness": 1,
+    "drawer_border_opacity": 10,
+    "drawer_shadow_opacity": 0,
+    "drawer_shadow_horizontal_offset": 0,
+    "drawer_shadow_vertical_offset": 4,
+    "drawer_shadow_blur": 5,
+    "badge_position": "bottom left",
+    "badge_corner_radius": 40,
+    "sale_badge_color_scheme": "scheme-5",
+    "sold_out_badge_color_scheme": "scheme-3",
+    "social_instagram_link": "https://www.instagram.com/onlychamps_ambrosia/",
+    "social_facebook_link": "",
+    "social_tiktok_link": "https://www.tiktok.com/@onlychamps_ambrosia",
+    "social_google_link": "https://g.co/kgs/UuQxaFB",
+    "social_google_business_link": "https://g.co/kgs/UuQxaFB",
+    "social_whatsapp_link": "https://wa.me/31850831537",
+    "social_mail_link": "mailto:onlychamps@vinambrosia.com",
+    "predictive_search_enabled": true,
+    "predictive_search_show_vendor": false,
+    "predictive_search_show_price": false,
+    "currency_code_enabled": true,
+    "cart_type": "notification",
+    "show_vendor": false,
+    "show_cart_note": false,
+    "cart_drawer_collection": "",
+    "ai_chat_toggle_logo": "shopify://shop_images/OnlyChamps_Logo_Icon_d2eac0ff-91cf-48a0-a269-b1ed85139b5a.svg",
+    "ai_chat_toggle_color": "#f26336",
+    "social_youtube_link": "https://facebook.com/shopify",
+    "social_twitter_link": "https://facebook.com/shopify",
+    "social_snapchat_link": "https://facebook.com/shopify",
+    "social_pinterest_link": "https://facebook.com/shopify",
+    "social_tumblr_link": "https://facebook.com/shopify",
+    "social_vimeo_link": "https://facebook.com/shopify",
+    "sections": {
+      "main-password-header": {
+        "type": "main-password-header",
+        "settings": {
+          "color_scheme": "scheme-1"
+        }
+      },
+      "main-password-footer": {
+        "type": "main-password-footer",
+        "settings": {
+          "color_scheme": "scheme-1"
+        }
+      },
+      "still-questions": {
+        "type": "still-questions",
+        "blocks": {
+          "image_f9kcBE": {
+            "type": "image",
+            "settings": {
+              "photo": "shopify://shop_images/Group_803741.png"
+            }
+          }
+        },
+        "block_order": [
+          "image_f9kcBE"
+        ],
+        "settings": {
+          "title": "Heb je toch nog vragen?",
+          "subtitle": "Pop ons gerust wat vragen door!",
+          "button_link": "shopify://pages/contact",
+          "button_label": "Contact"
+        }
+      },
+      "faq-questions": {
+        "type": "faq-questions",
+        "blocks": {
+          "faq_item_7yxNmK": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Bestellen",
+              "accordion_title": "Hoe plaats ik een bestelling?",
+              "accordion_content": "<p>Je kunt eenvoudig een bestelling plaatsen via onze website. Kies je favoriete champagne, voeg toe aan je winkelmandje en volg de stappen in het afrekenproces.</p>",
+              "cta_text": "",
+              "cta_link": "#"
+            }
+          },
+          "faq_item_MtpKia": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Bestellen",
+              "accordion_title": "Kan ik champagne als cadeau laten versturen?",
+              "accordion_content": "<p>Zeker! Tijdens het afrekenen kun je een cadeau-optie selecteren en een persoonlijk bericht toevoegen.</p>",
+              "cta_text": "",
+              "cta_link": "#"
+            }
+          },
+          "faq_item_nxxwNW": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Bestellen",
+              "accordion_title": "Is er een minimum bestelbedrag?",
+              "accordion_content": "<p>Nee, er is geen minimum bestelbedrag. Je kunt al vanaf één fles bestellen.</p>",
+              "cta_text": "",
+              "cta_link": "#"
+            }
+          },
+          "faq_item_CKXaF3": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Verzending & Levering",
+              "accordion_title": "Hoe lang duurt de levering?",
+              "accordion_content": "<p>Bestellingen binnen Nederland worden doorgaans binnen 1-2 werkdagen verzonden. Voor België en andere EU-landen kan dit iets langer duren.</p>",
+              "cta_text": "",
+              "cta_link": "#"
+            }
+          },
+          "faq_item_iFKLkW": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Verzending & Levering",
+              "accordion_title": "Wat zijn de verzendkosten?",
+              "accordion_content": "<p>Voor bestellingen boven de €150 is de verzending gratis binnen Nederland. Daaronder rekenen we €7,95 aan verzendkosten.</p>",
+              "cta_text": "",
+              "cta_link": "#"
+            }
+          },
+          "faq_item_j9Hhwx": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Verzending & Levering",
+              "accordion_title": "Kan ik mijn bestelling volgen?",
+              "accordion_content": "<p>Ja, je ontvangt een Track & Trace-link zodra je bestelling is verzonden.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_NXGty6": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Opslag & Serveeradvies",
+              "accordion_title": "Hoe bewaar ik mijn champagne het beste?",
+              "accordion_content": "<p>Bewaar champagne op een koele, donkere plek, bij voorkeur liggend, op een constante temperatuur tussen 10-12°C.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_9FtCGj": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Opslag & Serveeradvies",
+              "accordion_title": "Wat is de ideale serveertemperatuur?",
+              "accordion_content": "<p>Champagne komt het best tot zijn recht tussen 8-10°C.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_CDUdCt": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Opslag & Serveeradvies",
+              "accordion_title": "Moet ik champagne decanteren?",
+              "accordion_content": "<p>Nee, champagne hoeft meestal niet gedecanteerd te worden. Bij bepaalde vintage champagnes kan het wel voordelen hebben – neem contact met ons op voor advies.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_GbEgyH": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Opslag & Serveeradvies",
+              "accordion_title": "Hoeveel glazen haal je uit een magnum champagne?",
+              "accordion_content": "<p>Ongeveer 12 glazen van 125ml. Perfect voor 6 tot 8 personen bij een diner.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_JikjV4": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Opslag & Serveeradvies",
+              "accordion_title": "Wat is de grootste champagnefles die nog praktisch te schenken is?",
+              "accordion_content": "<p>Een methusalem van 6 liter. Alles daarboven vraagt om spierballen, geduld en een heel dorstige vriendengroep. </p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_tBEdMP": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Opslag & Serveeradvies",
+              "accordion_title": "Waarom smaakt champagne beter uit een magnum?",
+              "accordion_content": "<p>Door de langzamere rijping en het lagere zuurstofgehalte blijft de wijn stabieler, complexer en eleganter. Groter is hier letterlijk beter.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_QQ79Cq": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Algemene Vragen over Champagne",
+              "accordion_title": "Wat is het verschil tussen champagne en mousserende wijn?",
+              "accordion_content": "<p>Champagne is een mousserende wijn, maar mag alleen zo genoemd worden als hij afkomstig is uit de Champagnestreek in Frankrijk én voldoet aan strikte productieregels. Andere mousserende wijnen heten bijvoorbeeld prosecco (Italië) of cava (Spanje).</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_PrVxWc": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Algemene Vragen over Champagne",
+              "accordion_title": "Welke druiven worden gebruikt voor champagne?",
+              "accordion_content": "<p>De meest gebruikte druivensoorten zijn Chardonnay, Pinot Noir en Pinot Meunier.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_BgTaNQ": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Algemene Vragen over Champagne",
+              "accordion_title": "Hoe lang kan ik champagne bewaren?",
+              "accordion_content": "<p>Niet-vintage champagne is bedoeld om binnen 2-3 jaar te drinken. Vintage champagne kan vaak langer rijpen (5-10 jaar of meer), afhankelijk van het huis en de stijl.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_tUibLf": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Algemene Vragen over Champagne",
+              "accordion_title": "Wat is het verschil tussen vintage en non-vintage champagne?",
+              "accordion_content": "<ul><li>Non-vintage (NV): Gemaakt van druiven uit meerdere jaren; bedoeld voor constante huisstijl </li><li>Vintage: Gemaakt van druiven uit één uitzonderlijk goed jaar; vaak complexer en exclusiever</li></ul>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_jtFDqD": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Algemene Vragen over Champagne",
+              "accordion_title": "Past champagne alleen bij feestelijke gelegenheden?",
+              "accordion_content": "<p>Nee! Champagne is veelzijdig: het past perfect bij zeevruchten, sushi, lichte voorgerechten of zelfs frietjes met truffel. Het is niet alleen voor Oud & Nieuw!</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_qiF4B9": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Algemene Vragen over Champagne",
+              "accordion_title": "Waarom is champagne zo prijzig?",
+              "accordion_content": "<p>De productie is arbeidsintensief, de regels zijn streng, en de rijpingstijd is lang. Daarnaast komt het uitsluitend uit een beperkte regio, wat de exclusiviteit verhoogt.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_GYiwwY": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Algemene Vragen over Champagne",
+              "accordion_title": "Mag ik champagne schudden en met een knal openen?",
+              "accordion_content": "<p>Lievelingsscène op film – maar in werkelijkheid is het zonde. Champagne open je langzaam, met een zachte “zucht”, zodat de bubbels behouden blijven.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_VYeiYz": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Contact & Service",
+              "accordion_title": "Hoe kan ik jullie bereiken?",
+              "accordion_content": "<p>Je kunt ons bereiken via e-mail op <a href=\"mailto:onlychamps@vinambrosia.com\" title=\"mailto:onlychamps@vinambrosia.com\">onlychamps@vinambrosia.com</a>, via het contactformulier op onze website of klik op de whatsapp button onder aan de website. We reageren binnen 24 uur.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          },
+          "faq_item_g3czLH": {
+            "type": "faq_item",
+            "settings": {
+              "category": "Contact & Service",
+              "accordion_title": "Verkopen jullie ook aan bedrijven of evenementen?",
+              "accordion_content": "<p>Ja, wij leveren ook aan horeca, bedrijven en evenementen. Neem contact met ons op voor een offerte op maat.</p>",
+              "cta_text": "",
+              "cta_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "faq_item_7yxNmK",
+          "faq_item_MtpKia",
+          "faq_item_nxxwNW",
+          "faq_item_CKXaF3",
+          "faq_item_iFKLkW",
+          "faq_item_j9Hhwx",
+          "faq_item_NXGty6",
+          "faq_item_9FtCGj",
+          "faq_item_CDUdCt",
+          "faq_item_GbEgyH",
+          "faq_item_JikjV4",
+          "faq_item_tBEdMP",
+          "faq_item_QQ79Cq",
+          "faq_item_PrVxWc",
+          "faq_item_BgTaNQ",
+          "faq_item_tUibLf",
+          "faq_item_jtFDqD",
+          "faq_item_qiF4B9",
+          "faq_item_GYiwwY",
+          "faq_item_VYeiYz",
+          "faq_item_g3czLH"
+        ],
+        "settings": {}
+      },
+      "over-ons-about-ambrosia": {
+        "type": "over-ons-about-ambrosia",
+        "settings": {
+          "image_1": "shopify://shop_images/Vector_7.png",
+          "heading_1": "Het Verhaal  van OnlyChamps",
+          "text_1": "OnlyChamps is ontstaan uit een vriendschap en een gedeelde liefde voor champagne. Wat begon als een gezamenlijke zoektocht naar karaktervolle flessen groeide uit tot een missie: Nederland kennis laten maken met ambachtelijke champagnes van kleine, onafhankelijke huizen uit de Champagne-regio.",
+          "image_2": "shopify://shop_images/Placeholder_Lightbox.png",
+          "image_3": "shopify://shop_images/edit_x_studio_baybee-8771_convert.io.webp",
+          "heading_2": "Onze Passie voor Champagne",
+          "text_2": "Champagne is voor ons meer dan een feestelijk drankje – het is traditie, vakmanschap en emotie in een fles. Iedere champagne die wij selecteren, vertelt een eigen verhaal: van druiven geplukt met de hand tot generaties aan kennis die in de kelder wordt doorgegeven.\n\nWe bezoeken de huizen zelf, proeven elk cuvée met zorg, en kiezen alleen wat ons écht raakt. Of je nu kiest voor een brut nature, een blanc de blancs of een rosé: je weet zeker dat je iets bijzonders in huis haalt.\n\nVia OnlyChamps maken we deze parels toegankelijk voor iedereen die bewust wil kiezen en genieten.",
+          "heading_3": "Waarom OnlyChamps?",
+          "text_3": "Bij OnlyChamps draait alles om kwaliteit, karakter en persoonlijke beleving. Dit is waarom onze klanten voor ons kiezen:\n\n- Uniek aanbod: Je vindt bij ons geen massa-champagnes, maar zorgvuldig gekozen flessen van kleinschalige wijnboeren.\n\n- Rechtstreeks van de bron: We importeren zelf – zonder tussenpersonen – wat zorgt voor eerlijke prijzen en korte lijnen.\n\n- Persoonlijk advies: Of je nu een beginner bent of een doorgewinterde liefhebber, we helpen je met oprechte aandacht bij je keuze.\n\n- Passie die je proeft: Elk detail – van de selectie tot de verpakking – doen we met liefde voor het product.\n\nOnlyChamps is voor iedereen die champagne niet achteloos wil drinken, maar bewust wil beleven.",
+          "image_4": "shopify://shop_images/Placeholder_Images.png"
+        }
+      },
+      "discover-ambrosia": {
+        "type": "discover-ambrosia",
+        "blocks": {
+          "image_ibpxxP": {
+            "type": "image",
+            "settings": {
+              "photo": "shopify://shop_images/over-ons-onlychamps.png"
+            }
+          }
+        },
+        "block_order": [
+          "image_ibpxxP"
+        ],
+        "settings": {
+          "title": "Ontdek Onze Champagne Verhalen",
+          "subtitle": "Laat je inspireren door boeiende verhalen, tips en trends uit de wereld van champagne.",
+          "button_link": "shopify://blogs/champagne-verhalen",
+          "button_label": "Bekijk Alles"
+        }
+      },
+      "newsletter-ambrosia": {
+        "type": "newsletter-ambrosia",
+        "settings": {
+          "image": "shopify://shop_images/IMG_9111_1.jpg",
+          "title": "Altijd op de hoogte van de beste bubbels!",
+          "subtitle": "Schrijf je in voor onze nieuwsbrief en ontvang de mooiste aanbiedingen en verhalen...",
+          "placeholder": "Vul je e-mailadres in",
+          "button_text": "Inschrijven",
+          "legal_notice": "<p>Door je in te schrijven ga je akkoord met ons <a href=\"/policies/privacy-policy\" title=\"Privacy Policy\">privacybeleid</a>.</p>"
+        }
+      },
+      "over-champagne-about-ambrosia": {
+        "type": "over-champagne-about-ambrosia",
+        "settings": {
+          "image_1": "shopify://shop_images/Vector_77.png",
+          "heading_1": "Wat is Champagne?",
+          "text_1": "Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id scelerisque est ultricies ultricies. Duis est sit sed leo nisl, blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at scelerisque amet nulla purus habitasse.\n\nNunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.\n\nOdio felis sagittis, morbi feugiat tortor vitae feugiat fusce aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id morbi eget ipsum. Aliquam senectus neque ut id eget consectetur dictum. Donec posuere pharetra odio consequat scelerisque et, nunc tortor. Nulla adipiscing erat a erat. Condimentum lorem posuere gravida enim posuere cursus diam.",
+          "gallery_image_1": "shopify://shop_images/edit_x_studio_baybee-3568_1_1.png",
+          "gallery_image_2": "shopify://shop_images/Placeholder_Image_1_1.png",
+          "gallery_image_3": "shopify://shop_images/Placeholder_Image_1_2.png",
+          "gallery_image_4": "shopify://shop_images/Placeholder_Image_1_3.png",
+          "gallery_image_5": "shopify://shop_images/Placeholder_Image_1_4.png",
+          "heading_2": "Hoe Wordt Champagne Gemaakt?",
+          "text_2": "Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id scelerisque est ultricies ultricies. Duis est sit sed leo nisl, blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at scelerisque amet nulla purus habitasse.\n\nNunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.\n\nOdio felis sagittis, morbi feugiat tortor vitae feugiat fusce aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id morbi eget ipsum. Aliquam senectus neque ut id eget consectetur dictum. Donec posuere pharetra odio consequat scelerisque et, nunc tortor. Nulla adipiscing erat a erat. Condimentum lorem posuere gravida enim posuere cursus diam.",
+          "image_3": "shopify://shop_images/Placeholder_Image_1.png",
+          "heading_3": "Soorten Champagne",
+          "text_3": "Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id scelerisque est ultricies ultricies. Duis est sit sed leo nisl, blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at scelerisque amet nulla purus habitasse.\n\nNunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.\n\nOdio felis sagittis, morbi feugiat tortor vitae feugiat fusce aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id morbi eget ipsum. Aliquam senectus neque ut id eget consectetur dictum. Donec posuere pharetra odio consequat scelerisque et, nunc tortor. Nulla adipiscing erat a erat. Condimentum lorem posuere gravida enim posuere cursus diam.",
+          "heading_4": "Regio en Terroir",
+          "text_4": "Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id scelerisque est ultricies ultricies. Duis est sit sed leo nisl, blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at scelerisque amet nulla purus habitasse.\n\nNunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.\n\nOdio felis sagittis, morbi feugiat tortor vitae feugiat fusce aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id morbi eget ipsum. Aliquam senectus neque ut id eget consectetur dictum. Donec posuere pharetra odio consequat scelerisque et, nunc tortor. Nulla adipiscing erat a erat. Condimentum lorem posuere gravida enim posuere cursus diam."
+        }
+      },
+      "breadcrumb-ambrosia": {
+        "type": "breadcrumb-ambrosia",
+        "settings": {
+          "shop_label": "Champagnemakers",
+          "shop_link": "shopify://collections/champagnemakers"
+        }
+      },
+      "products-champagnemakers-ambrosia": {
+        "type": "products-champagnemakers-ambrosia",
+        "settings": {
+          "collection": ""
+        }
+      },
+      "champagne-makers": {
+        "type": "champagne-makers",
+        "settings": {
+          "title": "Andere champagnemakers",
+          "subtitle": "Lees over champagne, trends en tips van experts!",
+          "champagne_makers_collections": [
+            "gamet",
+            "lamiable",
+            "copin-cautel"
+          ],
+          "button_link": "shopify://collections/champagnemakers",
+          "button_label": "Alle champagne makers"
+        }
+      },
+      "partners-ambrosia": {
+        "type": "partners-ambrosia",
+        "blocks": {
+          "partner_pr8j4m": {
+            "type": "partner",
+            "settings": {
+              "logo": "shopify://shop_images/LOGO_Stacked_No_Tagline_Black_1_66c600ad-885c-4df6-a8c4-768559ec8fbe.png"
+            }
+          },
+          "partner_L6hhfw": {
+            "type": "partner",
+            "settings": {
+              "logo": "shopify://shop_images/WOW_logo_origineel_1b662ea6-b4f9-4628-9fbf-14543f4dbf45.png"
+            }
+          },
+          "partner_qmYwLP": {
+            "type": "partner",
+            "settings": {
+              "logo": "shopify://shop_images/blend_wijnfestival_transparent.png"
+            }
+          },
+          "partner_fLDBcR": {
+            "type": "partner",
+            "settings": {
+              "logo": "shopify://shop_images/Group_803758.png"
+            }
+          },
+          "partner_M93C8U": {
+            "type": "partner",
+            "settings": {
+              "logo": "shopify://shop_images/Logo-Bar-Proast1_1.png"
+            }
+          },
+          "partner_KXphpU": {
+            "type": "partner",
+            "settings": {
+              "logo": "shopify://shop_images/Logo-Mainstreet_trim.png"
+            }
+          }
+        },
+        "block_order": [
+          "partner_pr8j4m",
+          "partner_L6hhfw",
+          "partner_qmYwLP",
+          "partner_fLDBcR",
+          "partner_M93C8U",
+          "partner_KXphpU"
+        ],
+        "settings": {
+          "title": "Onze Partners"
+        }
+      },
+      "contact-section-b2b-ambrosia": {
+        "type": "contact-section-b2b-ambrosia",
+        "settings": {
+          "contact_image": "shopify://shop_images/Vector_1.png",
+          "title": "Samenwerken? <br>Stuur Ons een Bericht!",
+          "subtitle": "Interesse in onze champagnes voor jouw horecazaak of bijvoorbeeld als relatie geschenk? Neem contact op en ontdek de mogelijkheden!"
+        }
+      },
+      "content-b2b-ambrosia": {
+        "type": "content-b2b-ambrosia",
+        "blocks": {
+          "content_block_m6fhtQ": {
+            "type": "content_block",
+            "settings": {
+              "title": "Zakelijke Champagne Inkoop bij OnlyChamps",
+              "text": "OnlyChamps is dé partner voor bedrijven die op zoek zijn naar hoogwaardige champagne tegen scherpe voorwaarden. Of je nu een horecaonderneming runt, evenementen organiseert of relaties wilt verrassen, wij bieden een breed assortiment exclusieve champagnes. Met flexibele leveringen, maatwerk en scherpe prijzen helpen wij jouw bedrijf te groeien met topkwaliteit bubbels. Ontdek de voordelen van zakelijk champagne inkopen bij Ambrosia en onderscheid je met bijzondere champagnes die indruk maken."
+            }
+          },
+          "content_block_LYnyCf": {
+            "type": "content_block",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/4351aaef2b501712256fcd4f810abd4c130c30a2.png",
+              "title": "",
+              "text": "Ginger ale bar spoon sloe gin drunken liqueur tumbler masterclass Cocktail. Hangover recipe drink stirr frosted sour Navy strength new western Tom Collins. Double frosted sour on ice Cocktail lime juice Gimlet splash ml speak easy blend squeezer. Clover club sweet cordial Gin hangover jigger lime juice zest zest light happy hour Gin. Happy hour ice boozy booze recipe dirty mule sugar syrup easy short drink. Exta dry dash speak easy clover club Siegfried Rheinland Dry Gin jigger foam cheers booze shaken. Tikki on the rocks toddy drink infusion tasty frosted neat bramble gin & juice.\n\nYeah stirr ice Cocktail shake. Mule ice ball infusion jigger Siegfried Rheinland Dry Gin on the rocks delicious Negroni Gimlet. Neat sweet chill Schnaps digestif Gimlet splash Siegfried Easy Siegfried Rheinland Dry Gin Siegfried. Drink chill Siegfried Gin full mixology jigger. Exta dry Gin Gimlet Negroni Easy ml. Splash grenadine Gimlet cl liquor mixology spirit booze Siegfried Easy bar mat gin buck booze."
+            }
+          },
+          "content_block_fAyk4c": {
+            "type": "content_block",
+            "disabled": true,
+            "settings": {
+              "title": "Titel",
+              "text": "Zest distilled tasty blend lemon juice new western cooler muddle enjoy. Squeezer Martini is Gimlet ginger ale light bourbon dry. Yeah Martini cocktail bar highball shaker tin Negroni award bar frosted Siegfried toddy. Ml foam Siegfried Rheinland Dry Gin spirit cooler sugar syrup. Zest boozy Siegfried Vermouth proof shake bourbon half the alcohol on the rocks.\n\nHalf the alcohol sweet bourbon liqueur clover club shake tikki. Bartender booze lime juice dirty proof clover club digestif Alaska. Bartender fizz ice spirit mixer boozy neat Negroni dirty garnish fizz alcohol. Fizz on the rocks dash straight up booze chill Siegfried. Navy strength delicious bourbon zest straight up cooler shot stirr Martini. Gin & juice on the rocks Cocktail light infusion booze frosted ice ball stirr. Shake booze bar spoon bitters tipsy recipe clover club splash basil smash jigger.\n\nIs short drink infusion Negroni full. Dry Siegfried Easy sloe gin mixology Vermouth master distiller dash infusion infusion. Gin & juice blend liqueur fizz dash."
+            }
+          }
+        },
+        "block_order": [
+          "content_block_m6fhtQ",
+          "content_block_LYnyCf",
+          "content_block_fAyk4c"
+        ],
+        "settings": {
+          "section_title": "Champagne voor Horeca & Bedrijven",
+          "section_subtitle": "Exclusieve champagnes en scherpe B2B-tarieven. Neem contact met ons op voor meer informatie!",
+          "section_image": "shopify://shop_images/Vector_721.png"
+        }
+      },
+      "hero-champagnemakers-model-ambrosia": {
+        "type": "hero-champagnemakers-model-ambrosia",
+        "settings": {
+          "mobile_image": "shopify://shop_images/Vector_62.png",
+          "title": "Title H1",
+          "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce varius faucibus massa sollicitudin amet augue. Nibh metus a semper purus mauris duis. Lorem eu neque, tristique quis duis. </p>",
+          "button_label": "Button",
+          "button_link": ""
+        }
+      },
+      "over-ons-about-model-ambrosia": {
+        "type": "over-ons-about-model-ambrosia",
+        "settings": {
+          "heading_1": "Het Verhaal  van Ambrosia",
+          "text_1": "Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id scelerisque est ultricies ultricies. Duis est sit sed leo nisl, blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at scelerisque amet nulla purus habitasse.\n\nNunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.\n\nOdio felis sagittis, morbi feugiat tortor vitae feugiat fusce aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id morbi eget ipsum. Aliquam senectus neque ut id eget consectetur dictum. Donec posuere pharetra odio consequat scelerisque et, nunc tortor. Nulla adipiscing erat a erat. Condimentum lorem posuere gravida enim posuere cursus diam.",
+          "image_2": "shopify://shop_images/Placeholder_Lightbox.png",
+          "image_3": "shopify://shop_images/Placeholder_Image.png",
+          "heading_2": "Title H3",
+          "text_2": "Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id scelerisque est ultricies ultricies. Duis est sit sed leo nisl, blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at scelerisque amet nulla purus habitasse.\n\nNunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.\n\nOdio felis sagittis, morbi feugiat tortor vitae feugiat fusce aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id morbi eget ipsum. Aliquam senectus neque ut id eget consectetur dictum. Donec posuere pharetra odio consequat scelerisque et, nunc tortor. Nulla adipiscing erat a erat. Condimentum lorem posuere gravida enim posuere cursus diam.",
+          "heading_3": "Title H3",
+          "text_3": "Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id scelerisque est ultricies ultricies. Duis est sit sed leo nisl, blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at scelerisque amet nulla purus habitasse.\n\nNunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.\n\nOdio felis sagittis, morbi feugiat tortor vitae feugiat fusce aliquet. Nam elementum urna nisi aliquet erat dolor enim. Ornare id morbi eget ipsum. Aliquam senectus neque ut id eget consectetur dictum. Donec posuere pharetra odio consequat scelerisque et, nunc tortor. Nulla adipiscing erat a erat. Condimentum lorem posuere gravida enim posuere cursus diam.",
+          "image_4": "shopify://shop_images/Placeholder_Images.png",
+          "heading_4": "Title H3",
+          "text_4": "Eget quis mi enim, leo lacinia pharetra, semper. Eget in volutpat mollis at volutpat lectus velit, sed auctor. Porttitor fames arcu quis fusce augue enim. Quis at habitant diam at. Suscipit tristique risus, at donec. In turpis vel et quam imperdiet. Ipsum molestie aliquet sodales id est ac volutpat.\n\nMi tincidunt elit, id quisque ligula ac diam, amet. Vel etiam suspendisse morbi eleifend faucibus eget vestibulum felis. Dictum quis montes, sit sit. Tellus aliquam enim urna, etiam. Mauris posuere vulputate arcu amet, vitae nisi, tellus tincidunt. At feugiat sapien varius id."
+        }
+      },
+      "section-list-check-ambrosia": {
+        "type": "section-list-check-ambrosia",
+        "blocks": {
+          "benefit_pJzX9Q": {
+            "type": "benefit",
+            "settings": {
+              "text": "Not a standard 9-to-5 job, with varied working hours and a nice team;"
+            }
+          },
+          "benefit_X6UcYD": {
+            "type": "benefit",
+            "settings": {
+              "text": "A revenue bonus based on your sales results;"
+            }
+          },
+          "benefit_BeVBWP": {
+            "type": "benefit",
+            "settings": {
+              "text": "A pension scheme according to the CLA;"
+            }
+          },
+          "benefit_cKFh4E": {
+            "type": "benefit",
+            "settings": {
+              "text": "Extra allowance on holidays."
+            }
+          }
+        },
+        "block_order": [
+          "benefit_pJzX9Q",
+          "benefit_X6UcYD",
+          "benefit_BeVBWP",
+          "benefit_cKFh4E"
+        ],
+        "settings": {
+          "title": "Title text"
+        }
+      },
+      "section-list-number-ambrosia": {
+        "type": "section-list-number-ambrosia",
+        "blocks": {
+          "benefit_KK9Wje": {
+            "type": "benefit",
+            "settings": {
+              "text": "Not a standard 9-to-5 job, with varied working hours and a nice team;"
+            }
+          },
+          "benefit_gxnBai": {
+            "type": "benefit",
+            "settings": {
+              "text": "A revenue bonus based on your sales results;"
+            }
+          },
+          "benefit_wTc3Pb": {
+            "type": "benefit",
+            "settings": {
+              "text": "A pension scheme according to the CLA;"
+            }
+          },
+          "benefit_AcMh8L": {
+            "type": "benefit",
+            "settings": {
+              "text": "Extra allowance on holidays."
+            }
+          }
+        },
+        "block_order": [
+          "benefit_KK9Wje",
+          "benefit_gxnBai",
+          "benefit_wTc3Pb",
+          "benefit_AcMh8L"
+        ],
+        "settings": {
+          "title": "Title text"
+        }
+      },
+      "section-video-ambrosia": {
+        "type": "section-video-ambrosia",
+        "settings": {
+          "title": "Video",
+          "cover_image": "shopify://shop_images/Placeholder_Image_1_3.png",
+          "youtube_url": "https://www.youtube.com/embed/7X8II6J-6mU?si=xRPGw4dp5r-tVe_Z"
+        }
+      },
+      "hero-champagnemakers-ambrosia": {
+        "type": "hero-champagnemakers-ambrosia",
+        "settings": {}
+      },
+      "champagne-makers-automatic": {
+        "type": "champagne-makers-automatic",
+        "settings": {
+          "title": "Andere champagnemakers",
+          "subtitle": "Lees over champagne, trends en tips van experts!",
+          "button_link": "shopify://collections/champagnemakers",
+          "button_label": "Alle champagne makers"
+        }
+      },
+      "cart-upsell-popup": {
+        "type": "cart-upsell-popup",
+        "settings": {}
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "1232542678405107163": {
+        "type": "shopify://apps/instafeed/blocks/head-block/c447db20-095d-4a10-9725-b5977662c9d5",
+        "disabled": false,
+        "settings": {}
+      },
+      "3140817623390692025": {
+        "type": "shopify://apps/na-age-verification/blocks/agechecker_y1K8NR3dvv/15fad4c9-4ba9-4c27-8e6c-1f214a81924f",
+        "disabled": false,
+        "settings": {}
+      },
+      "8708172504981560946": {
+        "type": "shopify://apps/avada-seo-suite/blocks/avada-seo/15507c6e-1aa3-45d3-b698-7e175e033440",
+        "disabled": false,
+        "settings": {}
+      },
+      "9664103760669878543": {
+        "type": "shopify://apps/seoon-blog/blocks/avada-seoon-setting/a45c3e67-be9f-4255-a194-b255a24f37c9",
+        "disabled": false,
+        "settings": {}
+      }
+    },
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#ffffff",
+          "background_gradient": "",
+          "text": "#121212",
+          "button": "#121212",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#f3f3f3",
+          "background_gradient": "",
+          "text": "#121212",
+          "button": "#121212",
+          "button_label": "#f3f3f3",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-3": {
+        "settings": {
+          "background": "#242833",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#000000",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-4": {
+        "settings": {
+          "background": "#121212",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#121212",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-5": {
+        "settings": {
+          "background": "#334fb4",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#334fb4",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#121212"
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "logo_width": 90,
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "text": "#121212",
+            "button": "#121212",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#121212",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#F3F3F3",
+            "background_gradient": "",
+            "text": "#121212",
+            "button": "#121212",
+            "button_label": "#F3F3F3",
+            "secondary_button_label": "#121212",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#242833",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#000000",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#121212",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#121212",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#334FB4",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#334FB4",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        }
+      },
+      "type_header_font": "assistant_n4",
+      "heading_scale": 100,
+      "type_body_font": "assistant_n4",
+      "body_scale": 100,
+      "page_width": 1200,
+      "spacing_sections": 0,
+      "spacing_grid_horizontal": 8,
+      "spacing_grid_vertical": 8,
+      "buttons_border_thickness": 1,
+      "buttons_border_opacity": 100,
+      "buttons_radius": 0,
+      "buttons_shadow_opacity": 0,
+      "buttons_shadow_horizontal_offset": 0,
+      "buttons_shadow_vertical_offset": 4,
+      "buttons_shadow_blur": 5,
+      "variant_pills_border_thickness": 1,
+      "variant_pills_border_opacity": 55,
+      "variant_pills_radius": 40,
+      "variant_pills_shadow_opacity": 0,
+      "variant_pills_shadow_horizontal_offset": 0,
+      "variant_pills_shadow_vertical_offset": 4,
+      "variant_pills_shadow_blur": 5,
+      "inputs_border_thickness": 1,
+      "inputs_border_opacity": 55,
+      "inputs_radius": 0,
+      "inputs_shadow_opacity": 0,
+      "inputs_shadow_horizontal_offset": 0,
+      "inputs_shadow_vertical_offset": 4,
+      "inputs_shadow_blur": 5,
+      "card_style": "standard",
+      "card_image_padding": 0,
+      "card_text_alignment": "left",
+      "card_color_scheme": "scheme-2",
+      "card_border_thickness": 0,
+      "card_border_opacity": 10,
+      "card_corner_radius": 0,
+      "card_shadow_opacity": 0,
+      "card_shadow_horizontal_offset": 0,
+      "card_shadow_vertical_offset": 4,
+      "card_shadow_blur": 5,
+      "collection_card_style": "standard",
+      "collection_card_image_padding": 0,
+      "collection_card_text_alignment": "left",
+      "collection_card_color_scheme": "scheme-2",
+      "collection_card_border_thickness": 0,
+      "collection_card_border_opacity": 10,
+      "collection_card_corner_radius": 0,
+      "collection_card_shadow_opacity": 0,
+      "collection_card_shadow_horizontal_offset": 0,
+      "collection_card_shadow_vertical_offset": 4,
+      "collection_card_shadow_blur": 5,
+      "blog_card_style": "standard",
+      "blog_card_image_padding": 0,
+      "blog_card_text_alignment": "left",
+      "blog_card_color_scheme": "scheme-2",
+      "blog_card_border_thickness": 0,
+      "blog_card_border_opacity": 10,
+      "blog_card_corner_radius": 0,
+      "blog_card_shadow_opacity": 0,
+      "blog_card_shadow_horizontal_offset": 0,
+      "blog_card_shadow_vertical_offset": 4,
+      "blog_card_shadow_blur": 5,
+      "text_boxes_border_thickness": 0,
+      "text_boxes_border_opacity": 10,
+      "text_boxes_radius": 0,
+      "text_boxes_shadow_opacity": 0,
+      "text_boxes_shadow_horizontal_offset": 0,
+      "text_boxes_shadow_vertical_offset": 4,
+      "text_boxes_shadow_blur": 5,
+      "media_border_thickness": 1,
+      "media_border_opacity": 5,
+      "media_radius": 0,
+      "media_shadow_opacity": 0,
+      "media_shadow_horizontal_offset": 0,
+      "media_shadow_vertical_offset": 4,
+      "media_shadow_blur": 5,
+      "popup_border_thickness": 1,
+      "popup_border_opacity": 10,
+      "popup_corner_radius": 0,
+      "popup_shadow_opacity": 5,
+      "popup_shadow_horizontal_offset": 0,
+      "popup_shadow_vertical_offset": 4,
+      "popup_shadow_blur": 5,
+      "drawer_border_thickness": 1,
+      "drawer_border_opacity": 10,
+      "drawer_shadow_opacity": 0,
+      "drawer_shadow_horizontal_offset": 0,
+      "drawer_shadow_vertical_offset": 4,
+      "drawer_shadow_blur": 5,
+      "badge_position": "bottom left",
+      "badge_corner_radius": 40,
+      "sale_badge_color_scheme": "scheme-5",
+      "sold_out_badge_color_scheme": "scheme-3",
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tiktok_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "predictive_search_enabled": true,
+      "predictive_search_show_vendor": false,
+      "predictive_search_show_price": false,
+      "currency_code_enabled": true,
+      "cart_type": "notification",
+      "show_vendor": false,
+      "show_cart_note": false,
+      "cart_drawer_collection": "",
+      "sections": {
+        "main-password-header": {
+          "type": "main-password-header",
+          "settings": {
+            "color_scheme": "scheme-1"
+          }
+        },
+        "main-password-footer": {
+          "type": "main-password-footer",
+          "settings": {
+            "color_scheme": "scheme-1"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,455 @@
+<section class="product-hero-info text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        {% if product.images.size > 0 %}
+          <div class="first-image">
+            {% assign featured = product.featured_media %}
+            {% if featured.media_type == 'video' %}
+              {% assign mp4_url = '' %}
+              {% for source in featured.sources %}
+                {% if source.format == 'mp4' %}
+                  {% assign mp4_url = source.url %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+              {% if mp4_url != '' %}
+                <img
+                  src="{{ featured.preview_image | image_url }}"
+                  alt="{{ featured.alt | escape }}"
+                  class="img-fluid gallery-image"
+                  data-type="video"
+                  data-src="{{ mp4_url }}"
+                  data-poster="{{ featured.preview_image | image_url }}" width="{{ featured.preview_image.width }}" height="{{ featured.preview_image.height }}">
+              {% endif %}
+            {% elsif featured.media_type == 'external_video' and featured.host == 'youtube' %}
+              <img
+                src="{{ featured.preview_image | image_url }}"
+                alt="{{ featured.alt | escape }}"
+                class="img-fluid gallery-image"
+                data-type="youtube"
+                data-src="https://www.youtube.com/embed/{{ featured.external_id }}?autoplay=1&rel=0&modestbranding=1" width="{{ featured.preview_image.width }}" height="{{ featured.preview_image.height }}">
+            {% else %}
+              <img
+                src="{{ product.featured_image | image_url }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                class="img-fluid gallery-image"
+                data-type="image"
+                data-src="{{ product.featured_image | image_url }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+            {% endif %}
+          </div>
+
+          <div class="row images-bottom mt-2">
+            {% assign secondary_images = product.images | slice: 1, 2 %}
+            {% for image in secondary_images %}
+              <div class="col-6">
+                <img
+                  src="{{ image | image_url }}"
+                  alt="{{ image.alt | escape }}"
+                  class="img-fluid gallery-image"
+                  data-type="image"
+                  data-src="{{ image | image_url }}" width="{{ image.width }}" height="{{ image.height }}">
+              </div>
+            {% endfor %}
+
+            {% for media in product.media %}
+              {% if media.media_type == 'video' %}
+                {% assign mp4_url = '' %}
+                {% for source in media.sources %}
+                  {% if source.format == 'mp4' %}
+                    {% assign mp4_url = source.url %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+                {% if mp4_url != '' %}
+                  <div class="col-6 position-relative video-thumb">
+                    <img
+                      src="{{ media.preview_image | image_url }}"
+                      alt="Video"
+                      class="img-fluid gallery-image"
+                      data-type="video"
+                      data-src="{{ mp4_url }}"
+                      data-poster="{{ media.preview_image | image_url }}" width="{{ media.preview_image.width }}" height="{{ media.preview_image.height }}">
+                    <span class="play-icon"></span>
+                  </div>
+                {% endif %}
+              {% elsif media.media_type == 'external_video' and media.host == 'youtube' %}
+                <div class="col-6 position-relative video-thumb">
+                  <img
+                    src="{{ media.preview_image | image_url }}"
+                    alt="YouTube Video"
+                    class="img-fluid gallery-image"
+                    data-type="youtube"
+                    data-src="https://www.youtube.com/embed/{{ media.external_id }}?autoplay=1&rel=0&modestbranding=1" width="{{ media.preview_image.width }}" height="{{ media.preview_image.height }}">
+                  <span class="play-icon"></span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="col-md-6">
+        <!-- <p class="product-vendor">Champagnemaker</p> -->
+        <h1>{{ product.title }}</h1>
+
+        <table class="table border-0">
+          {% if product.metafields.custom.info_wijnkist != blank %}
+            <tr>
+             <td class="text-muted"></td>
+            <td>{{ product.metafields.custom.info_wijnkist | metafield_tag }}</td>
+            </tr>
+           {% endif %}
+          {% if product.metafields.custom.kijken %}
+            <tr>
+              <td class="text-muted">Kijken</td>
+              <td>{{ product.metafields.custom.kijken | newline_to_br }}</td>
+            </tr>
+          {% endif %}
+          {% if product.metafields.custom.ruiken %}
+            <tr>
+              <td class="text-muted">Ruiken</td>
+              <td>{{ product.metafields.custom.ruiken | newline_to_br }}</td>
+            </tr>
+          {% endif %}
+          {% if product.metafields.custom.smaak %}
+            <tr>
+              <td class="text-muted">Proeven</td>
+              <td>{{ product.metafields.custom.smaak | newline_to_br }}</td>
+            </tr>
+          {% endif %}
+          {% if product.metafields.custom.ingredi_nten %}
+            <tr>
+              <td class="text-muted">Druiven</td>
+              <td>{{ product.metafields.custom.ingredi_nten | newline_to_br }}</td>
+            </tr>
+          {% endif %}
+          {% if product.metafields.custom.appels %}
+            <tr>
+              <td class="text-muted">Appelsoort</td>
+              <td>{{ product.metafields.custom.appels | newline_to_br }}</td>
+            </tr>
+          {% endif %}
+          {% if product.metafields.custom.dosage %}
+            <tr>
+              <td class="text-muted">Dosage</td>
+              <td>{{ product.metafields.custom.dosage | newline_to_br }}</td>
+            </tr>
+          {% endif %}
+          {% if product.metafields.custom.serveertip %}
+            <tr>
+              <td class="text-muted">Serveertip</td>
+              <td>{{ product.metafields.custom.serveertip | newline_to_br }}</td>
+            </tr>
+          {% endif %}
+          {% if product.metafields.custom.perfect_bij %}
+            <tr>
+              <td class="text-muted">Perfect bij</td>
+              <td>{{ product.metafields.custom.perfect_bij | newline_to_br }}</td>
+            </tr>
+          {% endif %}
+        </table>
+
+        {% assign first_variant = product.variants.first %}
+
+        <p class="price">
+          <span class="product-price__current">{{ first_variant.price | money }}</span>
+          {% if first_variant.compare_at_price > first_variant.price %}
+            <span class="product-price__compare">{{ first_variant.compare_at_price | money }}</span>
+          {% endif %}
+        </p>
+
+        <form method="post" action="{{ routes.cart_add_url }}">
+          <input type="hidden" name="id" value="{{ first_variant.id }}">
+
+          <div class="d-block d-md-flex">
+            {% if first_variant.inventory_quantity > 0 or first_variant.inventory_policy == 'continue' %}
+              <div class="quantity-wrapper d-flex align-items-center justify-content-between" style="gap: 8px;">
+                <button type="button" class="qty-btn minus btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M5 11.6973H19V13.6973H5V11.6973Z" fill="#2A3942"/>
+                  </svg>
+                </button>
+
+                <input
+                  type="text"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  class="form-control text-center"
+                  style="max-width: 60px; height: 40px;"
+                >
+
+                <button type="button" class="qty-btn plus btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M19 11.6973H13V5.69727H11V11.6973H5V13.6973H11V19.6973H13V13.6973H19V11.6973Z" fill="#2A3942"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="infos">
+                <button type="submit" class="btn btn-primary">In Winkelwagen</button>
+                <span class="text-bottom">Gratis verzending vanaf €150</span>
+              </div>
+            {% else %}
+              <div class="infos sold">
+                <div class="sold-out-text">Uitverkocht</div>
+              </div>
+            {% endif %}
+          </div>
+        </form>
+
+        <div class="product-share">
+          <span class="text-share d-block mb-2">Deel dit product:</span>
+          <div class="d-flex align-items-center gap-3">
+            <button type="button" class="btn p-0 copy-link" title="Kopieer link" aria-label="Copy link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M4.22196 20.475C4.68584 20.9395 5.23693 21.3078 5.84358 21.5587C6.45023 21.8096 7.10048 21.9382 7.75696 21.937C8.41359 21.9381 9.06398 21.8096 9.67079 21.5587C10.2776 21.3078 10.8289 20.9395 11.293 20.475L14.121 17.646L12.707 16.232L9.87896 19.061C9.31543 19.622 8.55263 19.937 7.75746 19.937C6.96229 19.937 6.19949 19.622 5.63596 19.061C5.07447 18.4977 4.75917 17.7348 4.75917 16.9395C4.75917 16.1442 5.07447 15.3813 5.63596 14.818L8.46496 11.99L7.05096 10.576L4.22196 13.404C3.28577 14.3424 2.76001 15.6139 2.76001 16.9395C2.76001 18.2651 3.28577 19.5365 4.22196 20.475ZM19.778 11.99C20.7137 11.0513 21.2391 9.7799 21.2391 8.45448C21.2391 7.12907 20.7137 5.8577 19.778 4.91898C18.8395 3.98279 17.568 3.45703 16.2425 3.45703C14.9169 3.45703 13.6454 3.98279 12.707 4.91898L9.87896 7.74798L11.293 9.16198L14.121 6.33298C14.6845 5.77197 15.4473 5.45701 16.2425 5.45701C17.0376 5.45701 17.8004 5.77197 18.364 6.33298C18.9255 6.89626 19.2408 7.65915 19.2408 8.45448C19.2408 9.24982 18.9255 10.0127 18.364 10.576L15.535 13.404L16.949 14.818L19.778 11.99Z" fill="#2A3942"/>
+                <path d="M8.46395 17.6471L7.04895 16.2331L15.536 7.74707L16.95 9.16207L8.46395 17.6471Z" fill="#2A3942"/>
+              </svg>
+            </button>
+            <span
+              class="copied-msg position-absolute translate-middle mt-1 px-2 py-1 bg-dark text-white rounded small"
+              style="display:none;"
+            >
+              Copied!
+            </span>
+            <a
+              href="mailto:?subject={{ product.title | url_escape }}&body=Bekijk%20deze%20pagina%20op%20OnlyChamps.nl%20{{ shop.url | append: product.url | url_encode }}"
+              target="_blank"
+              class="p-0"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M20 4.69727H4C2.897 4.69727 2 5.59427 2 6.69727V18.6973C2 19.8003 2.897 20.6973 4 20.6973H20C21.103 20.6973 22 19.8003 22 18.6973V6.69727C22 5.59427 21.103 4.69727 20 4.69727ZM20 6.69727V7.20827L12 13.4313L4 7.20927V6.69727H20ZM4 18.6973V9.74127L11.386 15.4863C11.5611 15.6238 11.7773 15.6986 12 15.6986C12.2227 15.6986 12.4389 15.6238 12.614 15.4863L20 9.74127L20.002 18.6973H4Z" fill="#2A3942"/>
+              </svg>
+            </a>
+
+            <!-- WhatsApp -->
+            <a
+              href="https://wa.me/?text={{ 'Bekijk deze pagina op OnlyChamps.nl ' | append: canonical_url | url_encode }}"
+              target="_blank"
+              class="p-0"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M22 12.6973C22 18.2201 17.5228 22.6973 12 22.6973C9.96818 22.6973 8.0779 22.0913 6.5 21.0502L2 22.6973L3.5 17.9677C2.54913 16.4374 2 14.6315 2 12.6973C2 7.17442 6.47715 2.69727 12 2.69727C17.5228 2.69727 22 7.17442 22 12.6973Z" stroke="#2A3942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.65101 15.0432C11.834 17.2272 14.6 18.6192 16.245 16.9812L16.644 16.5822C17.176 16.0512 17.102 15.1712 16.484 14.7422C16.095 14.4712 15.677 14.1802 15.215 13.8552C14.737 13.5192 14.082 13.5722 13.667 13.9832L13.216 14.4312C12.657 14.0772 12.104 13.6222 11.59 13.1092L11.588 13.1072C11.075 12.5942 10.62 12.0402 10.266 11.4812L10.714 11.0302C11.126 10.6162 11.177 9.96021 10.842 9.48221C10.516 9.02021 10.225 8.60221 9.95501 8.21321C9.52601 7.59621 8.64601 7.52221 8.11501 8.05321L7.71601 8.45221C6.07901 10.0972 7.47001 12.8612 9.65301 15.0462" stroke="#2A3942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <!-- Facebook -->
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u={{ product.url | prepend: shop.url }}"
+              target="_blank"
+              class="p-0"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M22 13.001C22 7.44445 17.5229 2.93994 12 2.93994C6.47715 2.93994 2 7.44445 2 13.001C2 18.0227 5.65684 22.1851 10.4375 22.9399V15.9093H7.89844V13.001H10.4375V10.7845C10.4375 8.2629 11.9305 6.87006 14.2146 6.87006C15.3088 6.87006 16.4531 7.06657 16.4531 7.06657V9.54255H15.1922C13.95 9.54255 13.5625 10.3182 13.5625 11.1138V13.001H16.3359L15.8926 15.9093H13.5625V22.9399C18.3432 22.1851 22 18.0229 22 13.001Z" fill="#2A3942"/>
+              </svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a
+              href="https://www.linkedin.com/shareArticle?mini=true&url={{ product.url | prepend: shop.url }}&title={{ product.title | url_escape }}"
+              target="_blank"
+              class="p-0"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 3.93994C3.67157 3.93994 3 4.61151 3 5.43994V20.4399C3 21.2683 3.67157 21.9399 4.5 21.9399H19.5C20.3284 21.9399 21 21.2683 21 20.4399V5.43994C21 4.61151 20.3284 3.93994 19.5 3.93994H4.5ZM8.52076 7.94266C8.52639 8.89891 7.81061 9.48813 6.96123 9.48391C6.16107 9.47969 5.46357 8.84266 5.46779 7.94407C5.47201 7.09891 6.13998 6.41969 7.00764 6.43938C7.88795 6.45907 8.52639 7.10454 8.52076 7.94266ZM12.2797 10.7017H9.75971H9.7583V19.2615H12.4217V19.0618C12.4217 18.6819 12.4214 18.3019 12.4211 17.9218C12.4203 16.908 12.4194 15.8931 12.4246 14.8796C12.426 14.6335 12.4372 14.3776 12.5005 14.1427C12.7381 13.2652 13.5271 12.6985 14.4074 12.8378C14.9727 12.9263 15.3467 13.254 15.5042 13.787C15.6013 14.1202 15.6449 14.4788 15.6491 14.8262C15.6605 15.8738 15.6589 16.9214 15.6573 17.9691C15.6567 18.3389 15.6561 18.7089 15.6561 19.0787V19.2601H18.328V19.0548C18.328 18.6028 18.3278 18.1509 18.3275 17.699C18.327 16.5695 18.3264 15.44 18.3294 14.3101C18.3308 13.7996 18.276 13.2962 18.1508 12.8026C17.9638 12.0685 17.5771 11.461 16.9485 11.0223C16.5027 10.7101 16.0133 10.509 15.4663 10.4865C15.404 10.484 15.3412 10.4806 15.2781 10.4772C14.9984 10.462 14.7141 10.4467 14.4467 10.5006C13.6817 10.6539 13.0096 11.004 12.5019 11.6213C12.4429 11.6921 12.3852 11.764 12.2991 11.8713L12.2797 11.8956V10.7017ZM5.68164 19.2643H8.33242V10.7073H5.68164V19.2643Z" fill="#2A3942"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="galleryModal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-transparent border-0">
+      <div class="modal-body position-relative text-center p-0">
+        <button
+          type="button"
+          class="btn-close position-absolute top-0 end-0 m-3"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <img id="modalImage" src="{{ product.featured_image | image_url: width: 1200 }}" alt="" class="img-fluid rounded" width="1200" height="1200">
+        <button
+          class="btn btn-light position-absolute start-0 top-50 translate-middle-y gallery-prev"
+          style="z-index:10;"
+        >
+          ‹
+        </button>
+        <button
+          class="btn btn-light position-absolute end-0 top-50 translate-middle-y gallery-next"
+          style="z-index:10;"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.quantity-wrapper').forEach((wrapper) => {
+      const input = wrapper.querySelector('input[name="quantity"]');
+      const btnMinus = wrapper.querySelector('.qty-btn.minus');
+      const btnPlus = wrapper.querySelector('.qty-btn.plus');
+
+      btnMinus.addEventListener('click', () => {
+        const current = parseInt(input.value, 10) || 1;
+        input.value = Math.max(1, current - 1);
+      });
+
+      btnPlus.addEventListener('click', () => {
+        const current = parseInt(input.value, 10) || 1;
+        input.value = current + 1;
+      });
+    });
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('galleryModal');
+    const modalBody = modal.querySelector('.modal-body');
+    const images = Array.from(document.querySelectorAll('.gallery-image'));
+    let currentIndex = 0;
+
+    function getVideoMimeType(url) {
+      const ext = url.split('.').pop().toLowerCase();
+      switch (ext) {
+        case 'mp4':
+          return 'video/mp4';
+        case 'webm':
+          return 'video/webm';
+        case 'mov':
+          return 'video/quicktime';
+        default:
+          return 'video/mp4';
+      }
+    }
+
+    function resetModalBody() {
+      modalBody.innerHTML = `
+      <button
+        type="button"
+        class="btn-close position-absolute top-0 end-0 m-3"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+      <button
+        class="btn btn-light position-absolute start-0 top-50 translate-middle-y gallery-prev"
+        style="z-index:10;"
+      >
+        ‹
+      </button>
+      <button
+        class="btn btn-light position-absolute end-0 top-50 translate-middle-y gallery-next"
+        style="z-index:10;"
+      >
+        ›
+      </button>
+    `;
+    }
+
+    function showMedia(index) {
+      if (index < 0 || index >= images.length) return;
+      currentIndex = index;
+
+      const el = images[index];
+      const type = el.dataset.type || 'image';
+      const src = el.dataset.src || el.src;
+      const poster = el.dataset.poster || '';
+      let html = '';
+
+      if (type === 'video') {
+        const mime = getVideoMimeType(src);
+        html = `
+      <video class="w-100 rounded" controls autoplay playsinline poster="${poster}">
+        <source src="${src}" type="${mime}">
+        Your browser does not support the video tag.
+      </video>
+    `;
+      } else if (type === 'youtube') {
+        html = `
+      <div class="ratio ratio-16x9">
+        <iframe src="${src}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    `;
+      } else {
+        html = `<img src="${src}" class="img-fluid rounded">`;
+      }
+
+      resetModalBody();
+      modalBody.insertAdjacentHTML('afterbegin', html);
+
+      modalBody.querySelector('.gallery-prev').addEventListener('click', () => {
+        showMedia((currentIndex - 1 + images.length) % images.length);
+      });
+
+      modalBody.querySelector('.gallery-next').addEventListener('click', () => {
+        showMedia((currentIndex + 1) % images.length);
+      });
+
+      bootstrap.Modal.getOrCreateInstance(modal).show();
+    }
+
+    images.forEach((img, i) => {
+      img.addEventListener('click', () => showMedia(i));
+    });
+
+    document.querySelector('.gallery-prev')?.addEventListener('click', () => {
+      showMedia((currentIndex - 1 + images.length) % images.length);
+    });
+
+    document.querySelector('.gallery-next')?.addEventListener('click', () => {
+      showMedia((currentIndex + 1) % images.length);
+    });
+
+    modal.addEventListener('hidden.bs.modal', resetModalBody);
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const copyBtn = document.querySelector('.copy-link');
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+          copyBtn.classList.add('copied');
+          setTimeout(() => copyBtn.classList.remove('copied'), 2000);
+        });
+      });
+    }
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    const copyBtn = document.querySelector('.copy-link');
+    const copiedMsg = document.querySelector('.copied-msg');
+
+    if (copyBtn && copiedMsg) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          copiedMsg.classList.add('show');
+
+          setTimeout(() => {
+            copiedMsg.classList.remove('show');
+          }, 1500);
+        });
+      });
+    }
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Product Hero Info",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product Hero Info"
+    }
+  ]
+}
+{% endschema %}

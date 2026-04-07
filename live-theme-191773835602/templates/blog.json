@@ -1,0 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "disabled": true,
+      "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "blog_section_posts_ambrosia_4wfNwQ": {
+      "type": "blog-section-posts-ambrosia",
+      "name": "Blog Posts mutiple",
+      "settings": {}
+    },
+    "newsletter_blog_ambrosia_PA9RGg": {
+      "type": "newsletter-blog-ambrosia",
+      "name": "Newsletter Blog",
+      "settings": {
+        "title": "Altijd op de hoogte van de beste bubbels!",
+        "subtitle": "Schrijf je in voor onze nieuwsbrief en ontvang de mooiste aanbiedingen en verhalen...",
+        "placeholder": "Vul je e-mailadres in",
+        "button_text": "Inschrijven",
+        "legal_notice": "<p>Door je in te schrijven ga je akkoord met ons <a href=\"/pages/privacybeleid\">privacybeleid</a>.</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "blog_section_posts_ambrosia_4wfNwQ",
+    "newsletter_blog_ambrosia_PA9RGg"
+  ]
+}

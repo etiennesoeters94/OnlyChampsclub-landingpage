@@ -1,0 +1,181 @@
+<section class="blog-news-section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.text != blank %}
+      <p class="text-center text">{{ section.settings.text }}</p>
+    {% endif %}
+
+    <div class="row d-none d-md-flex">
+      {% for article in blogs['champagne-verhalen'].articles limit: 2 %}
+        <div class="col-md-6">
+          <div class="cardborder-0">
+            {% if article.image %}
+              <div class="card-content">
+                <a href="{{ article.url }}" class="img-link">
+                  <img
+                    src="{{ article.image | image_url: width: 300 }}"
+                    srcset="
+                      {{ article.image | image_url: width: 200 }} 200w,
+                      {{ article.image | image_url: width: 300 }} 300w
+                    "
+                    sizes="(max-width: 1200px) 168px, (max-width: 768px) 200px, 266px"
+                    alt="{{ article.image.alt | escape }}"
+                    class="img-fluid"
+                   
+                    width="266"
+                    height="310"
+                  >
+                </a>
+                <div class="card-body p-0">
+                  <h5 class="card-title">
+                    <a href="{{ article.url }}" class="text-dark text-decoration-none">
+                      {{ article.title }}
+                    </a>
+                  </h5>
+                  <p class="card-text">
+                    {% if article.excerpt != blank %}
+                      {{ article.excerpt | strip_html | truncate: 70 }}
+                    {% else %}
+                      {{ article.content | strip_html | truncate: 70 }}
+                    {% endif %}
+                  </p>
+                  {% assign word_count = article.content | strip_html | split: ' ' | size %}
+                  {% assign reading_time = word_count | divided_by: 200 | ceil %}
+                  <p class="text-time">{{ reading_time }} min leestijd</p>
+                  <a href="{{ article.url }}" class="btn btn-link">
+                    Lees meer
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                      <path d="M10.414 18.2538L16.121 12.5468L10.414 6.83984L9 8.25384L13.293 12.5468L9 16.8398L10.414 18.2538Z" fill="#1468A7"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="swiper blog-news-swiper d-md-none">
+      <div class="swiper-wrapper">
+        {% for article in blogs['champagne-verhalen'].articles limit: 4 %}
+          <div class="swiper-slide">
+            <div class="cardborder-0">
+              {% if article.image %}
+                <div class="card-content">
+                  <a href="{{ article.url }}" class="img-link">
+                    <img
+                      src="{{ article.image | image_url: width: 300 }}"
+                      srcset="
+                        {{ article.image | image_url: width: 200 }} 200w,
+                        {{ article.image | image_url: width: 300 }} 300w
+                      "
+                      sizes="(max-width: 768px) 200px, 266px"
+                      alt="{{ article.image.alt | escape }}"
+                      class="img-fluid"
+                     
+                      width="200"
+                      height="234"
+                    >
+                  </a>
+                  <div class="card-body p-0">
+                    <h5 class="card-title">
+                      <a href="{{ article.url }}" class="text-dark text-decoration-none">
+                        {{ article.title }}
+                      </a>
+                    </h5>
+                    <p class="card-text">
+                      {% if article.excerpt != blank %}
+                        {{ article.excerpt | strip_html | truncate: 70 }}
+                      {% else %}
+                        {{ article.content | strip_html | truncate: 70 }}
+                      {% endif %}
+                    </p>
+                    {% assign word_count = article.content | strip_html | split: ' ' | size %}
+                    {% assign reading_time = word_count | divided_by: 200 | ceil %}
+                    <p class="text-time">{{ reading_time }} min leestijd</p>
+                    <a href="{{ article.url }}" class="btn btn-link">
+                      Lees meer
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <path d="M10.414 18.2538L16.121 12.5468L10.414 6.83984L9 8.25384L13.293 12.5468L9 16.8398L10.414 18.2538Z" fill="#1468A7"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="swiper-button-prev d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M13.586 17.414L7.879 11.707L13.586 6L15 7.414L10.707 11.707L15 16L13.586 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+      <div class="swiper-button-next d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/blogs/champagne-verhalen" class="btn btn-outline-primary">
+        {{ section.settings.cta_text }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.innerWidth < 768) {
+      new Swiper('.blog-news-swiper', {
+        loop: true,
+        slidesPerView: 1.5,
+        spaceBetween: 16,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    }
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Stories",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Champagne Stories"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Section subtitle",
+      "default": "Read about champagne, trends and tips from experts!"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Bekijk alles"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stories",
+      "category": "Blog"
+    }
+  ]
+}
+{% endschema %}

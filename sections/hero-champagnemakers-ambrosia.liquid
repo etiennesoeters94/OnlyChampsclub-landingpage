@@ -1,0 +1,153 @@
+<section class="section-hero-champagnemakers">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-md-6 d-block d-md-none">
+        <figure class="figure-mobile">
+          <img
+            src="{{ product.metafields.custom.first_image_champagnemakers | image_url }}"
+            alt="{{ product.metafields.custom.first_image_champagnemakers.alt | escape }}"
+            class="img-fluid" width="{{ product.metafields.custom.first_image_champagnemakers.width }}" height="{{ product.metafields.custom.first_image_champagnemakers.height }}">
+        </figure>
+      </div>
+      <div class="col-12 col-md-6">
+        <h1>{{ product.title }}</h1>
+        <div class="description">
+          {% if product.description != blank %}
+            {{ product.description }}
+          {% endif %}
+        </div>
+        <div class="d-flex infos-hero">
+          <p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+              <path d="M3 6.54736V20.5474C3 21.0778 3.21071 21.5865 3.58579 21.9616C3.96086 22.3366 4.46957 22.5474 5 22.5474H19C19.5304 22.5474 20.0391 22.3366 20.4142 21.9616C20.7893 21.5865 21 21.0778 21 20.5474V6.54736C21 6.01693 20.7893 5.50822 20.4142 5.13315C20.0391 4.75808 19.5304 4.54736 19 4.54736H17V2.54736H15V4.54736H9V2.54736H7V4.54736H5C4.46957 4.54736 3.96086 4.75808 3.58579 5.13315C3.21071 5.50822 3 6.01693 3 6.54736ZM19 20.5474H5V8.54736H19V20.5474Z" fill="black"/>
+            </svg>
+            {{ product.metafields.custom.verzending }}
+          </p>
+          <p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+              <path d="M12.0001 14.5474C14.2061 14.5474 16.0001 12.7534 16.0001 10.5474C16.0001 8.34136 14.2061 6.54736 12.0001 6.54736C9.79406 6.54736 8.00006 8.34136 8.00006 10.5474C8.00006 12.7534 9.79406 14.5474 12.0001 14.5474ZM12.0001 8.54736C13.1031 8.54736 14.0001 9.44436 14.0001 10.5474C14.0001 11.6504 13.1031 12.5474 12.0001 12.5474C10.8971 12.5474 10.0001 11.6504 10.0001 10.5474C10.0001 9.44436 10.8971 8.54736 12.0001 8.54736Z" fill="black"/>
+              <path d="M11.4201 22.3614C11.5893 22.4822 11.7921 22.5472 12.0001 22.5472C12.2081 22.5472 12.4108 22.4822 12.5801 22.3614C12.8841 22.1464 20.0291 16.9874 20.0001 10.5474C20.0001 6.13636 16.4111 2.54736 12.0001 2.54736C7.58909 2.54736 4.00009 6.13636 4.00009 10.5424C3.97109 16.9874 11.1161 22.1464 11.4201 22.3614ZM12.0001 4.54736C15.3091 4.54736 18.0001 7.23836 18.0001 10.5524C18.0211 14.9904 13.6121 18.9754 12.0001 20.2824C10.3891 18.9744 5.97909 14.9884 6.00009 10.5474C6.00009 7.23836 8.69109 4.54736 12.0001 4.54736Z" fill="black"/>
+            </svg>
+            {{ product.metafields.custom.regio_champagnemaker }}
+          </p>
+        </div>
+        {% if product.metafields.custom.link_hero %}
+          {% assign link_text_raw = product.metafields.custom.link_hero %}
+
+          {% assign url_start = link_text_raw | split: '"url":"' %}
+          {% assign url_split = url_start[1] | split: '"' %}
+          {% assign real_url = url_split[0] %}
+
+          {% assign text_start = link_text_raw | split: '"text":"' %}
+          {% assign text_split = text_start[1] | split: '"' %}
+          {% assign real_text = text_split[0] %}
+
+          <a href="{{ real_url }}" class="btn btn-primary">
+            {{ real_text }}
+          </a>
+        {% endif %}
+      </div>
+      <div class="col-12 col-md-6 d-none d-md-block">
+        <figure class="figure-desktop">
+          <img
+            src="{{ product.metafields.custom.first_image_champagnemakers | image_url }}"
+            alt="{{ product.metafields.custom.first_image_champagnemakers.alt | escape }}"
+            class="img-fluid" width="{{ product.metafields.custom.first_image_champagnemakers.width }}" height="{{ product.metafields.custom.first_image_champagnemakers.height }}">
+        </figure>
+      </div>
+      <div class="col-12 col-lg-8">
+        <h3>{{ product.metafields.custom.title_seo_block }}</h3>
+        <p>{{ product.metafields.custom.text_seo_block_champagnemakers | newline_to_br }}</p>
+      </div>
+
+      {% assign gallery_images = product.metafields.custom.images_champagnemakers.value %}
+
+      {% if gallery_images != blank %}
+        <div class="col-12 champagne-gallery2 d-none d-md-block">
+          <div class="row gx-2 gy-2">
+            {% for image in gallery_images %}
+              <div class="col-6">
+                <figure>
+                  <img
+                    src="{{ image | image_url }}"
+                    alt="{{ image.alt | escape }}"
+                    class="img-fluid w-100 object-fit-cover" width="{{ image.width }}" height="{{ image.height }}">
+                </figure>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% assign gallery_images = product.metafields.custom.images_champagnemakers.value %}
+
+      {% if gallery_images != blank %}
+        <div class="col-12 champagne-gallery2 d-md-none">
+          <!-- mobile only -->
+          <div class="swiper gallery-swiper">
+            <div class="swiper-wrapper">
+              {% for image in gallery_images %}
+                <div class="swiper-slide">
+                  <figure>
+                    <img
+                      src="{{ image | image_url }}"
+                      alt="{{ image.alt | escape }}"
+                      class="img-fluid w-100 object-fit-cover" width="{{ image.width }}" height="{{ image.height }}">
+                  </figure>
+                </div>
+              {% endfor %}
+            </div>
+
+            <!-- Setas de navegação -->
+            <div class="swiper-button-prev d-block d-md-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M13.586 17.414L7.879 11.707L13.586 6L15 7.414L10.707 11.707L15 16L13.586 17.414Z" fill="#2A3942"/>
+              </svg>
+            </div>
+            <div class="swiper-button-next d-block d-md-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#2A3942"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    const gallery = document.querySelector('.champagne-gallery2 .row');
+    if (!gallery) return;
+
+    const allItems = gallery.querySelectorAll('.col-6');
+    if (allItems.length < 5) return;
+
+    const firstImage = allItems[0];
+    const rightContainer = document.createElement('div');
+    rightContainer.className = 'col-6 d-flex flex-wrap gap-2';
+
+    for (let i = 1; i <= 4; i++) {
+      const el = allItems[i];
+      el.style.width = 'calc(50% - 4px)';
+      rightContainer.appendChild(el);
+    }
+
+    gallery.innerHTML = '';
+    gallery.appendChild(firstImage);
+    gallery.appendChild(rightContainer);
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.innerWidth < 768) {
+      new Swiper('.gallery-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    }
+  });
+{% endjavascript %}

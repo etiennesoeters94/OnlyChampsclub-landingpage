@@ -1,0 +1,533 @@
+{% assign products_per_page = section.settings.products_per_page %}
+{% if request.params.products_per_page %}
+  {% assign products_per_page = request.params.products_per_page %}
+{% endif %}
+
+{% assign is_filter_collection = false %}
+{% if collection.handle == 'online-champagne-kopen' %}
+  {% assign is_filter_collection = true %}
+  {% assign products_per_page = 'all' %}
+  {{ 'onlychamps-filters.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'onlychamps-filters.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+
+{% capture onlychamps_filters_markup %}
+  <div class="oc-filter-panel" data-oc-filter-panel>
+    <div class="oc-filter-groups">
+      <details class="oc-filter-group" open>
+        <summary>Prijs</summary>
+        <div class="oc-filter-group__content" data-filter-group="price">
+          <label><input type="checkbox" value="under-40"> Onder €40</label>
+          <label><input type="checkbox" value="40-60"> €40 tot €60</label>
+          <label><input type="checkbox" value="60-100"> €60 tot €100</label>
+          <label><input type="checkbox" value="100-plus"> €100+</label>
+        </div>
+      </details>
+
+      <details class="oc-filter-group" open>
+        <summary>Gelegenheid</summary>
+        <div class="oc-filter-group__content" data-filter-group="gelegenheid">
+          <label><input type="checkbox" value="filter-gelegenheid-aperitief"> Aperitief</label>
+          <label><input type="checkbox" value="filter-gelegenheid-lunch"> Lunch</label>
+          <label><input type="checkbox" value="filter-gelegenheid-diner"> Diner</label>
+          <label><input type="checkbox" value="filter-gelegenheid-cadeau"> Cadeau</label>
+          <label><input type="checkbox" value="filter-gelegenheid-feest"> Feest</label>
+          <label><input type="checkbox" value="filter-gelegenheid-bijzondere-gelegenheid"> Bijzondere gelegenheid</label>
+        </div>
+      </details>
+
+      <details class="oc-filter-group" open>
+        <summary>Stijl</summary>
+        <div class="oc-filter-group__content" data-filter-group="stijl">
+          <label><input type="checkbox" value="filter-stijl-fris-fruitig"> Fris en fruitig</label>
+          <label><input type="checkbox" value="filter-stijl-elegant-mineraal"> Elegant en mineraal</label>
+          <label><input type="checkbox" value="filter-stijl-romig-vol"> Romig en vol</label>
+          <label><input type="checkbox" value="filter-stijl-krachtig-complex"> Krachtig en complex</label>
+        </div>
+      </details>
+
+      <details class="oc-filter-group">
+        <summary>Druif</summary>
+        <div class="oc-filter-group__content" data-filter-group="druif">
+          <label><input type="checkbox" value="filter-druif-chardonnay"> Chardonnay</label>
+          <label><input type="checkbox" value="filter-druif-pinot-noir"> Pinot Noir</label>
+          <label><input type="checkbox" value="filter-druif-meunier"> Meunier</label>
+        </div>
+      </details>
+
+      <details class="oc-filter-group">
+        <summary>Dosage</summary>
+        <div class="oc-filter-group__content" data-filter-group="dosage">
+          <label><input type="checkbox" value="filter-dosage-brut-nature"> Brut Nature</label>
+          <label><input type="checkbox" value="filter-dosage-extra-brut"> Extra Brut</label>
+          <label><input type="checkbox" value="filter-dosage-brut"> Brut</label>
+          <label><input type="checkbox" value="filter-dosage-demi-sec"> Demi Sec</label>
+          <label><input type="checkbox" value="filter-dosage-doux"> Doux</label>
+        </div>
+      </details>
+
+      <details class="oc-filter-group">
+        <summary>Type</summary>
+        <div class="oc-filter-group__content" data-filter-group="type">
+          <label><input type="checkbox" value="filter-type-blanc-de-blancs"> Blanc de Blancs</label>
+          <label><input type="checkbox" value="filter-type-blanc-de-noirs"> Blanc de Noirs</label>
+          <label><input type="checkbox" value="filter-type-rose"> Rosé</label>
+          <label><input type="checkbox" value="filter-type-vintage"> Vintage</label>
+          <label><input type="checkbox" value="filter-type-blend"> Blend</label>
+        </div>
+      </details>
+
+      <details class="oc-filter-group">
+        <summary>Regio</summary>
+        <div class="oc-filter-group__content" data-filter-group="regio">
+          <label><input type="checkbox" value="filter-regio-montagne-de-reims"> Montagne de Reims</label>
+          <label><input type="checkbox" value="filter-regio-vallee-de-la-marne"> Vallée de la Marne</label>
+          <label><input type="checkbox" value="filter-regio-cote-des-blancs"> Côte des Blancs</label>
+          <label><input type="checkbox" value="filter-regio-cote-des-bar"> Côte des Bar</label>
+        </div>
+      </details>
+
+      <details class="oc-filter-group">
+        <summary>Formaat</summary>
+        <div class="oc-filter-group__content" data-filter-group="formaat">
+          <label><input type="checkbox" value="filter-formaat-75cl"> Standaard (75 cl)</label>
+          <label><input type="checkbox" value="filter-formaat-magnum"> Magnum (1,5L)</label>
+          <label><input type="checkbox" value="filter-formaat-jeroboam"> Jeroboam (3L)</label>
+        </div>
+      </details>
+    </div>
+
+    <div class="oc-filter-actions">
+      <button type="button" class="btn btn-primary" data-oc-apply-filters>Filters toepassen</button>
+      <button type="button" class="btn btn-link" data-oc-reset-filters>Wis filters</button>
+    </div>
+  </div>
+{% endcapture %}
+
+{% if products_per_page == "all" %}
+  <section class="collection-section"{% if is_filter_collection %} data-oc-collection-filters{% endif %}>
+    <div class="container">
+      <div class="text-center">
+        <h1>{{ collection.title }}</h1>
+        <div class="description">
+          {% if collection.description != blank %}
+            {{ collection.description }}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center infos-top">
+        {% assign products_in_page = collection.products.size %}
+        <span class="small-content">
+          <span data-oc-visible-count>{{ products_in_page }}</span> product{% if products_in_page != 1 %}en{% endif %}
+        </span>
+
+        <form method="get" class="sort-by-form d-flex align-items-center">
+          <!-- <label for="SortBy">Sorteren op</label> -->
+          <select name="sort_by" id="SortBy" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option
+              value="Sorteren op"
+            >
+              Sorteren op
+            </option>
+            <option
+              value="best-selling"
+              {% if collection.sort_by == 'best-selling' %}
+                selected
+              {% endif %}
+            >
+              Best verkocht
+            </option>
+            <option
+              value="title-ascending"
+              {% if collection.sort_by == 'title-ascending' %}
+                selected
+              {% endif %}
+            >
+              Naam A–Z
+            </option>
+            <option
+              value="title-descending"
+              {% if collection.sort_by == 'title-descending' %}
+                selected
+              {% endif %}
+            >
+              Naam Z–A
+            </option>
+            <option
+              value="price-ascending"
+              {% if collection.sort_by == 'price-ascending' %}
+                selected
+              {% endif %}
+            >
+              Prijs laag–hoog
+            </option>
+            <option
+              value="price-descending"
+              {% if collection.sort_by == 'price-descending' %}
+                selected
+              {% endif %}
+            >
+              Prijs hoog–laag
+            </option>
+            <option
+              value="created-descending"
+              {% if collection.sort_by == 'created-descending' %}
+                selected
+              {% endif %}
+            >
+              Nieuwste
+            </option>
+            <option
+              value="created-ascending"
+              {% if collection.sort_by == 'created-ascending' %}
+                selected
+              {% endif %}
+            >
+              Oudste
+            </option>
+          </select>
+
+          {% unless is_filter_collection %}
+            <select name="products_per_page" class="form-select form-select-sm ms-2" onchange="this.form.submit()">
+              <option value="">Producten per pagina</option>
+              <option value="8" {% if products_per_page == '8' %}selected{% endif %}>8</option>
+              <option value="12" {% if products_per_page == '12' %}selected{% endif %}>12</option>
+              <option value="16" {% if products_per_page == '16' %}selected{% endif %}>16</option>
+              <option value="24" {% if products_per_page == '24' %}selected{% endif %}>24</option>
+              <option value="32" {% if products_per_page == '32' %}selected{% endif %}>32</option>
+              <option value="48" {% if products_per_page == '48' %}selected{% endif %}>48</option>
+              <option value="all" {% if products_per_page == 'all' %}selected{% endif %}>Alle</option>
+            </select>
+          {% endunless %}
+        </form>
+      </div>
+
+      {% if is_filter_collection %}
+        <div class="oc-mobile-filter-trigger-wrap d-md-none mb-3">
+          <button type="button" class="btn btn-outline-secondary w-100" data-oc-open-mobile-filters>Filteren</button>
+        </div>
+      {% endif %}
+
+      <div class="row">
+        {% if is_filter_collection %}
+          <aside class="col-md-3 d-none d-md-block">
+            {{ onlychamps_filters_markup }}
+          </aside>
+        {% endif %}
+
+        <div class="{% if is_filter_collection %}col-12 col-md-9{% else %}col-12{% endif %}">
+          <div class="row" data-oc-product-grid>
+            {% for product in collection.products %}
+              <div class="col-6 col-md-3" data-oc-product-card-wrapper>
+                <div
+                  class="product-card products-items text-center"
+                  data-oc-product-card
+                  data-price-cents="{{ product.price }}"
+                  data-tags="{{ product.tags | join: '|' | downcase | escape }}"
+                >
+              {% assign first_variant = product.variants.first %}
+              {% if first_variant.inventory_quantity == 0 and first_variant.inventory_policy == 'deny' %}
+                <div class="sold-out-badge">Uitverkocht</div>
+              {% endif %}
+              {% if product.featured_image != blank %}
+                <div class="product-image products-items">
+                  <a href="{{ product.url }}">
+                    <img
+                      src="{{ product.featured_image | image_url }}"
+                      alt="{{ product.title }}"
+                      class="img-fluid" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+                  </a>
+                </div>
+              {% endif %}
+              <!-- <div class="product-vendor">Champagnemaker</div> -->
+              <div class="product-title">
+                <a href="{{ product.url }}" class="text-decoration-none">{{ product.title }}</a>
+              </div>
+              <div class="product-price">
+                <span class="product-price__current">{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="product-price__compare">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+              <a
+                href="javascript:void(0);"
+                class="btn btn-primary add-to-cart-link"
+                data-variant-id="{{ product.variants.first.id }}"
+              >
+                In Winkelwagen
+              </a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="oc-no-results" data-oc-no-results hidden>Geen producten gevonden met deze filters.</div>
+        </div>
+      </div>
+
+      {% if is_filter_collection %}
+        <div class="oc-mobile-filters" data-oc-mobile-filters hidden>
+          <div class="oc-mobile-filters__backdrop" data-oc-close-mobile-filters></div>
+          <div class="oc-mobile-filters__drawer" role="dialog" aria-modal="true" aria-label="Filters">
+            <div class="oc-mobile-filters__header">
+              <h2>Filters</h2>
+              <button type="button" class="btn btn-link" data-oc-close-mobile-filters>Sluiten</button>
+            </div>
+            <div class="oc-mobile-filters__content">
+              {{ onlychamps_filters_markup }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% else %}
+{% paginate collection.products by products_per_page %}
+  <section class="collection-section">
+    <div class="container">
+      <div class="text-center">
+        <h1>{{ collection.title }}</h1>
+        <div class="description">
+          {% if collection.description != blank %}
+            {{ collection.description }}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center infos-top">
+        {% assign products_in_page = 0 %}
+        {% for product in collection.products %}
+          {% assign products_in_page = products_in_page | plus: 1 %}
+        {% endfor %}
+        <span class="small-content">
+          {{ products_in_page }} product{% if products_in_page != 1 %}en{% endif %}
+        </span>
+
+        <form method="get" class="sort-by-form d-flex align-items-center">
+          <!-- <label for="SortBy">Sorteren op</label> -->
+          <select name="sort_by" id="SortBy" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option
+              value="Sorteren op"
+            >
+              Sorteren op
+            </option>
+            <option
+              value="best-selling"
+              {% if collection.sort_by == 'best-selling' %}
+                selected
+              {% endif %}
+            >
+              Best verkocht
+            </option>
+            <option
+              value="title-ascending"
+              {% if collection.sort_by == 'title-ascending' %}
+                selected
+              {% endif %}
+            >
+              Naam A–Z
+            </option>
+            <option
+              value="title-descending"
+              {% if collection.sort_by == 'title-descending' %}
+                selected
+              {% endif %}
+            >
+              Naam Z–A
+            </option>
+            <option
+              value="price-ascending"
+              {% if collection.sort_by == 'price-ascending' %}
+                selected
+              {% endif %}
+            >
+              Prijs laag–hoog
+            </option>
+            <option
+              value="price-descending"
+              {% if collection.sort_by == 'price-descending' %}
+                selected
+              {% endif %}
+            >
+              Prijs hoog–laag
+            </option>
+            <option
+              value="created-descending"
+              {% if collection.sort_by == 'created-descending' %}
+                selected
+              {% endif %}
+            >
+              Nieuwste
+            </option>
+            <option
+              value="created-ascending"
+              {% if collection.sort_by == 'created-ascending' %}
+                selected
+              {% endif %}
+            >
+              Oudste
+            </option>
+          </select>
+
+          <select name="products_per_page" class="form-select form-select-sm ms-2" onchange="this.form.submit()">
+            <option value="">Producten per pagina</option>
+            <option value="8" {% if products_per_page == '8' %}selected{% endif %}>8</option>
+            <option value="12" {% if products_per_page == '12' %}selected{% endif %}>12</option>
+            <option value="16" {% if products_per_page == '16' %}selected{% endif %}>16</option>
+            <option value="24" {% if products_per_page == '24' %}selected{% endif %}>24</option>
+            <option value="32" {% if products_per_page == '32' %}selected{% endif %}>32</option>
+            <option value="48" {% if products_per_page == '48' %}selected{% endif %}>48</option>
+            <option value="all" {% if products_per_page == 'all' %}selected{% endif %}>Alle</option>
+          </select>
+        </form>
+      </div>
+
+      <div class="row">
+        {% for product in collection.products %}
+          <div class="col-6 col-md-3">
+            <div class="product-card products-items text-center">
+              {% assign first_variant = product.variants.first %}
+              {% if first_variant.inventory_quantity == 0 and first_variant.inventory_policy == 'deny' %}
+                <div class="sold-out-badge">Uitverkocht</div>
+              {% endif %}
+              {% if product.featured_image != blank %}
+                <div class="product-image products-items">
+                  <a href="{{ product.url }}">
+                    <img
+                      src="{{ product.featured_image | image_url }}"
+                      alt="{{ product.title }}"
+                      class="img-fluid" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+                  </a>
+                </div>
+              {% endif %}
+              <!-- <div class="product-vendor">Champagnemaker</div> -->
+              <div class="product-title">
+                <a href="{{ product.url }}" class="text-decoration-none">{{ product.title }}</a>
+              </div>
+              <div class="product-price">
+                <span class="product-price__current">{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="product-price__compare">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+              <a
+                href="javascript:void(0);"
+                class="btn btn-primary add-to-cart-link"
+                data-variant-id="{{ product.variants.first.id }}"
+              >
+                In Winkelwagen
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <nav class="pagination-nav d-flex justify-content-center">
+          <ul class="pagination">
+            <li class="page-item {% unless paginate.previous %}disabled{% endunless %}">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}" class="page-link svg left">
+              {% else %}
+                <span class="page-link svg left">
+              {% endif %}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M13.586 18.0141L7.879 12.3071L13.586 6.6001L15 8.0141L10.707 12.3071L15 16.6001L13.586 18.0141Z" fill="#1468A7"/>
+              </svg>
+              vorige pagina
+              {% if paginate.previous %}
+                </a>
+              {% else %}
+                </span>
+              {% endif %}
+            </li>
+
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <li class="page-item">
+                  <a href="{{ part.url }}" class="page-link">{{ part.title }}</a>
+                </li>
+              {% else %}
+                <li class="page-item {% if part.title == paginate.current_page %}active{% endif %}">
+                  <span class="page-link">{{ part.title }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+
+            <li class="page-item {% unless paginate.next %}disabled{% endunless %}">
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}" class="page-link svg right">
+              {% else %}
+                <span class="page-link svg right">
+              {% endif %}
+              volgende pagina
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M10.414 18.0141L16.121 12.3071L10.414 6.6001L9 8.0141L13.293 12.3071L9 16.6001L10.414 18.0141Z" fill="#1468A7"/>
+              </svg>
+              {% if paginate.next %}
+                </a>
+              {% else %}
+                </span>
+              {% endif %}
+            </li>
+          </ul>
+        </nav>
+      {% endif %}
+    </div>
+  </section>
+{% endpaginate %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Products Section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "select",
+      "id": "products_per_page",
+      "label": "Producten per pagina",
+      "options": [
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "12",
+          "label": "12"
+        },
+        {
+          "value": "16",
+          "label": "16"
+        },
+        {
+          "value": "24",
+          "label": "24"
+        },
+        {
+          "value": "32",
+          "label": "32"
+        },
+        {
+          "value": "48",
+          "label": "48"
+        },
+        {
+          "value": "all",
+          "label": "Alle"
+        }
+      ],
+      "default": "8"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products"
+    }
+  ]
+}
+{% endschema %}

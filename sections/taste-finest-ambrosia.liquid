@@ -1,0 +1,81 @@
+<section class="taste-finest-section">
+  <div class="container">
+    <div class="row align-items-lg-center">
+      <div class="col-md-6">
+        {% if section.settings.image != blank %}
+          <figure>
+            <img
+              src="{{ section.settings.image | image_url: width: 600 }}"
+              srcset="
+                {{ section.settings.image | image_url: width: 400 }} 400w,
+                {{ section.settings.image | image_url: width: 600 }} 600w,
+                {{ section.settings.image | image_url: width: 800 }} 800w
+              "
+              sizes="(max-width: 768px) 100vw, 600px"
+              alt="Taste the Finest Champagnes"
+              class="img-fluid"
+             
+              width="600"
+              height="716"
+            >
+          </figure>
+        {% endif %}
+      </div>
+
+      <div class="col-md-6">
+        <h2>
+          {{ section.settings.title }}
+        </h2>
+        <p class="text">{{ section.settings.text }}</p>
+        {% if section.settings.cta_text != blank and section.settings.cta_link != blank %}
+          <a href="{{ section.settings.cta_link }}" class="btn btn-primary">
+            {{ section.settings.cta_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Taste the Finest",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Taste the Finest Champagnes"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Discover unique flavors with a carefully curated tasting box. Perfect to find your favorite champagne!"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Order Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Taste the Finest Champagnes",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

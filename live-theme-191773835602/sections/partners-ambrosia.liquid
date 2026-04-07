@@ -1,0 +1,114 @@
+<section class="partners-section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div class="swiper partners-swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          {% if block.settings.logo != blank %}
+            <div class="swiper-slide d-flex justify-content-center align-items-center">
+              <figure>
+                <img
+                  src="{{ block.settings.logo | image_url: width: 300 }}"
+                  srcset="
+                    {{ block.settings.logo | image_url: width: 200 }} 200w,
+                    {{ block.settings.logo | image_url: width: 300 }} 300w
+                  "
+                  sizes="(max-width: 768px) 150px, 247px"
+                  alt="Partner Logo"
+                  class="img-fluid"
+                 
+                  width="247"
+                  height="120"
+                >
+              </figure>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="swiper-pagination d-none d-md-block mt-4"></div>
+
+      <div class="swiper-button-prev d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M13.586 17.414L7.879 11.707L13.586 6L15 7.414L10.707 11.707L15 16L13.586 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+      <div class="swiper-button-next d-block d-md-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M10.414 17.414L16.121 11.707L10.414 6L9 7.414L13.293 11.707L9 16L10.414 17.414Z" fill="#2A3942"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.partners-swiper', {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      spaceBetween: 30,
+      slidesPerView: 5,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1.6,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        992: {
+          slidesPerView: 5,
+          spaceBetween: 30,
+        },
+      },
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Partners Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Onze Partners"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "partner",
+      "name": "Partner Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Partner Logo"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Partners Section"
+    }
+  ]
+}
+{% endschema %}

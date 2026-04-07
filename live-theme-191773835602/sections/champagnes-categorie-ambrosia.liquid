@@ -1,0 +1,77 @@
+<section class="collections-grid-section">
+  <div class="container text-center">
+    {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.subtitle != blank %}
+      <p class="text">{{ section.settings.subtitle }}</p>
+    {% endif %}
+
+    <div class="row">
+      {% for block in section.blocks %}
+        {% if block.settings.collection != blank %}
+          <div class="col-6 col-md-3">
+            <div class="card border-0">
+              <a href="{{ block.settings.collection.url }}" class="img-link">
+                {% if block.settings.collection.image != blank %}
+                  <img
+                    src="{{ block.settings.collection.image | image_url }}"
+                    alt="{{ block.settings.collection.title }}"
+                    class="img-fluid" width="{{ block.settings.collection.image.width }}" height="{{ block.settings.collection.image.height }}">
+                {% endif %}
+              </a>
+              <a href="{{ block.settings.collection.url }}">
+                <div class="card-body p-0">
+                  <h6 class="card-title">{{ block.settings.collection.title }}</h6>
+                  {% if block.settings.collection.description != blank %}
+                    <p class="text">{{ block.settings.collection.description | strip_html | truncate: 100 }}</p>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections Grid Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Champagnes per Categorie"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Ontdek onze selectie champagnes, ingedeeld op stijl en type, perfect voor elke gelegenheid"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Collections Grid Section"
+    }
+  ]
+}
+{% endschema %}

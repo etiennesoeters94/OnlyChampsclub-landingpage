@@ -1,0 +1,222 @@
+{% if template == 'cart' %}
+<style>
+#ambrosia-upsell-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.50);
+    z-index: 9998;
+  }
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Zorgt ervoor dat de pagina niet horizontaal scrolt */
+}
+  #ambrosia-upsell-popup {
+    display: none;
+    position: fixed;
+    z-index: 9999999999;
+    left: 50%;
+    top: 128px;
+    transform: translateX(-50%);
+    background: #fae47a;
+    border-radius: 18px;
+    padding: 28px;
+    width: 92%;
+    max-width: 480px;
+    box-shadow: 0 15px 55px rgba(0,0,0,0.25);
+    font-family: inherit;
+    text-align: center;
+  }
+
+  #upsell-close-x {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 22px;
+    color: #1468a7;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  #ambrosia-upsell-popup h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #1468a7;
+  }
+
+  .upsell-items {
+    display: grid;
+    gap: 16px;
+  }
+
+  .upsell-card {
+    display: flex;
+    gap: 12px;
+    background: #f5ecdc;
+    border-radius: 12px;
+    padding: 12px;
+    align-items: center;
+  }
+
+  .upsell-card img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .upsell-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .upsell-info a {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1468a7;
+    text-decoration: none;
+    margin-bottom: 4px;
+  }
+
+  .upsell-info .price {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #000;
+  }
+
+  .upsell-info button {
+    background: #1468a7;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 480px) {
+    #ambrosia-upsell-popup {
+      padding: 22px;
+      width: 94%;
+      max-width: 94%;
+      border-radius: 14px;
+    }
+
+    #ambrosia-upsell-popup h2 {
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .upsell-items {
+      gap: 14px;
+    }
+
+    .upsell-card {
+      padding: 10px;
+      gap: 10px;
+    }
+
+    .upsell-card img {
+      width: 65px;
+      height: 65px;
+    }
+
+    .upsell-info a {
+      font-size: 14px;
+    }
+
+    .upsell-info .price {
+      font-size: 13px;
+    }
+
+    .upsell-info button {
+      padding: 9px 14px;
+      width: 100%;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div id="ambrosia-upsell-overlay"></div>
+
+<div id="ambrosia-upsell-popup">
+  <span id="upsell-close-x">✕</span>
+  <h2>Voor bij je champagne</h2>
+  <div class="upsell-items" id="upsell-products"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async function() {
+
+  if (window.location.pathname !== "/cart") return;
+
+  const cart = await fetch('/cart.js').then(r => r.json());
+
+  const hasChampagne = cart.items.some(item => 
+    item.product_type &&
+    item.product_type.toLowerCase().includes("champagne")
+  );
+
+  if (!hasChampagne) return;
+
+  const upsellProducts = [
+    "luxe-houten-champagnekist-gepersonaliseerd",
+    "sabreerpas",
+    "heidsieck-champagnekoeler",
+    "duval-champagnekoeler"
+  ];
+
+  const container = document.getElementById("upsell-products");
+
+  for (const handle of upsellProducts) {
+    try {
+      const res = await fetch(`/products/${handle}.js`);
+      const product = await res.json();
+
+      const div = document.createElement("div");
+      div.className = "upsell-card";
+
+      div.innerHTML = `
+        <img src="${product.images[0]}" alt="${product.title}">
+        <div class="upsell-info">
+          <a href="/products/${handle}">${product.title}</a>
+          <div class="price">€ ${(product.price / 100).toFixed(2)}</div>
+          <button onclick="addToCart(${product.variants[0].id})">
+            Toevoegen aan winkelwagen
+          </button>
+        </div>
+      `;
+      container.appendChild(div);
+
+    } catch(e) {
+      console.error("Kon product niet laden:", handle);
+    }
+  }
+
+  function showPopup() {
+    document.getElementById("ambrosia-upsell-popup").style.display = "block";
+    document.getElementById("ambrosia-upsell-overlay").style.display = "block";
+  }
+
+  window.addToCart = function(variantId) {
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ id: variantId, quantity: 1 })
+    })
+    .then(() => alert("Toegevoegd aan winkelwagen"))
+    .catch(err => console.error(err));
+  };
+
+  setTimeout(showPopup, 2000);
+
+  document.getElementById("upsell-close-x").onclick = function() {
+    document.getElementById("ambrosia-upsell-popup").style.display = "none";
+    document.getElementById("ambrosia-upsell-overlay").style.display = "none";
+  };
+});
+</script>
+{% endif %}

@@ -1,0 +1,629 @@
+{% comment %}
+  Hero nieuw
+  1 knop
+  Geen beeld achter sticky header
+  Alles instelbaar qua kleur en tekstgrootte in editor
+  Mobiel en desktop apart
+{% endcomment %}
+
+{% assign default_cta_link = 'https://www.onlychamps.nl/collections/online-champagne-kopen' %}
+{% assign cta_link = section.settings.cta_link %}
+{% if cta_link == blank %}
+  {% assign cta_link = default_cta_link %}
+{% endif %}
+
+<section
+  id="heroNieuw-{{ section.id }}"
+  class="heroNieuw"
+  style="
+    --heroBg: {{ section.settings.bg_color }};
+    --heroOverlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --heroPadY: {{ section.settings.padding_y }}px;
+    --heroMax: {{ section.settings.content_max_width }}px;
+
+    --bgPosD: 50% 15%;
+    --bgPosM: 50% 35%;
+
+    --kickerColor: {{ section.settings.kicker_color }};
+    --headingColor: {{ section.settings.heading_color }};
+    --bodyColor: {{ section.settings.body_color }};
+    --trustColor: {{ section.settings.trust_color }};
+
+    --kickerSizeD: {{ section.settings.kicker_size_desktop }}px;
+    --kickerSizeM: {{ section.settings.kicker_size_mobile }}px;
+
+    --headingSizeD: {{ section.settings.heading_size_desktop }}px;
+    --headingSizeM: {{ section.settings.heading_size_mobile }}px;
+
+    --bodySizeD: {{ section.settings.body_size_desktop }}px;
+    --bodySizeM: {{ section.settings.body_size_mobile }}px;
+
+    --trustSizeD: {{ section.settings.trust_size_desktop }}px;
+    --trustSizeM: {{ section.settings.trust_size_mobile }}px;
+
+    --btnFontD: {{ section.settings.btn_font_desktop }}px;
+    --btnFontM: {{ section.settings.btn_font_mobile }}px;
+    --btnPadY_D: {{ section.settings.btn_pad_y_desktop }}px;
+    --btnPadX_D: {{ section.settings.btn_pad_x_desktop }}px;
+    --btnPadY_M: {{ section.settings.btn_pad_y_mobile }}px;
+    --btnPadX_M: {{ section.settings.btn_pad_x_mobile }}px;
+
+    --outlineOn: {{ section.settings.text_outline_enabled }};
+    --outlineColor: {{ section.settings.text_outline_color }};
+    --outlineW_D: {{ section.settings.text_outline_width_desktop }}px;
+    --outlineW_M: {{ section.settings.text_outline_width_mobile }}px;
+
+    --heroHeaderSpacer: 0px;
+  "
+>
+  <div class="heroNieuw_stage">
+    <div class="heroNieuw_bg" aria-hidden="true">
+      {% if section.settings.bg_image != blank or section.settings.bg_image_mobile != blank %}
+        <picture>
+          {% if section.settings.bg_image_mobile != blank %}
+            <source
+              media="(max-width: 749px)"
+              srcset="
+                {{ section.settings.bg_image_mobile | image_url: width: 600 }} 600w,
+                {{ section.settings.bg_image_mobile | image_url: width: 900 }} 900w,
+                {{ section.settings.bg_image_mobile | image_url: width: 1200 }} 1200w
+              "
+              sizes="100vw"
+            >
+          {% endif %}
+
+          {% assign desktop_img = section.settings.bg_image | default: section.settings.bg_image_mobile %}
+
+          <img
+            class="heroNieuw_bgImg"
+            src="{{ desktop_img | image_url: width: 2400 }}"
+            srcset="
+              {{ desktop_img | image_url: width: 800 }} 800w,
+              {{ desktop_img | image_url: width: 1200 }} 1200w,
+              {{ desktop_img | image_url: width: 1600 }} 1600w,
+              {{ desktop_img | image_url: width: 2000 }} 2000w,
+              {{ desktop_img | image_url: width: 2400 }} 2400w
+            "
+            sizes="100vw"
+            alt="{{ desktop_img.alt | escape }}"
+            loading="lazy" width="{{ desktop_img.width }}" height="{{ desktop_img.height }}">
+        </picture>
+      {% else %}
+        <div class="heroNieuw_bgSolid"></div>
+      {% endif %}
+
+      <div class="heroNieuw_overlay"></div>
+    </div>
+
+    <div class="heroNieuw_inner page-width">
+      <div class="heroNieuw_content">
+        {% if section.settings.kicker != blank %}
+          <p class="heroNieuw_kicker">{{ section.settings.kicker | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h1 class="heroNieuw_heading">{{ section.settings.heading | escape }}</h1>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="heroNieuw_text rte">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        <div class="heroNieuw_ctaRow">
+          <a class="btn btn-primary heroNieuw_btn" href="{{ cta_link }}">
+            {{ section.settings.cta_label | escape }}
+          </a>
+        </div>
+
+        {% if section.settings.show_trust %}
+          <ul class="heroNieuw_trust">
+            {% if section.settings.trust_1 != blank %}
+              <li>{{ section.settings.trust_1 | escape }}</li>
+            {% endif %}
+            {% if section.settings.trust_2 != blank %}
+              <li>{{ section.settings.trust_2 | escape }}</li>
+            {% endif %}
+            {% if section.settings.trust_3 != blank %}
+              <li>{{ section.settings.trust_3 | escape }}</li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+        #heroNieuw-{{ section.id }}.heroNieuw {
+          position: relative;
+          background: #F1EDE1;
+          overflow: hidden;
+        }
+
+        /* Stage krijgt extra top padding alleen als er echt overlap is */
+        #heroNieuw-{{ section.id }} .heroNieuw_stage {
+          position: relative;
+          padding-top: calc(var(--heroPadY) + var(--heroHeaderSpacer));
+          padding-bottom: var(--heroPadY);
+        }
+
+        /* Achtergrond start onder de sticky header, nooit erachter */
+        #heroNieuw-{{ section.id }} .heroNieuw_bg {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: var(--heroHeaderSpacer);
+          z-index: 0;
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_bgImg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--bgPosD); /* desktop focus */
+      display: block;
+    }
+
+    @media (max-width: 749px) {
+      #heroNieuw-{{ section.id }} .heroNieuw_bgImg {
+        object-position: var(--bgPosM); /* mobiel focus, hoger zodat hoofden blijven */
+      }
+    }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_bgSolid {
+          width: 100%;
+          height: 100%;
+          background: var(--heroBg);
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, var(--heroOverlay));
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_inner {
+          position: relative;
+          z-index: 1;
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_content {
+          max-width: var(--heroMax);
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_ctaRow {
+          margin-top: 14px;
+        }
+
+        /* Typografie desktop */
+        #heroNieuw-{{ section.id }} .heroNieuw_kicker {
+          color: var(--kickerColor);
+          font-size: var(--kickerSizeD);
+          line-height: 1.2;
+          margin: 0 0 10px 0;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_heading {
+          color: var(--headingColor);
+          font-size: var(--headingSizeD);
+          line-height: 1.05;
+          margin: 0 0 14px 0;
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_text,
+        #heroNieuw-{{ section.id }} .heroNieuw_text * {
+          color: var(--bodyColor);
+          font-size: var(--bodySizeD);
+          line-height: 1.45;
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_trust,
+        #heroNieuw-{{ section.id }} .heroNieuw_trust li {
+          color: var(--trustColor);
+          font-size: var(--trustSizeD);
+          line-height: 1.3;
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_trust {
+          margin: 18px 0 0 0;
+          padding: 0;
+          list-style: none;
+          display: grid;
+          gap: 6px;
+        }
+
+        #heroNieuw-{{ section.id }} .heroNieuw_trust li::before {
+          content: "✓";
+          margin-right: 8px;
+        }
+
+        /* Knop sizing alleen in deze hero */
+        #heroNieuw-{{ section.id }} .heroNieuw_btn {
+          --bs-btn-font-size: var(--btnFontD);
+          --bs-btn-padding-y: var(--btnPadY_D);
+          --bs-btn-padding-x: var(--btnPadX_D);
+
+          font-size: var(--btnFontD);
+          padding: var(--btnPadY_D) var(--btnPadX_D);
+          line-height: 1.1;
+
+          width: fit-content;
+          max-width: 100%;
+          height: auto;
+
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Outline voor leesbaarheid */
+        #heroNieuw-{{ section.id }} .heroNieuw_kicker,
+        #heroNieuw-{{ section.id }} .heroNieuw_heading,
+        #heroNieuw-{{ section.id }} .heroNieuw_text,
+        #heroNieuw-{{ section.id }} .heroNieuw_text *,
+        #heroNieuw-{{ section.id }} .heroNieuw_trust,
+        #heroNieuw-{{ section.id }} .heroNieuw_trust li {
+          -webkit-text-stroke: calc(var(--outlineOn) * var(--outlineW_D)) var(--outlineColor);
+          text-shadow:
+            var(--outlineW_D) 0 0 var(--outlineColor),
+            calc(var(--outlineW_D) * -1) 0 0 var(--outlineColor),
+            0 var(--outlineW_D) 0 var(--outlineColor),
+            0 calc(var(--outlineW_D) * -1) 0 var(--outlineColor),
+            var(--outlineW_D) var(--outlineW_D) 0 var(--outlineColor),
+            var(--outlineW_D) calc(var(--outlineW_D) * -1) 0 var(--outlineColor),
+            calc(var(--outlineW_D) * -1) var(--outlineW_D) 0 var(--outlineColor),
+            calc(var(--outlineW_D) * -1) calc(var(--outlineW_D) * -1) 0 var(--outlineColor);
+        }
+
+        @media (max-width: 749px) {
+          #heroNieuw-{{ section.id }} .heroNieuw_kicker { font-size: var(--kickerSizeM); }
+          #heroNieuw-{{ section.id }} .heroNieuw_heading { font-size: var(--headingSizeM); }
+
+          #heroNieuw-{{ section.id }} .heroNieuw_text,
+          #heroNieuw-{{ section.id }} .heroNieuw_text * {
+            font-size: var(--bodySizeM);
+          }
+
+          #heroNieuw-{{ section.id }} .heroNieuw_trust,
+          #heroNieuw-{{ section.id }} .heroNieuw_trust li {
+            font-size: var(--trustSizeM);
+          }
+
+          #heroNieuw-{{ section.id }} .heroNieuw_btn {
+            --bs-btn-font-size: var(--btnFontM);
+            --bs-btn-padding-y: var(--btnPadY_M);
+            --bs-btn-padding-x: var(--btnPadX_M);
+
+            font-size: var(--btnFontM);
+            padding: var(--btnPadY_M) var(--btnPadX_M);
+          }
+
+          #heroNieuw-{{ section.id }} .heroNieuw_kicker,
+          #heroNieuw-{{ section.id }} .heroNieuw_heading,
+          #heroNieuw-{{ section.id }} .heroNieuw_text,
+          #heroNieuw-{{ section.id }} .heroNieuw_text *,
+          #heroNieuw-{{ section.id }} .heroNieuw_trust,
+          #heroNieuw-{{ section.id }} .heroNieuw_trust li {
+            -webkit-text-stroke: calc(var(--outlineOn) * var(--outlineW_M)) var(--outlineColor);
+            text-shadow:
+              var(--outlineW_M) 0 0 var(--outlineColor),
+              calc(var(--outlineW_M) * -1) 0 0 var(--outlineColor),
+              0 var(--outlineW_M) 0 var(--outlineColor),
+              0 calc(var(--outlineW_M) * -1) 0 var(--outlineColor),
+              var(--outlineW_M) var(--outlineW_M) 0 var(--outlineColor),
+              var(--outlineW_M) calc(var(--outlineW_M) * -1) 0 var(--outlineColor),
+              calc(var(--outlineW_M) * -1) var(--outlineW_M) 0 var(--outlineColor),
+              calc(var(--outlineW_M) * -1) calc(var(--outlineW_M) * -1) 0 var(--outlineColor);
+          }
+        }
+  </style>
+
+  <script>
+    (() => {
+      const hero = document.getElementById('heroNieuw-{{ section.id }}');
+      if (!hero) return;
+
+      const getHeader = () =>
+        document.querySelector('#shopify-section-header') ||
+        document.querySelector('sticky-header') ||
+        document.querySelector('header') ||
+        document.querySelector('.header-wrapper') ||
+        document.querySelector('.site-header');
+
+      const header = getHeader();
+      if (!header) return;
+
+      const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+      const setHeights = () => {
+        const headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+
+        /* Global variable for potential other styling (optional to keep) */
+        document.documentElement.style.setProperty('--header-height', headerH + 'px');
+
+        /* Measure whether the hero is still sliding under the header and set the spacer safely */
+        const heroRect = hero.getBoundingClientRect();
+
+        // Only compute overlap when the hero is actually near the top/viewport.
+        // This prevents huge spacer values when you're far down the page (heroRect.top becomes very negative).
+        let spacer = 0;
+
+        // heroRect.bottom > 0 => hero is not completely above the viewport
+        // heroRect.top < headerH => hero intersects the header area
+        if (heroRect.bottom > 0 && heroRect.top < headerH) {
+          spacer = headerH - heroRect.top;
+          spacer = clamp(spacer, 0, headerH); // never larger than the header itself
+        }
+
+        hero.style.setProperty('--heroHeaderSpacer', spacer + 'px');
+      };
+
+      const updateHeaderTransparency = () => {
+        const headerH = header.getBoundingClientRect().height || 0;
+        const heroRect = hero.getBoundingClientRect();
+
+        /* Condition to make header transparent:
+         - we are (roughly) near the top of the page (not heavily scrolled),
+         - and the hero starts (partially) where the header sits */
+        const nearTop = window.scrollY < headerH + 10;
+        const heroUnderHeader = heroRect.top <= headerH + 4;
+
+        if (nearTop && heroUnderHeader) {
+          header.classList.add('hero-is-overlapping');
+        } else {
+          header.classList.remove('hero-is-overlapping');
+        }
+      };
+
+      // rAF throttling to avoid resize/scroll spam on mobile (address bar show/hide triggers resize)
+      let raf = null;
+      const schedule = () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = null;
+          setHeights();
+          updateHeaderTransparency();
+        });
+      };
+
+      // initialization
+      schedule();
+
+      // events
+      window.addEventListener('resize', schedule, { passive: true });
+      window.addEventListener('load', schedule);
+      window.addEventListener(
+        'scroll',
+        () => {
+          // We only need transparency on scroll, but keeping this separated avoids unnecessary layout reads
+          updateHeaderTransparency();
+        },
+        { passive: true }
+      );
+
+      document.addEventListener('shopify:section:load', schedule);
+      document.addEventListener('shopify:section:select', schedule);
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Hero nieuw",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "image_picker", "id": "bg_image_mobile", "label": "Achtergrond afbeelding mobiel" },
+
+    { "type": "image_picker", "id": "bg_image", "label": "Achtergrond afbeelding" },
+    { "type": "color", "id": "bg_color", "label": "Achtergrond kleur", "default": "#0b0b0b" },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay donkerte",
+      "min": 0,
+      "max": 85,
+      "step": 5,
+      "default": 45
+    },
+
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Max breedte content",
+      "min": 420,
+      "max": 1000,
+      "step": 20,
+      "default": 640
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Verticale padding",
+      "min": 30,
+      "max": 160,
+      "step": 10,
+      "default": 90
+    },
+
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "OnlyChamps" },
+    { "type": "text", "id": "heading", "label": "Kop", "default": "Alle champagnes, direct van kleine huizen" },
+    { "type": "richtext", "id": "text", "label": "Tekst", "default": "<p>Kies je stijl en bestel vandaag nog.</p>" },
+
+    { "type": "text", "id": "cta_label", "label": "Knop tekst", "default": "Shop nu" },
+    { "type": "url", "id": "cta_link", "label": "Knop link" },
+
+    { "type": "checkbox", "id": "show_trust", "label": "Toon trust bullets", "default": true },
+    { "type": "text", "id": "trust_1", "label": "Trust bullet 1", "default": "Kleine champagnehuizen" },
+    { "type": "text", "id": "trust_2", "label": "Trust bullet 2", "default": "Snel en veilig verzonden" },
+    { "type": "text", "id": "trust_3", "label": "Trust bullet 3", "default": "Premium selectie" },
+
+    { "type": "header", "content": "Kleuren" },
+    { "type": "color", "id": "kicker_color", "label": "Kicker kleur", "default": "#ffffff" },
+    { "type": "color", "id": "heading_color", "label": "Kop kleur", "default": "#ffffff" },
+    { "type": "color", "id": "body_color", "label": "Tekst kleur", "default": "#ffffff" },
+    { "type": "color", "id": "trust_color", "label": "Trust bullets kleur", "default": "#ffffff" },
+
+    { "type": "header", "content": "Tekstgroottes desktop" },
+    {
+      "type": "range",
+      "id": "kicker_size_desktop",
+      "label": "Kicker grootte desktop",
+      "min": 10,
+      "max": 26,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Kop grootte desktop",
+      "min": 26,
+      "max": 80,
+      "step": 1,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "body_size_desktop",
+      "label": "Tekst grootte desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "trust_size_desktop",
+      "label": "Trust bullets grootte desktop",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "default": 14
+    },
+
+    { "type": "header", "content": "Tekstgroottes mobiel" },
+    {
+      "type": "range",
+      "id": "kicker_size_mobile",
+      "label": "Kicker grootte mobiel",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Kop grootte mobiel",
+      "min": 20,
+      "max": 52,
+      "step": 1,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "body_size_mobile",
+      "label": "Tekst grootte mobiel",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "trust_size_mobile",
+      "label": "Trust bullets grootte mobiel",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 12
+    },
+
+    { "type": "header", "content": "Knop grootte desktop" },
+    {
+      "type": "range",
+      "id": "btn_font_desktop",
+      "label": "Knop tekstgrootte desktop",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "btn_pad_y_desktop",
+      "label": "Knop padding Y desktop",
+      "min": 4,
+      "max": 18,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "btn_pad_x_desktop",
+      "label": "Knop padding X desktop",
+      "min": 6,
+      "max": 28,
+      "step": 1,
+      "default": 12
+    },
+
+    { "type": "header", "content": "Knop grootte mobiel" },
+    {
+      "type": "range",
+      "id": "btn_font_mobile",
+      "label": "Knop tekstgrootte mobiel",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "btn_pad_y_mobile",
+      "label": "Knop padding Y mobiel",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "btn_pad_x_mobile",
+      "label": "Knop padding X mobiel",
+      "min": 6,
+      "max": 26,
+      "step": 1,
+      "default": 11
+    },
+
+    { "type": "header", "content": "Tekst outline" },
+    { "type": "checkbox", "id": "text_outline_enabled", "label": "Outline aan", "default": true },
+    { "type": "color", "id": "text_outline_color", "label": "Outline kleur", "default": "#000000" },
+    {
+      "type": "range",
+      "id": "text_outline_width_desktop",
+      "label": "Outline dikte desktop",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "text_outline_width_mobile",
+      "label": "Outline dikte mobiel",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    }
+  ],
+  "presets": [{ "name": "Hero nieuw" }]
+}
+{% endschema %}

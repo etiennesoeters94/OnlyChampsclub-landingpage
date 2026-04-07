@@ -1,0 +1,135 @@
+{% assign search_query = search.terms %}
+<section class="section-results-search">
+  <div class="container">
+    {% if search.results_count > 0 %}
+      <h1 class="text-center">Zoekresultaten voor “{{ search_query }}”</h1>
+
+      {% paginate search.results by 20 %}
+        {% assign visible_products = 0 %}
+
+        {%- for item in search.results -%}
+          {% if item.object_type == 'product' %}
+            {% assign visible_products = visible_products | plus: 1 %}
+          {% endif %}
+        {%- endfor -%}
+
+        <div class="d-flex justify-content-between align-items-center infos-top mb-3">
+          <span class="small-content">
+            {{ visible_products }} product{% if visible_products != 1 %}en{% endif %}
+          </span>
+        </div>
+
+        <div class="row">
+          {% assign count = 0 %}
+          {% for item in search.results %}
+            {% if item.object_type == 'product' %}
+              {% assign count = count | plus: 1 %}
+              {% if count <= 8 %}
+                <div class="col-6 col-md-3 mb-4">
+                  <div class="product-card products-items text-center">
+                    {% if item.featured_image %}
+                      <div class="product-image products-items">
+                        <a href="{{ item.url }}">
+                          <img
+                            src="{{ item.featured_image | image_url }}"
+                            alt="{{ item.title }}"
+                            class="img-fluid" width="{{ item.featured_image.width }}" height="{{ item.featured_image.height }}">
+                        </a>
+                      </div>
+                    {% endif %}
+                    <!-- <div class="product-vendor">Champagnemaker</div> -->
+                    <div class="product-title">
+                      <a href="{{ item.url }}" class="text-decoration-none">{{ item.title }}</a>
+                    </div>
+
+                    {% if item.price > 0 %}
+                      <div class="product-price">
+                        {{ item.price | money }}
+                      </div>
+                      <a
+                        href="javascript:void(0);"
+                        class="btn btn-primary mt-2 add-to-cart-link"
+                        data-variant-id="{{ item.variants.first.id }}"
+                      >
+                        In Winkelwagen
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          <nav class="pagination-nav d-flex justify-content-center">
+            <ul class="pagination">
+              <li class="page-item {% unless paginate.previous %}disabled{% endunless %}">
+                {% if paginate.previous %}
+                  <a href="{{ paginate.previous.url }}" class="page-link svg left">
+                {% else %}
+                  <span class="page-link svg left">
+                {% endif %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M13.586 18.0141L7.879 12.3071L13.586 6.6001L15 8.0141L10.707 12.3071L15 16.6001L13.586 18.0141Z" fill="#1468A7"/>
+                </svg>
+                vorige pagina
+                {% if paginate.previous %}
+                  </a>
+                {% else %}
+                  </span>
+                {% endif %}
+              </li>
+
+              {% for part in paginate.parts %}
+                {% if part.is_link %}
+                  <li class="page-item">
+                    <a href="{{ part.url }}" class="page-link">{{ part.title }}</a>
+                  </li>
+                {% else %}
+                  <li class="page-item {% if part.title == paginate.current_page %}active{% endif %}">
+                    <span class="page-link">{{ part.title }}</span>
+                  </li>
+                {% endif %}
+              {% endfor %}
+
+              <li class="page-item {% unless paginate.next %}disabled{% endunless %}">
+                {% if paginate.next %}
+                  <a href="{{ paginate.next.url }}" class="page-link svg right">
+                {% else %}
+                  <span class="page-link svg right">
+                {% endif %}
+                volgende pagina
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M10.414 18.0141L16.121 12.3071L10.414 6.6001L9 8.0141L13.293 12.3071L9 16.6001L10.414 18.0141Z" fill="#1468A7"/>
+                </svg>
+                {% if paginate.next %}
+                  </a>
+                {% else %}
+                  </span>
+                {% endif %}
+              </li>
+            </ul>
+          </nav>
+        {% endif %}
+      {% endpaginate %}
+    {% else %}
+      <h2 class="mb-4">Geen zoekresultaten voor “{{ search_query }}”</h2>
+      <p>Probeer een andere zoekterm.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search Results",
+  "tag": "section",
+  "class": "search-results-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Search Results"
+    }
+  ]
+}
+{% endschema %}

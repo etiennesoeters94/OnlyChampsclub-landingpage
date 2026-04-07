@@ -1,0 +1,85 @@
+<section class="bottom-green-section">
+  <div class="container text-center position-relative">
+    <div class="d-none d-md-none justify-content-center flex-wrap box-instagram">
+      {% for block in section.blocks %}
+        {% if block.settings.photo != blank %}
+          <figure>
+            <img
+              src="{{ block.settings.photo | image_url }}"
+              alt="Instagram Photo"
+              class="img-fluid" width="{{ block.settings.photo.width }}" height="{{ block.settings.photo.height }}">
+          </figure>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="box-green">
+      {% if section.settings.title != blank %}
+        <h3>{{ section.settings.title }}</h3>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <p class="text">{{ section.settings.subtitle }}</p>
+      {% endif %}
+
+      {% if section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="btn btn-primary" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.4444 2.33984H7.55556C4.48731 2.33984 2 4.82715 2 7.8954V16.7843C2 19.8525 4.48731 22.3398 7.55556 22.3398H16.4444C19.5127 22.3398 22 19.8525 22 16.7843V7.8954C22 4.82715 19.5127 2.33984 16.4444 2.33984ZM20.0556 16.7843C20.0494 18.7761 18.4362 20.3893 16.4444 20.3954H7.55556C5.56372 20.3893 3.95054 18.7761 3.94444 16.7843V7.8954C3.95054 5.90357 5.56372 4.29039 7.55556 4.28429H16.4444C18.4362 4.29039 20.0494 5.90357 20.0556 7.8954V16.7843ZM17.2778 8.17318C17.8914 8.17318 18.3889 7.67571 18.3889 7.06207C18.3889 6.44842 17.8914 5.95095 17.2778 5.95095C16.6641 5.95095 16.1667 6.44842 16.1667 7.06207C16.1667 7.67571 16.6641 8.17318 17.2778 8.17318ZM12 7.33984C9.23858 7.33984 7 9.57842 7 12.3398C7 15.1013 9.23858 17.3398 12 17.3398C14.7614 17.3398 17 15.1013 17 12.3398C17.003 11.0128 16.4771 9.73937 15.5388 8.80104C14.6004 7.86272 13.327 7.33689 12 7.33984ZM8.94444 12.3398C8.94444 14.0274 10.3124 15.3954 12 15.3954C13.6876 15.3954 15.0556 14.0274 15.0556 12.3398C15.0556 10.6523 13.6876 9.28429 12 9.28429C10.3124 9.28429 8.94444 10.6523 8.94444 12.3398Z" fill="white"/>
+          </svg>
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Laat je inspireren door onze Instagram"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Ontdek de mooiste champagne momenten en exclusieve updates. Volg ons en deel jouw ervaring"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Volg Ons op Instagram"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Instagram Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Instagram Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Instagram Section"
+    }
+  ]
+}
+{% endschema %}

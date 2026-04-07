@@ -1,0 +1,19 @@
+{
+  "name": "onlychamps-club-landing",
+  "version": "1.0.0",
+  "description": "OnlyChamps Club landing page with Shopify integration",
+  "main": "api/onlychamps-club-signup.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "npm run build:theme",
+    "build:theme": "echo 'Theme built (Shopify handles theme assets)'",
+    "test": "echo 'Add tests here'"
+  },
+  "keywords": ["shopify", "signup", "vercel"],
+  "author": "OnlyChamps",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": "18.x || 20.x"
+  }
+}

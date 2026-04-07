@@ -1,0 +1,605 @@
+{% if customer %}
+  <section class="account-details-section">
+    <div class="container">
+      <h1 class="d-none d-lg-block">Mijn Account</h1>
+      <div class="account-wrapper">
+        <!-- Menu lateral -->
+        <div class="account-menu">
+          <button class="tab-link active" data-tab="orders">Bestellingen</button>
+          <button class="tab-link" data-tab="addresses">Adressen</button>
+          {% if customer %}
+            <a href="{{ routes.account_logout_url }}" class="logout">Uitloggen</a>
+          {% endif %}
+        </div>
+        <h1 class="d-block d-lg-none">Mijn Account</h1>
+        <!-- Conteúdo -->
+        <div class="account-content">
+          <!-- Pedidos -->
+          <div id="orders" class="tab-content active">
+            <h5>Bestellingen</h5>
+            <div class="table-wrapper d-none d-md-block">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th>Datum</th>
+                    <th>Bestelnummer</th>
+                    <th>Totaalbedrag</th>
+                    <th>Bestelstatus</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if customer and customer.orders_count > 0 %}
+                    {% paginate customer.orders by 20 %}
+                      {% for order in customer.orders %}
+                        <tr>
+                          <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
+                          <td>{{ order.name }}</td>
+                          <td>{{ order.total_price | money }}</td>
+                          <td>
+                            {% case order.fulfillment_status %}
+                              {% when 'fulfilled' %}
+                                Succesvol voltooid
+                              {% when 'partial' %}
+                                Gedeeltelijk voltooid
+                              {% when 'unfulfilled' %}
+                                Onderweg
+                              {% else %}
+                                Onbekend
+                            {% endcase %}
+                          </td>
+                          <td>
+                            <a
+                              href="https://onlychamps.nl/apps/download-pdf/orders/731e728847dbc161b7fb/{{ order.id | times: 8912 }}/{{ order.name | handleize }}.pdf"
+                              target="_blank"
+                              class="download-link"
+                              rel="noopener"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="25"
+                                viewBox="0 0 20 25"
+                                fill="none"
+                              >
+                                <path d="M18.3876 23.8995H1.61242C1.27419 23.8995 1 23.6258 1 23.2881V16.7959H19V23.2881C19 23.6258 18.7258 23.8995 18.3876 23.8995Z" fill="#F26336"/>
+                                <path d="M13.7612 1.09961H1.61242C1.27419 1.09961 1 1.37331 1 1.9044V23.4818C1 23.6259 1.27419 23.8996 1.61242 23.8996H18.3876C18.7258 23.8996 19 23.6259 19 23.4818V6.52256C19 6.23173 18.9611 6.13813 18.8924 6.06918L14.0215 1.207C13.9525 1.13847 13.8587 1.09961 13.7612 1.09961Z" stroke="#2A3942" stroke-width="1.5" stroke-linejoin="round"/>
+                                <path d="M13.5996 1.09961V6.49961H18.9996" stroke="#2A3942" stroke-width="1.5" stroke-linejoin="round"/>
+                                <path d="M6.44761 15.0244C6.30194 15.0244 6.16212 14.9772 6.04282 14.8882C5.60705 14.5619 5.54845 14.1988 5.57608 13.9514C5.65226 13.2711 6.49491 12.5591 8.08143 11.8337C8.71101 10.4564 9.31003 8.75951 9.6671 7.34172C9.24933 6.43414 8.84329 5.25661 9.13924 4.5659C9.24305 4.32396 9.3724 4.13843 9.61394 4.0582C9.70938 4.02644 9.9505 3.98633 10.0392 3.98633C10.2502 3.98633 10.4357 4.25752 10.5671 4.42466C10.6906 4.58177 10.9706 4.91481 10.411 7.26692C10.9752 8.43024 11.7748 9.61528 12.5408 10.4268C13.0896 10.3277 13.5618 10.2772 13.9465 10.2772C14.602 10.2772 14.9993 10.4297 15.1613 10.7439C15.2952 11.0038 15.2404 11.3076 14.998 11.6465C14.7649 11.972 14.4434 12.1442 14.0687 12.1442C13.5597 12.1442 12.967 11.8232 12.306 11.1893C11.1184 11.4371 9.73156 11.8792 8.61054 12.3685C8.26059 13.1098 7.92529 13.7069 7.61301 14.1449C7.18394 14.7445 6.81389 15.0244 6.44761 15.0244ZM7.56194 12.8825C6.66738 13.3844 6.30277 13.7968 6.2764 14.0291C6.27222 14.0675 6.26091 14.1687 6.45682 14.3183C6.51919 14.2986 6.88338 14.1327 7.56194 12.8825ZM13.2704 11.0264C13.6116 11.2884 13.6949 11.4208 13.918 11.4208C14.016 11.4208 14.2952 11.4167 14.4245 11.2366C14.4869 11.1492 14.5112 11.0932 14.5208 11.0632C14.4693 11.036 14.4011 10.9808 14.029 10.9808C13.8176 10.9813 13.5518 10.9904 13.2704 11.0264ZM10.1435 8.27605C9.84417 9.30983 9.44901 10.4259 9.02412 11.4367C9.89901 11.0978 10.8501 10.802 11.7434 10.5926C11.1783 9.93745 10.6136 9.11929 10.1435 8.27605ZM9.88938 4.74014C9.84836 4.75393 9.33264 5.47432 9.92957 6.08397C10.3268 5.2002 9.90738 4.73429 9.88938 4.74014Z" fill="#F26336"/>
+                              </svg>
+                              <span>Download as PDF</span>
+                            </a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    {% endpaginate %}
+                  {% else %}
+                    <tr>
+                      <td colspan="5">Je hebt nog geen bestellingen geplaatst.</td>
+                    </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="orders-mobile d-md-none">
+              {% if customer and customer.orders_count > 0 %}
+                {% paginate customer.orders by 20 %}
+                  {% for order in customer.orders %}
+                    <div class="order-card">
+                      <p><strong>Datum:</strong> {{ order.created_at | date: '%b %d, %Y' }}</p>
+                      <p><strong>Bestelnummer:</strong> {{ order.name }}</p>
+                      <p><strong>Totaalbedrag:</strong> {{ order.total_price | money }}</p>
+                      <p>
+                        <strong>Bestelstatus:</strong>
+                        {% case order.fulfillment_status %}
+                          {% when 'fulfilled' %}
+                            Succesvol voltooid
+                          {% when 'partial' %}
+                            Gedeeltelijk voltooid
+                          {% when 'unfulfilled' %}
+                            Onderweg
+                          {% else %}
+                            Onbekend
+                        {% endcase %}
+                      </p>
+                      <a
+                        href="https://onlychamps.nl/apps/download-pdf/orders/731e728847dbc161b7fb/{{ order.id | times: 8912 }}/{{ order.name | handleize }}.pdf"
+                        target="_blank"
+                        class="download-link"
+                        rel="noopener"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 25" fill="none">
+                          <path d="M18.3876 23.8995H1.61242C1.27419 23.8995 1 23.6258 1 23.2881V16.7959H19V23.2881C19 23.6258 18.7258 23.8995 18.3876 23.8995Z" fill="#F26336"/>
+                          <path d="M13.7612 1.09961H1.61242C1.27419 1.09961 1 1.37331 1 1.9044V23.4818C1 23.6259 1.27419 23.8996 1.61242 23.8996H18.3876C18.7258 23.8996 19 23.6259 19 23.4818V6.52256C19 6.23173 18.9611 6.13813 18.8924 6.06918L14.0215 1.207C13.9525 1.13847 13.8587 1.09961 13.7612 1.09961Z" stroke="#2A3942" stroke-width="1.5" stroke-linejoin="round"/>
+                          <path d="M13.5996 1.09961V6.49961H18.9996" stroke="#2A3942" stroke-width="1.5" stroke-linejoin="round"/>
+                          <path d="M6.44761 15.0244C6.30194 15.0244 6.16212 14.9772 6.04282 14.8882C5.60705 14.5619 5.54845 14.1988 5.57608 13.9514C5.65226 13.2711 6.49491 12.5591 8.08143 11.8337C8.71101 10.4564 9.31003 8.75951 9.6671 7.34172C9.24933 6.43414 8.84329 5.25661 9.13924 4.5659C9.24305 4.32396 9.3724 4.13843 9.61394 4.0582C9.70938 4.02644 9.9505 3.98633 10.0392 3.98633C10.2502 3.98633 10.4357 4.25752 10.5671 4.42466C10.6906 4.58177 10.9706 4.91481 10.411 7.26692C10.9752 8.43024 11.7748 9.61528 12.5408 10.4268C13.0896 10.3277 13.5618 10.2772 13.9465 10.2772C14.602 10.2772 14.9993 10.4297 15.1613 10.7439C15.2952 11.0038 15.2404 11.3076 14.998 11.6465C14.7649 11.972 14.4434 12.1442 14.0687 12.1442C13.5597 12.1442 12.967 11.8232 12.306 11.1893C11.1184 11.4371 9.73156 11.8792 8.61054 12.3685C8.26059 13.1098 7.92529 13.7069 7.61301 14.1449C7.18394 14.7445 6.81389 15.0244 6.44761 15.0244ZM7.56194 12.8825C6.66738 13.3844 6.30277 13.7968 6.2764 14.0291C6.27222 14.0675 6.26091 14.1687 6.45682 14.3183C6.51919 14.2986 6.88338 14.1327 7.56194 12.8825ZM13.2704 11.0264C13.6116 11.2884 13.6949 11.4208 13.918 11.4208C14.016 11.4208 14.2952 11.4167 14.4245 11.2366C14.4869 11.1492 14.5112 11.0932 14.5208 11.0632C14.4693 11.036 14.4011 10.9808 14.029 10.9808C13.8176 10.9813 13.5518 10.9904 13.2704 11.0264ZM10.1435 8.27605C9.84417 9.30983 9.44901 10.4259 9.02412 11.4367C9.89901 11.0978 10.8501 10.802 11.7434 10.5926C11.1783 9.93745 10.6136 9.11929 10.1435 8.27605ZM9.88938 4.74014C9.84836 4.75393 9.33264 5.47432 9.92957 6.08397C10.3268 5.2002 9.90738 4.73429 9.88938 4.74014Z" fill="#F26336"/>
+                        </svg>
+                        <span>Download as PDF</span>
+                      </a>
+                    </div>
+                  {% endfor %}
+                {% endpaginate %}
+              {% else %}
+                <div class="order-card">
+                  <p>Je hebt nog geen bestellingen geplaatst.</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Endereços -->
+          <div id="addresses" class="tab-content">
+            <div class="d-block d-md-flex justify-content-between align-items-center items-address">
+              <h5>Adressen</h5>
+              <button class="new-address-btn" data-bs-toggle="modal" data-bs-target="#modalAddAddress">
+                Nieuw adres toevoegen
+              </button>
+            </div>
+            <div class="table-wrapper d-none d-md-block">
+              <table class="addresses-table">
+                <thead>
+                  <tr>
+                    <th>Adressen</th>
+                    <th>Postcode</th>
+                    <th>Stad/Land</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for address in customer.addresses %}
+                    <tr>
+                      <td>{{ address.address1 }}</td>
+                      <td>{{ address.zip }}</td>
+                      <td>
+                        {{ address.city }}
+                        {{ address.country }}
+                      </td>
+                      <td>
+                        <button
+                          data-bs-toggle="modal"
+                          data-bs-target="#modalEditAddress_{{ address.id }}"
+                          class="action-btn"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                          >
+                            <path d="M19.045 7.40088C19.423 7.02288 19.631 6.52088 19.631 5.98688C19.631 5.45288 19.423 4.95088 19.045 4.57288L17.459 2.98688C17.081 2.60888 16.579 2.40088 16.045 2.40088C15.511 2.40088 15.009 2.60888 14.632 2.98588L4 13.5849V17.9999H8.413L19.045 7.40088ZM16.045 4.40088L17.632 5.98588L16.042 7.56988L14.456 5.98488L16.045 4.40088ZM6 15.9999V14.4149L13.04 7.39688L14.626 8.98288L7.587 15.9999H6ZM4 19.9999H20V21.9999H4V19.9999Z" fill="#2A3942"/>
+                          </svg>
+                          <span>bewerking</span>
+                        </button>
+                        <td>
+                          <button class="action-btn delete-address-btn" data-address-id="{{ address.id }}">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                            >
+                              <path d="M5 20C5 20.5304 5.21071 21.0391 5.58579 21.4142C5.96086 21.7893 6.46957 22 7 22H17C17.5304 22 18.0391 21.7893 18.4142 21.4142C18.7893 21.0391 19 20.5304 19 20V8H21V6H17V4C17 3.46957 16.7893 2.96086 16.4142 2.58579C16.0391 2.21071 15.5304 2 15 2H9C8.46957 2 7.96086 2.21071 7.58579 2.58579C7.21071 2.96086 7 3.46957 7 4V6H3V8H5V20ZM9 4H15V6H9V4ZM17 8V20H7V8H17Z" fill="#2A3942"/>
+                              <path d="M9 10H11V18H9V10ZM13 10H15V18H13V10Z" fill="#2A3942"/>
+                            </svg>
+                            <span>verwijderen</span>
+                          </button>
+                        </td>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div class="address-mobile d-md-none">
+              {% for address in customer.addresses %}
+                <div class="address-card">
+                  <p><strong>Adressen:</strong> {{ address.address1 }}</p>
+                  <p><strong>Postcode:</strong> {{ address.zip }}</p>
+                  <p>
+                    <strong>Stad/Land:</strong>{{ address.city }}
+                    {{ address.country }}
+                  </p>
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalEditAddress_{{ address.id }}"
+                    class="action-btn"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path d="M19.045 7.40088C19.423 7.02288 19.631 6.52088 19.631 5.98688C19.631 5.45288 19.423 4.95088 19.045 4.57288L17.459 2.98688C17.081 2.60888 16.579 2.40088 16.045 2.40088C15.511 2.40088 15.009 2.60888 14.632 2.98588L4 13.5849V17.9999H8.413L19.045 7.40088ZM16.045 4.40088L17.632 5.98588L16.042 7.56988L14.456 5.98488L16.045 4.40088ZM6 15.9999V14.4149L13.04 7.39688L14.626 8.98288L7.587 15.9999H6ZM4 19.9999H20V21.9999H4V19.9999Z" fill="#2A3942"/>
+                    </svg>
+                    <span>bewerking</span>
+                  </button>
+                  <button class="action-btn delete-address-btn" data-address-id="{{ address.id }}">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path d="M5 20C5 20.5304 5.21071 21.0391 5.58579 21.4142C5.96086 21.7893 6.46957 22 7 22H17C17.5304 22 18.0391 21.7893 18.4142 21.4142C18.7893 21.0391 19 20.5304 19 20V8H21V6H17V4C17 3.46957 16.7893 2.96086 16.4142 2.58579C16.0391 2.21071 15.5304 2 15 2H9C8.46957 2 7.96086 2.21071 7.58579 2.58579C7.21071 2.96086 7 3.46957 7 4V6H3V8H5V20ZM9 4H15V6H9V4ZM17 8V20H7V8H17Z" fill="#2A3942"/>
+                      <path d="M9 10H11V18H9V10ZM13 10H15V18H13V10Z" fill="#2A3942"/>
+                    </svg>
+                    <span>verwijderen</span>
+                  </button>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% else %}
+  <p>Je moet ingelogd zijn om je account te bekijken.</p>
+{% endif %}
+<div class="modal fade" id="modalAddAddress" tabindex="-1" aria-labelledby="modalAddAddressLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalAddAddressLabel">Add new address</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+      </div>
+      <div class="modal-body">
+        {%- form 'customer_address',
+          customer.new_address,
+          aria-labelledBy: 'AddressNewHeading',
+          class: 'form-add-address'
+        -%}
+          <input type="hidden" name="form_type" value="customer_address">
+          <input type="hidden" name="utf8" value="✓">
+
+          <div class="field">
+            <select
+              id="AddressCountryNew"
+              name="address[country]"
+              data-default="{{ form.country }}"
+              autocomplete="country"
+              class="form-select"
+            >
+              {{ all_country_option_tags }}
+            </select>
+            <label for="AddressCountryNew" class="visually-hidden">Land</label>
+          </div>
+
+          <div class="field">
+            <input
+              type="text"
+              id="AddressCityNew"
+              name="address[city]"
+              value="{{ form.city }}"
+              autocomplete="address-level2"
+              placeholder="Stad"
+            >
+            <label for="AddressCityNew" class="visually-hidden">Stad</label>
+          </div>
+
+          <div class="field">
+            <input
+              type="text"
+              id="AddressFirstNameNew"
+              name="address[first_name]"
+              value="{{ form.first_name }}"
+              autocomplete="given-name"
+              placeholder="Voornaam"
+            >
+            <label for="AddressFirstNameNew" class="visually-hidden">Voornaam</label>
+          </div>
+
+          <div class="field">
+            <input
+              type="text"
+              id="AddressAddress1New"
+              name="address[address1]"
+              value="{{ form.address1 }}"
+              autocomplete="address-line1"
+              placeholder="Adressen"
+            >
+            <label for="AddressAddress1New" class="visually-hidden">Adressen</label>
+          </div>
+
+          <div class="field">
+            <input
+              type="text"
+              id="AddressZipNew"
+              name="address[zip]"
+              value="{{ form.zip }}"
+              autocomplete="postal-code"
+              placeholder="Postcode"
+            >
+            <label for="AddressZipNew" class="visually-hidden">Postcode</label>
+          </div>
+
+          <div class="d-flex justify-content-center buttons">
+            <button type="reset" class="btn btn-outline-primary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% for address in customer.addresses %}
+  <div
+    class="modal fade modal-edit-address"
+    id="modalEditAddress_{{ address.id }}"
+    tabindex="-1"
+    aria-labelledby="modalEditAddressLabel_{{ address.id }}"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalEditAddressLabel_{{ address.id }}">
+            {{ 'customer.addresses.edit_address' | t }}
+          </h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+        </div>
+        <div class="modal-body">
+          {%- form 'customer_address', address, target: 'hidden_iframe' -%}
+            <div class="field">
+              <select
+                id="AddressCountry_{{ form.id }}"
+                name="address[country]"
+                data-address-country-select
+                data-default="{{ form.country }}"
+                data-form-id="{{ form.id }}"
+                autocomplete="country"
+                class="form-select"
+              >
+                {{ all_country_option_tags }}
+              </select>
+              <label for="AddressCountry_{{ form.id }}" class="visually-hidden">Land</label>
+            </div>
+
+            <div class="field">
+              <input
+                type="text"
+                id="AddressCity_{{ form.id }}"
+                name="address[city]"
+                value="{{ form.city }}"
+                autocomplete="address-level2"
+                placeholder="Stad"
+              >
+              <label for="AddressCity_{{ form.id }}" class="visually-hidden">Stad</label>
+            </div>
+
+            <div class="field">
+              <input
+                type="text"
+                id="AddressFirstName_{{ form.id }}"
+                name="address[first_name]"
+                value="{{ form.first_name }}"
+                autocomplete="given-name"
+                placeholder="Voornaam"
+              >
+              <label for="AddressFirstName_{{ form.id }}" class="visually-hidden">Voornaam</label>
+            </div>
+
+            <div class="field">
+              <input
+                type="text"
+                id="AddressAddress1_{{ form.id }}"
+                name="address[address1]"
+                value="{{ form.address1 }}"
+                autocomplete="address-line1"
+                placeholder="Adressen"
+              >
+              <label for="AddressAddress1_{{ form.id }}" class="visually-hidden">Adressen</label>
+            </div>
+
+            <div class="field">
+              <input
+                type="text"
+                id="AddressZip_{{ form.id }}"
+                name="address[zip]"
+                value="{{ form.zip }}"
+                autocapitalize="characters"
+                autocomplete="postal-code"
+                placeholder="Postcode"
+              >
+              <label for="AddressZip_{{ form.id }}" class="visually-hidden">Postcode</label>
+            </div>
+
+            <div class="field d-none">
+              <input
+                type="text"
+                id="AddressLastName_{{ form.id }}"
+                name="address[last_name]"
+                value="{{ form.last_name }}"
+              >
+              <label for="AddressLastName_{{ form.id }}"></label>
+            </div>
+
+            <div class="field d-none">
+              <input
+                type="text"
+                id="AddressCompany_{{ form.id }}"
+                name="address[company]"
+                value="{{ form.company }}"
+              >
+              <label for="AddressCompany_{{ form.id }}"></label>
+            </div>
+
+            <div id="AddressProvinceContainer_{{ form.id }}" style="display:none;">
+              <label for="AddressProvince_{{ form.id }}" class="visually-hidden">Provincie</label>
+              <div class="select">
+                <select
+                  id="AddressProvince_{{ form.id }}"
+                  name="address[province]"
+                  data-default="{{ form.province }}"
+                  autocomplete="address-level1"
+                ></select>
+                <span class="svg-wrapper">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <input
+                type="tel"
+                id="AddressPhone_{{ form.id }}"
+                name="address[phone]"
+                value="{{ form.phone }}"
+                autocomplete="tel"
+                placeholder="Telefoon"
+              >
+              <label for="AddressPhone_{{ form.id }}" class="visually-hidden">Telefoon</label>
+            </div>
+
+            <div class="checkbox">
+              {{ form.set_as_default_checkbox }}
+              <label for="address_default_address_{{ form.id }}">Standaardadres</label>
+            </div>
+
+            <div class="d-flex justify-content-center buttons">
+              <button type="reset" class="btn btn-outline-primary">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+<iframe name="hidden_iframe" style="display:none;" onload="onAddressAdded()"></iframe>
+<iframe name="hidden_iframe" style="display:none;" onload="onAddressAddedOrEdited()"></iframe>
+<form id="delete-address-form" method="post" style="display: none;">
+  <input type="hidden" name="_method" value="delete">
+</form>
+
+<script>
+  function onAddressAddedOrEdited() {
+    sessionStorage.setItem('activateAddressesTab', '1');
+    location.reload();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const activateTab = sessionStorage.getItem('activateAddressesTab');
+    const tabToActivate = activateTab === '1' ? 'addresses' : 'orders';
+    sessionStorage.removeItem('activateAddressesTab');
+
+    document.querySelectorAll('.tab-link').forEach((btn) => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach((tab) => tab.classList.remove('active'));
+
+    const tabBtn = document.querySelector(`.tab-link[data-tab="${tabToActivate}"]`);
+    const tabContent = document.getElementById(tabToActivate);
+    if (tabBtn && tabContent) {
+      tabBtn.classList.add('active');
+      tabContent.classList.add('active');
+    }
+
+    document.querySelectorAll('.tab-link').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-link').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach((tab) => tab.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById(this.dataset.tab).classList.add('active');
+      });
+    });
+
+    const addForm = document.querySelector('.form-add-address');
+    if (addForm) {
+      addForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(addForm);
+
+        fetch(addForm.action, {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
+          body: formData,
+        })
+          .then((res) => {
+            if (res.ok || res.redirected) {
+              const modal = bootstrap.Modal.getInstance(document.getElementById('modalAddAddress'));
+              if (modal) modal.hide();
+              onAddressAddedOrEdited();
+            } else {
+              alert('Error adding address.');
+            }
+          })
+          .catch(() => alert('Network error while submitting form.'));
+      });
+    }
+
+    document.querySelectorAll('form[action*="/account/addresses/"]').forEach((editForm) => {
+      editForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(editForm);
+
+        fetch(editForm.action, {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
+          body: formData,
+        })
+          .then((res) => {
+            if (res.ok || res.redirected) {
+              const modalEl = editForm.closest('.modal');
+              const modal = bootstrap.Modal.getInstance(modalEl);
+              if (modal) modal.hide();
+              onAddressAddedOrEdited();
+            } else {
+              alert('Error editing address.');
+            }
+          })
+          .catch(() => alert('Network error while editing address.'));
+      });
+    });
+
+    document.querySelectorAll('.delete-address-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const addressId = this.dataset.addressId;
+        if (!addressId) return;
+
+        const confirmed = confirm('Weet u zeker dat u dit adres wilt verwijderen?');
+        if (!confirmed) return;
+
+        const form = document.getElementById('delete-address-form');
+        form.setAttribute('action', `/account/addresses/${addressId}`);
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
+          body: formData,
+        })
+          .then((res) => {
+            if (res.ok || res.redirected) {
+              sessionStorage.setItem('activateAddressesTab', '1');
+              location.reload();
+            } else {
+              alert('Error deleting address.');
+            }
+          })
+          .catch(() => alert('Network error while deleting address.'));
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Account Section",
+  "tag": "section",
+  "class": "account-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Account Section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,228 @@
+<section class="faq-categorized-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 d-none d-lg-block">
+        <h1>{{ page.title }}</h1>
+        <p class="text">{{ page.content | strip_html }}</p>
+      </div>
+      <div class="col-lg-3 sticky">
+        <div class="custom-select-wrapper d-block d-lg-none">
+          <select class="form-select faq-select" aria-label="Select category">
+            <option value="alle" selected>Alle</option>
+            {% assign used_categories = '' %}
+            {% for block in section.blocks %}
+              {% assign cat = block.settings.category | handleize %}
+              {% unless used_categories contains cat %}
+                <option value="{{ cat }}">{{ block.settings.category }}</option>
+                {% assign used_categories = used_categories | append: cat | append: ',' %}
+              {% endunless %}
+            {% endfor %}
+          </select>
+          <span class="select-icon">
+            <svg
+              class="arrow-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path d="M16 9L11.707 13.293L7.414 9L6 10.414L11.707 16.121L17.414 10.414L16 9Z" fill="#2A3942"/>
+            </svg>
+          </span>
+        </div>
+        <div class="col-12 d-block d-lg-none">
+          <h1>{{ page.title }}</h1>
+          <p class="text">{{ page.content | strip_html }}</p>
+        </div>
+        <ul class="nav flex-column faq-tabs d-none d-lg-block" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-category="alle" type="button">Alle</button>
+          </li>
+          {% assign used_categories = '' %}
+          {% for block in section.blocks %}
+            {% assign current_tab = block.settings.category | handleize %}
+            {% unless used_categories contains current_tab %}
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" data-category="{{ current_tab }}" type="button">
+                  {{ block.settings.category }}
+                </button>
+              </li>
+              {% assign used_categories = used_categories | append: current_tab | append: ',' %}
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="faq-category-content" data-category="alle" style="display: block;">
+          <div class="accordion" id="accordion-alle">
+            {% for block in section.blocks %}
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse-alle-{{ forloop.index }}"
+                    aria-expanded="false"
+                  >
+                    {{ block.settings.accordion_title }}
+                  </button>
+                </h3>
+                <div id="collapse-alle-{{ forloop.index }}" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    {{ block.settings.accordion_content }}
+
+                    {% if block.settings.cta_text and block.settings.cta_link %}
+                      <a href="{{ block.settings.cta_link }}" class="btn btn-link">
+                        {{- block.settings.cta_text -}}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {% assign handled = '' %}
+        {% for block in section.blocks %}
+          {% assign cat = block.settings.category | handleize %}
+          {% unless handled contains cat %}
+            <div class="faq-category-content" data-category="{{ cat }}" style="display: none;">
+              <div class="accordion" id="accordion-{{ cat }}">
+                {% for inner in section.blocks %}
+                  {% assign inner_cat = inner.settings.category | handleize %}
+                  {% if inner_cat == cat %}
+                    <div class="accordion-item">
+                      <h3 class="accordion-header">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse-{{ cat }}-{{ forloop.index }}"
+                          aria-expanded="false"
+                        >
+                          {{ inner.settings.accordion_title }}
+                        </button>
+                      </h3>
+                      <div id="collapse-{{ cat }}-{{ forloop.index }}" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                          {{ inner.settings.accordion_content }}
+                          {% if inner.settings.cta_text and inner.settings.cta_link %}
+                            <a href="{{ inner.settings.cta_link }}" class="btn btn-link">
+                              {{- inner.settings.cta_text -}}
+                            </a>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            {% assign handled = handled | append: cat | append: ',' %}
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for block in section.blocks %}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.accordion_title | strip_html | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ block.settings.accordion_content | strip_html | json }}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+  </script>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    const tabs = document.querySelectorAll('.faq-tabs .nav-link');
+    const select = document.querySelector('.faq-select');
+    const contents = document.querySelectorAll('.faq-category-content');
+
+    function showCategory(cat) {
+      contents.forEach((c) => {
+        c.style.display = c.getAttribute('data-category') === cat ? 'block' : 'none';
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        const cat = tab.getAttribute('data-category');
+        showCategory(cat);
+        if (select) select.value = cat;
+      });
+    });
+
+    if (select) {
+      select.addEventListener('change', (e) => {
+        const cat = e.target.value;
+        showCategory(cat);
+        tabs.forEach((t) => {
+          t.classList.toggle('active', t.getAttribute('data-category') === cat);
+        });
+      });
+    }
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "FAQ Categorized",
+  "max_blocks": 50,
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category (must match for grouping)"
+        },
+        {
+          "type": "text",
+          "id": "accordion_title",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "accordion_content",
+          "label": "Answer"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Link text (optional)"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "Link URL (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Categorized"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "onlychamps-club-signup",
+      "settings": {
+        "color_scheme": "",
+        "side_image": "shopify://shop_images/ChatGPT_Image_4_apr_2026_20_31_17.png",
+        "section_background_color": "#f5ecdc",
+        "card_background_color": "#ffffff",
+        "input_background_color": "#ffffff",
+        "heading_text_color": "#121212",
+        "body_text_color": "#606060",
+        "border_color": "#d9d9d9",
+        "button_background_color": "#1468a7",
+        "button_text_color": "#ffffff",
+        "overlay_color": "#121212",
+        "popup_background_color": "#fae47a",
+        "popup_heading_color": "#121212",
+        "popup_text_color": "#606060",
+        "popup_border_color": "#d9d9d9",
+        "kicker": "OnlyChamps Club",
+        "heading": "Word nu lid van OnlyChamps",
+        "subtext": "<p>Word nu lid en krijg als eerste toegang tot exclusieve drops, bijzondere verhalen uit de Champagne en aanbiedingen voor echte liefhebbers.</p><p>Voor onze grootste liefhebbers is er daarnaast de VIP-WhatsAppgroep. Hier delen we exclusieve champagnes, gelimiteerde releases en zeldzame flessen die de webshop vaak niet eens halen.</p>",
+        "name_label": "Naam",
+        "name_placeholder": "Jouw naam",
+        "email_label": "E-mail",
+        "email_placeholder": "jij@example.com",
+        "phone_label": "Telefoonnummer",
+        "phone_placeholder": "+31 6 12345678",
+        "vip_whatsapp_text": "Ik geef toestemming om toegevoegd te worden aan de VIP WhatsApp-groep.",
+        "gdpr_text": "Ik geef toestemming voor e-mailmarketing en ga akkoord met het privacybeleid.",
+        "button_text": "Schrijf me in",
+        "error_text": "Controleer je gegevens en probeer opnieuw.",
+        "popup_heading": "Welkom!",
+        "popup_text": "Leuk dat je erbij bent. Vanaf nu ontvang je als eerste onze exclusieve drops, bijzondere verhalen en aanbiedingen. Check je mail voor je kortingscode op je eerste bestelling.",
+        "popup_button_text": "Ontdek alle champagnes",
+        "popup_button_link": "shopify://collections/online-champagne-kopen",
+        "popup_logo": "shopify://shop_images/Ambrosia_Illustrations2024_grapes_blue.png",
+        "popup_logo_width": 160
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
