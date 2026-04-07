@@ -1,5 +1,38 @@
 const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION || '2024-10';
 
+let _cachedToken = null;
+let _tokenExpiresAt = 0;
+
+async function getShopifyToken(storeDomain, clientId, clientSecret) {
+  const now = Date.now();
+  if (_cachedToken && now < _tokenExpiresAt) {
+    return _cachedToken;
+  }
+
+  const response = await fetch(`https://${storeDomain}/admin/oauth/access_token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: clientId,
+      client_secret: clientSecret
+    })
+  });
+
+  const text = await response.text();
+  let data = {};
+  try { data = JSON.parse(text); } catch (_) { data = { raw: text }; }
+
+  if (!response.ok || !data.access_token) {
+    throw new Error(`Token exchange failed (${response.status}): ${JSON.stringify(data)}`);
+  }
+
+  _cachedToken = data.access_token;
+  // Shopify tokens expire in 1 hour; cache 55 min to be safe
+  _tokenExpiresAt = now + 55 * 60 * 1000;
+  return _cachedToken;
+}
+
 function jsonResponse(res, statusCode, body, origin) {
   if (origin) {
     res.setHeader('Access-Control-Allow-Origin', origin);
@@ -141,13 +174,14 @@ module.exports = async function handler(req, res) {
   }
 
   const storeDomain = process.env.SHOPIFY_STORE_DOMAIN;
-  const token = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+  const clientId = process.env.SHOPIFY_CLIENT_ID;
+  const clientSecret = process.env.SHOPIFY_CLIENT_SECRET;
 
-  if (!storeDomain || !token) {
+  if (!storeDomain || !clientId || !clientSecret) {
     return jsonResponse(
       res,
       500,
-      { error: 'Missing SHOPIFY_STORE_DOMAIN or SHOPIFY_ADMIN_ACCESS_TOKEN environment variable.' },
+      { error: 'Missing SHOPIFY_STORE_DOMAIN, SHOPIFY_CLIENT_ID or SHOPIFY_CLIENT_SECRET environment variable.' },
       corsOrigin
     );
   }
@@ -160,6 +194,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    const token = await getShopifyToken(storeDomain, clientId, clientSecret);
     const existingCustomer = await findCustomerByEmail(email, token, storeDomain);
     const customer = buildCustomerPayload(body, existingCustomer);
 
