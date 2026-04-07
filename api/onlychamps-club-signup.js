@@ -153,8 +153,11 @@ function buildCustomerPayload(input, existingCustomer) {
     tags: mergeTagString(existingCustomer ? existingCustomer.tags : '', tags)
   };
 
-  if (whatsappOptIn && phone) {
+  if (phone) {
     customer.phone = phone;
+  }
+
+  if (whatsappOptIn && phone) {
     customer.sms_marketing_consent = buildSmsConsent(phone, true);
   }
 

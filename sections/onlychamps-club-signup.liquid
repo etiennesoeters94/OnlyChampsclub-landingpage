@@ -530,7 +530,7 @@
         return {
           firstName: elements.nameInput ? elements.nameInput.value.trim() : '',
           email: elements.emailInput.value.trim(),
-          phone: whatsappOptIn ? formattedPhone : '',
+          phone: formattedPhone,
           whatsappOptIn: whatsappOptIn,
           acceptsMarketing: Boolean(elements.marketingConsent && elements.marketingConsent.checked),
           tags: tags
