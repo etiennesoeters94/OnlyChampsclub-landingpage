@@ -129,10 +129,10 @@ function isPhoneAlreadyTakenError(message) {
   return value.includes('phone') && value.includes('already been taken');
 }
 
-function buildPhoneTag(phone) {
+function buildDuplicatePhoneNote(phone) {
   const value = String(phone || '').trim();
   if (!value) return '';
-  return `phone:${value}`;
+  return `Ingevoerd telefoonnummer (duplicaat): ${value}`;
 }
 
 function mergeTagString(existingTags, incomingTags) {
@@ -153,6 +153,7 @@ function buildCustomerPayload(input, existingCustomer) {
   const firstName = String(input.firstName || '').trim();
   const email = String(input.email || '').trim();
   const phone = String(input.phone || '').trim();
+  const note = String(input.note || '').trim();
   const whatsappOptIn = Boolean(input.whatsappOptIn);
   const acceptsMarketing = Boolean(input.acceptsMarketing);
   const tags = normalizeTags(input.tags);
@@ -160,6 +161,7 @@ function buildCustomerPayload(input, existingCustomer) {
   const customer = {
     email,
     first_name: firstName || undefined,
+    note: note || undefined,
     accepts_marketing: acceptsMarketing,
     tags: mergeTagString(existingCustomer ? existingCustomer.tags : '', tags)
   };
@@ -261,17 +263,13 @@ module.exports = async function handler(req, res) {
         throw createError;
       }
 
-      const fallbackTags = normalizeTags(body.tags);
-      const phoneTag = buildPhoneTag(phone);
-      if (phoneTag && !fallbackTags.includes(phoneTag)) {
-        fallbackTags.push(phoneTag);
-      }
+      const duplicatePhoneNote = buildDuplicatePhoneNote(phone);
 
       const fallbackInput = {
         ...body,
         phone: '',
         whatsappOptIn: false,
-        tags: fallbackTags
+        note: duplicatePhoneNote
       };
 
       const fallbackCustomer = buildCustomerPayload(fallbackInput, null);
