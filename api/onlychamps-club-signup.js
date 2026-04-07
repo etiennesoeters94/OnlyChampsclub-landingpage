@@ -124,6 +124,34 @@ async function findCustomerByEmail(email, token, storeDomain) {
   return result.customers[0];
 }
 
+async function findCustomerByPhone(phone, token, storeDomain) {
+  const query = encodeURIComponent(`phone:${phone}`);
+  const result = await shopifyRequest(
+    `/customers/search.json?query=${query}&fields=id,email,phone,tags`,
+    'GET',
+    token,
+    storeDomain
+  );
+
+  if (!result.customers || result.customers.length === 0) {
+    return null;
+  }
+
+  const normalized = String(phone || '').replace(/[^\d+]/g, '');
+
+  const exactMatch = result.customers.find((customer) => {
+    const candidate = String(customer.phone || '').replace(/[^\d+]/g, '');
+    return candidate && candidate === normalized;
+  });
+
+  return exactMatch || result.customers[0];
+}
+
+function isPhoneAlreadyTakenError(message) {
+  const value = String(message || '').toLowerCase();
+  return value.includes('phone') && value.includes('already been taken');
+}
+
 function mergeTagString(existingTags, incomingTags) {
   const merged = new Set();
 
@@ -230,18 +258,63 @@ module.exports = async function handler(req, res) {
     }
 
     const createPayload = { customer };
-    const createResult = await shopifyRequest('/customers.json', 'POST', token, storeDomain, createPayload);
 
-    return jsonResponse(
-      res,
-      200,
-      {
-        ok: true,
-        mode: 'created',
-        customerId: createResult.customer && createResult.customer.id
-      },
-      corsOrigin
-    );
+    try {
+      const createResult = await shopifyRequest('/customers.json', 'POST', token, storeDomain, createPayload);
+
+      return jsonResponse(
+        res,
+        200,
+        {
+          ok: true,
+          mode: 'created',
+          customerId: createResult.customer && createResult.customer.id
+        },
+        corsOrigin
+      );
+    } catch (createError) {
+      const phone = String(body.phone || '').trim();
+      if (!phone || !isPhoneAlreadyTakenError(createError.message)) {
+        throw createError;
+      }
+
+      const customerByPhone = await findCustomerByPhone(phone, token, storeDomain);
+      if (!customerByPhone) {
+        throw createError;
+      }
+
+      const phoneFallbackInput = {
+        ...body,
+        email: customerByPhone.email || String(body.email || '').trim()
+      };
+
+      const phoneFallbackCustomer = buildCustomerPayload(phoneFallbackInput, customerByPhone);
+      const fallbackUpdatePayload = {
+        customer: {
+          id: customerByPhone.id,
+          ...phoneFallbackCustomer
+        }
+      };
+
+      const fallbackUpdateResult = await shopifyRequest(
+        `/customers/${customerByPhone.id}.json`,
+        'PUT',
+        token,
+        storeDomain,
+        fallbackUpdatePayload
+      );
+
+      return jsonResponse(
+        res,
+        200,
+        {
+          ok: true,
+          mode: 'updated_by_phone',
+          customerId: fallbackUpdateResult.customer && fallbackUpdateResult.customer.id
+        },
+        corsOrigin
+      );
+    }
   } catch (error) {
     return jsonResponse(res, 500, { error: error.message || 'Unknown server error' }, corsOrigin);
   }
