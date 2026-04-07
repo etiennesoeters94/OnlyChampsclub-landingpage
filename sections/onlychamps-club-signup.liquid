@@ -467,6 +467,7 @@
     (function () {
       var sectionId = 'OnlyChampsClubSection-{{ section.id }}';
       var popupId = 'OnlyChampsSuccessPopup';
+      var fallbackBackendUrl = 'https://only-champsclub-landingpage.vercel.app/api/onlychamps-club-signup';
       var headerSelectors = [
         '.header-wrapper',
         '#shopify-section-header',
@@ -502,7 +503,8 @@
       function getBackendUrl(section) {
         if (!section) return '';
 
-        return (section.getAttribute('data-onlychamps-backend-url') || '').trim();
+        var configuredUrl = (section.getAttribute('data-onlychamps-backend-url') || '').trim();
+        return configuredUrl || fallbackBackendUrl;
       }
 
       function buildSubmissionPayload(form) {
@@ -730,14 +732,13 @@
           form.dataset.onlyChampsBound = 'true';
           form.addEventListener('submit', function (event) {
             var backendUrl = getBackendUrl(section);
+            event.preventDefault();
 
             if (!backendUrl) {
-              syncContactTags(form);
-              setSubmitting(form, true);
+              setSubmitting(form, false);
+              setErrorVisibility(form, true);
               return;
             }
-
-            event.preventDefault();
 
             if (form.dataset.onlyChampsSubmitting === 'true') {
               return;
