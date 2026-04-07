@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "OnlyChamps Club landing page with Shopify integration",
   "main": "api/onlychamps-club-signup.js",
-  "type": "module",
   "scripts": {
     "dev": "vercel dev",
     "build": "npm run build:theme",
