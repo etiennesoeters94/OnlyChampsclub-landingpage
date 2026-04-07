@@ -124,32 +124,15 @@ async function findCustomerByEmail(email, token, storeDomain) {
   return result.customers[0];
 }
 
-async function findCustomerByPhone(phone, token, storeDomain) {
-  const query = encodeURIComponent(`phone:${phone}`);
-  const result = await shopifyRequest(
-    `/customers/search.json?query=${query}&fields=id,email,phone,tags`,
-    'GET',
-    token,
-    storeDomain
-  );
-
-  if (!result.customers || result.customers.length === 0) {
-    return null;
-  }
-
-  const normalized = String(phone || '').replace(/[^\d+]/g, '');
-
-  const exactMatch = result.customers.find((customer) => {
-    const candidate = String(customer.phone || '').replace(/[^\d+]/g, '');
-    return candidate && candidate === normalized;
-  });
-
-  return exactMatch || result.customers[0];
-}
-
 function isPhoneAlreadyTakenError(message) {
   const value = String(message || '').toLowerCase();
   return value.includes('phone') && value.includes('already been taken');
+}
+
+function buildPhoneTag(phone) {
+  const value = String(phone || '').trim();
+  if (!value) return '';
+  return `phone:${value}`;
 }
 
 function mergeTagString(existingTags, incomingTags) {
@@ -278,39 +261,30 @@ module.exports = async function handler(req, res) {
         throw createError;
       }
 
-      const customerByPhone = await findCustomerByPhone(phone, token, storeDomain);
-      if (!customerByPhone) {
-        throw createError;
+      const fallbackTags = normalizeTags(body.tags);
+      const phoneTag = buildPhoneTag(phone);
+      if (phoneTag && !fallbackTags.includes(phoneTag)) {
+        fallbackTags.push(phoneTag);
       }
 
-      const phoneFallbackInput = {
+      const fallbackInput = {
         ...body,
-        email: customerByPhone.email || String(body.email || '').trim()
+        phone: '',
+        whatsappOptIn: false,
+        tags: fallbackTags
       };
 
-      const phoneFallbackCustomer = buildCustomerPayload(phoneFallbackInput, customerByPhone);
-      const fallbackUpdatePayload = {
-        customer: {
-          id: customerByPhone.id,
-          ...phoneFallbackCustomer
-        }
-      };
-
-      const fallbackUpdateResult = await shopifyRequest(
-        `/customers/${customerByPhone.id}.json`,
-        'PUT',
-        token,
-        storeDomain,
-        fallbackUpdatePayload
-      );
+      const fallbackCustomer = buildCustomerPayload(fallbackInput, null);
+      const fallbackCreatePayload = { customer: fallbackCustomer };
+      const fallbackCreateResult = await shopifyRequest('/customers.json', 'POST', token, storeDomain, fallbackCreatePayload);
 
       return jsonResponse(
         res,
         200,
         {
           ok: true,
-          mode: 'updated_by_phone',
-          customerId: fallbackUpdateResult.customer && fallbackUpdateResult.customer.id
+          mode: 'created_without_phone_duplicate',
+          customerId: fallbackCreateResult.customer && fallbackCreateResult.customer.id
         },
         corsOrigin
       );
