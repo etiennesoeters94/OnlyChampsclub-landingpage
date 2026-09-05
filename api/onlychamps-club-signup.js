@@ -162,9 +162,17 @@ function buildCustomerPayload(input, existingCustomer) {
     email,
     first_name: firstName || undefined,
     note: note || undefined,
-    accepts_marketing: acceptsMarketing,
     tags: mergeTagString(existingCustomer ? existingCustomer.tags : '', tags)
   };
+
+  if (acceptsMarketing) {
+    customer.email_marketing_consent = {
+      state: 'subscribed',
+      opt_in_level: 'single_opt_in',
+      consent_updated_at: new Date().toISOString(),
+      consent_collected_from: 'OTHER'
+    };
+  }
 
   if (phone) {
     customer.phone = phone;
